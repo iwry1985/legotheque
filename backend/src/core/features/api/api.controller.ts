@@ -9,7 +9,7 @@ export class ApiController {
 
     @Get('rebrickable_api')
     fetch_brickset(): string {
-        this._apiService.fetch_brickset_data();
+        this._apiService.fetchSetsByYear(2025);
         return 'ok';
     }
 }

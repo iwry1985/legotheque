@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity({name: 'legoset'})
+@Unique('UQ_bricksetid', ['bricksetid'])
 export class Legoset {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     setid: number;
 
     @Column()
@@ -10,6 +11,9 @@ export class Legoset {
 
     @Column()
     variant?: number;
+
+    @Column()
+    bricksetid: string;
 
     @Column()
     name: string;
@@ -20,26 +24,26 @@ export class Legoset {
     @Column()
     category?: string;
 
-    @Column()
+    @Column({default: false})
     released: boolean;
 
     @Column()
     pieces: number;
 
     @Column()
-    launchDate?: Date;
+    launchdate?: Date;
 
     @Column()
     thumbnail?: string;
 
     @Column()
-    price?: number;
+    retailprice?: number;
 
     @Column()
     rating?: number;
 
     @Column()
-    minAge?: number;
+    minage?: number;
 
     @Column()
     tags?: string;
@@ -54,17 +58,20 @@ export class Legoset {
     width?: number;
 
     @Column()
-    exitDate?: Date;
+    exitdate?: Date;
 
-    @Column()
+    @Column({default: 0})
     minifigs?: number;
 
-    @Column()
-    reviewCount?: number;
+    @Column({default: 0})
+    reviewcount?: number;
 
     @Column()
-    themeId: number;
+    themeid: number;
 
-    @Column()
-    lastUpdatedAt: Date;
+    @Column({default: false})
+    fetch_brick_economy: boolean;
+
+    @Column({default: new Date()})
+    lastupdatedat: Date;
 }
