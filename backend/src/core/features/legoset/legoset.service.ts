@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LegosetDto } from 'src/core/models/dto/legoset/legoset.dto';
-import { GetLegosetFilterDto } from 'src/core/models/dto/legoset/legoset_filters.dto';
-import { LegosetListDto } from 'src/core/models/dto/legoset/legoset_list.dto';
+import { GetLegosetFilterDto } from 'src/core/models/dto/legoset/legoset-filters.dto';
+import { LegosetListDto } from 'src/core/models/dto/legoset/legoset-list.dto';
 import { Legoset } from 'src/core/models/entities/legoset.entity';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 
