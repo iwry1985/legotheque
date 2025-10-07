@@ -1,8 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
-@Entity({name: 'brickset_collection'})
+@Entity({ name: 'brickset_collection' })
 @Unique('UQ_setid', ['setid'])
-export class BricketCollection {
+export class BricksetCollection {
     @PrimaryGeneratedColumn()
     brcolid: number;
 

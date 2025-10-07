@@ -1,20 +1,29 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule);
 
-  //swagger
-  const config = new DocumentBuilder()
-    .setTitle('Legothec')
-    .setDescription('Bibliothèque Lego')
-    .setVersion('1.0')
-    .build()
+    //validation pipe
+    app.useGlobalPipes(
+        new ValidationPipe({
+            transform: true, //transform query params automatically
+            whitelist: true, //remove unknown fields
+        })
+    );
 
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+    //swagger
+    const config = new DocumentBuilder()
+        .setTitle('Legothec')
+        .setDescription('Bibliothèque Lego')
+        .setVersion('1.0')
+        .build();
 
-  await app.listen(process.env.PORT ?? 3000);
+    const documentFactory = () => SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, documentFactory);
+
+    await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

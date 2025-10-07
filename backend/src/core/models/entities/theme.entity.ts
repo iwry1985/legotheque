@@ -1,6 +1,12 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
+import {
+    Column,
+    Entity,
+    PrimaryColumn,
+    PrimaryGeneratedColumn,
+    Unique,
+} from 'typeorm';
 
-@Entity({name: 'theme'})
+@Entity({ name: 'theme' })
 export class Theme {
     @PrimaryGeneratedColumn()
     themeid: number;

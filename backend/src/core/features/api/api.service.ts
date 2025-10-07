@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BricketCollection } from 'src/core/models/entities/bricksetCollection.entity';
+import { BricksetCollection } from 'src/core/models/entities/bricksetCollection.entity';
 import { Legoset } from 'src/core/models/entities/legoset.entity';
 import { Theme } from 'src/core/models/entities/theme.entity';
 import { Repository } from 'typeorm';
 import * as striptags from 'striptags';
+import { LegosetDto } from 'src/core/models/dto/legoset/legoset.dto';
 
 @Injectable()
 export class ApiService {
@@ -17,8 +18,8 @@ export class ApiService {
         private readonly _legosetRepository: Repository<Legoset>,
         @InjectRepository(Theme)
         private readonly _themeRepository: Repository<Theme>,
-        @InjectRepository(BricketCollection)
-        private readonly _bricksetCollectionRepository: Repository<BricketCollection>
+        @InjectRepository(BricksetCollection)
+        private readonly _bricksetCollectionRepository: Repository<BricksetCollection>
     ) {}
 
     //****************************** */
@@ -58,7 +59,11 @@ export class ApiService {
         }
     };
 
-    fetchSetsByYear = async (year) => {
+    fetchSetsByYear = async (year: number) => {
+        /**
+         * @param year: number year from which fetching begins (from year to 1955)
+         * @returns void sets are fetched, transformed into Legoset then stored in db
+         */
         console.log('[API Service] Fetch brickset data...');
         const hash = await this.getBricksetHash();
         const pageSize = 500;
@@ -70,29 +75,43 @@ export class ApiService {
                 year: year.toString(),
                 pageSize: pageSize.toString(),
                 pageNumber: pageNumber.toString(),
+                //setNumber: '10342-1',
+                extendedData: 1,
             };
 
             const url =
                 this._bricksetUrl +
                 `getSets?apiKey=${process.env.BRICKSET_API_KEY}&userHash=${hash}&params=${JSON.stringify(params)}`;
 
+            console.log('[API Service] Calling API...');
             const resp = await fetch(url, {
                 method: 'GET',
             });
 
             const data = await resp.json();
-            console.log('[API Service] Matches', data.matches);
+            console.log(
+                '[API Service] Matches',
+                data.matches,
+                data.sets?.length
+            );
 
             const sets = data.sets ?? [];
 
             if (sets.length === 0) break; //stop loop
 
             for (const set of sets) {
+                const ref = parseInt(set.number);
+                const isNumber = typeof ref == 'number' && !Number.isNaN(ref);
+
+                console.log('REF', ref, isNumber, typeof ref);
                 if (
+                    isNumber &&
                     set.packagingType === 'Box' &&
                     set.pieces &&
-                    set.name !== '{?}'
+                    set.name !== '{?}' &&
+                    set.LEGOCom?.US?.retailPrice
                 ) {
+                    console.log('[API Service] Set :', set.name, set.number);
                     //get theme in db
                     let theme = await this._themeRepository.findOne({
                         where: { name: set.theme },

@@ -1,6 +1,17 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
+import {
+    Column,
+    DeleteDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryColumn,
+    PrimaryGeneratedColumn,
+    Unique,
+    UpdateDateColumn,
+} from 'typeorm';
+import { Theme } from './theme.entity';
 
-@Entity({name: 'legoset'})
+@Entity({ name: 'legoset' })
 @Unique('UQ_bricksetid', ['bricksetid'])
 export class Legoset {
     @PrimaryGeneratedColumn()
@@ -9,7 +20,7 @@ export class Legoset {
     @Column()
     reference: number;
 
-    @Column()
+    @Column({ nullable: true })
     variant?: number;
 
     @Column()
@@ -21,57 +32,62 @@ export class Legoset {
     @Column()
     year: number;
 
-    @Column()
+    @Column({ nullable: true })
     category?: string;
 
-    @Column({default: false})
+    @Column({ default: false })
     released: boolean;
 
     @Column()
     pieces: number;
 
-    @Column()
+    @Column({ nullable: true })
     launchdate?: Date;
 
-    @Column()
+    @Column({ nullable: true })
     thumbnail?: string;
 
-    @Column()
+    @Column({ nullable: true })
     retailprice?: number;
 
-    @Column()
+    @Column({ nullable: true })
     rating?: number;
 
-    @Column()
+    @Column({ nullable: true })
     minage?: number;
 
-    @Column()
+    @Column({ nullable: true })
     tags?: string;
 
-    @Column()
+    @Column({ nullable: true })
     description?: string;
 
-    @Column()
+    @Column({ nullable: true })
     height?: number;
 
-    @Column()
+    @Column({ nullable: true })
     width?: number;
 
-    @Column()
+    @Column({ nullable: true })
     exitdate?: Date;
 
-    @Column({default: 0})
+    @Column({ default: 0, nullable: true })
     minifigs?: number;
 
-    @Column({default: 0})
+    @Column({ default: 0, nullable: true })
     reviewcount?: number;
 
     @Column()
     themeid: number;
 
-    @Column({default: false})
+    @Column({ default: false })
     fetch_brick_economy: boolean;
 
-    @Column({default: new Date()})
+    @UpdateDateColumn({ default: new Date() })
     lastupdatedat: Date;
+
+    //theme
+    @ManyToOne(() => Theme)
+    @JoinColumn({ name: 'themeid', referencedColumnName: 'themeid' })
+    theme: Theme;
 }
