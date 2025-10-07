@@ -1,4 +1,5 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Legoset } from './legoset.entity';
 
 export class Legotheque {
     @PrimaryGeneratedColumn()
@@ -42,4 +43,9 @@ export class Legotheque {
 
     @Column()
     addedat: Date;
+
+    //legoset
+    @ManyToOne(() => Legoset)
+    @JoinColumn({ name: 'setid', referencedColumnName: 'setid' })
+    set: Legoset;
 }

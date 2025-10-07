@@ -8,6 +8,7 @@ import {
     IsNumber,
     IsOptional,
 } from 'class-validator';
+import { LegosetDto } from '../legoset/legoset.dto';
 
 export class LegothequeDto {
     @IsNotEmpty()
@@ -78,4 +79,8 @@ export class LegothequeDto {
     @IsDate()
     @ApiProperty()
     addedat?: boolean;
+
+    @IsNotEmpty()
+    @ApiProperty()
+    set: LegosetDto;
 }
