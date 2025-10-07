@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from 'src/core/models/dto/user/user.dto';
-import { CreateUserDto } from 'src/core/models/dto/user/user_create.dto';
+import { CreateUserDto } from 'src/core/models/dto/user/user-create.dto';
 import { ApiOperation } from '@nestjs/swagger';
 import { todo } from 'node:test';
 

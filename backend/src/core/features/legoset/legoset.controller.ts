@@ -1,9 +1,9 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { LegosetService } from './legoset.service';
 import { LegosetDto } from 'src/core/models/dto/legoset/legoset.dto';
-import { GetLegosetFilterDto } from 'src/core/models/dto/legoset/legoset_filters.dto';
+import { GetLegosetFilterDto } from 'src/core/models/dto/legoset/legoset-filters.dto';
 import { UseFilters } from '@nestjs/common';
-import { LegosetListDto } from 'src/core/models/dto/legoset/legoset_list.dto';
+import { LegosetListDto } from 'src/core/models/dto/legoset/legoset-list.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('legoset')
