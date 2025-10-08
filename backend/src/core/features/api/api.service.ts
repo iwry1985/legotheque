@@ -69,6 +69,7 @@ export class ApiService {
         const pageSize = 500;
         let pageNumber = 1;
         let hasMore = true;
+        const toYear = 2024;
 
         while (hasMore) {
             let params = {
@@ -111,7 +112,12 @@ export class ApiService {
                     set.name !== '{?}' &&
                     set.LEGOCom?.US?.retailPrice
                 ) {
-                    console.log('[API Service] Set :', set.name, set.number);
+                    console.log(
+                        '[API Service] Set :',
+                        set.name,
+                        set.number,
+                        year
+                    );
                     //get theme in db
                     let theme = await this._themeRepository.findOne({
                         where: { name: set.theme },
@@ -174,13 +180,23 @@ export class ApiService {
                     }
 
                     //delay
-                    await new Promise((resolve) => setTimeout(resolve, 500));
+                    await new Promise((resolve) => setTimeout(resolve, 2000));
                 }
             }
-            //pagination
-            hasMore = sets.length === pageSize;
-            pageNumber++;
-            console.log('[API Service] hasMore', hasMore, pageNumber);
+
+            if (sets.length === pageSize) {
+                // encore des pages à parcourir pour cette année
+                pageNumber++;
+            } else {
+                // plus de pages, on passe à l’année suivante
+                year--;
+                pageNumber = 1;
+            }
+
+            // on continue tant qu’on n’a pas dépassé l’année limite
+            hasMore = year >= toYear;
+
+            console.log('[API Service] hasMore', hasMore, pageNumber, year);
         }
     };
 }
