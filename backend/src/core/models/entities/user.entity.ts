@@ -1,5 +1,6 @@
 import {
     Column,
+    CreateDateColumn,
     DeleteDateColumn,
     Entity,
     PrimaryGeneratedColumn,
@@ -24,4 +25,7 @@ export class User {
 
     @UpdateDateColumn()
     lastupdatedat: Date;
+
+    @CreateDateColumn()
+    addedat: Date;
 }

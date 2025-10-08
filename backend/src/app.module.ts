@@ -6,6 +6,7 @@ import { ApiModule } from './core/features/api/api.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './core/features/user/user.module';
 import { LegosetModule } from './core/features/legoset/legoset.module';
+import { LegothequeModule } from './core/features/legotheque/legotheque.module';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { LegosetModule } from './core/features/legoset/legoset.module';
         ApiModule,
         UserModule,
         LegosetModule,
+        LegothequeModule,
     ],
     controllers: [AppController],
     providers: [AppService],

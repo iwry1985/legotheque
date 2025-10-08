@@ -1,6 +1,15 @@
-import { Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from 'typeorm';
 import { Legoset } from './legoset.entity';
 
+@Entity({ name: 'legotheque_dev' })
 export class Legotheque {
     @PrimaryGeneratedColumn()
     legothequeid: number;
@@ -38,10 +47,10 @@ export class Legotheque {
     @Column({ nullable: true })
     purchaseprice?: number;
 
-    @Column()
+    @UpdateDateColumn()
     lastupdatedat: Date;
 
-    @Column()
+    @CreateDateColumn()
     addedat: Date;
 
     //legoset

@@ -9,6 +9,7 @@ import {
     IsOptional,
 } from 'class-validator';
 import { LegosetDto } from '../legoset/legoset.dto';
+import { Type } from 'class-transformer';
 
 export class LegothequeDto {
     @IsNotEmpty()
@@ -43,44 +44,45 @@ export class LegothequeDto {
     @IsOptional()
     @IsDate()
     @ApiProperty()
-    ownedat?: boolean;
+    wantedat?: Date;
+
+    @IsOptional()
+    @IsDate()
+    @Type(() => Date)
+    @ApiProperty()
+    ownedat?: Date;
 
     @IsOptional()
     @IsDate()
     @ApiProperty()
-    wantedat?: boolean;
+    builtat?: Date;
 
     @IsOptional()
     @IsDate()
     @ApiProperty()
-    builtat?: boolean;
-
-    @IsOptional()
-    @IsDate()
-    @ApiProperty()
-    builtbeginat?: boolean;
+    builtbeginat?: Date;
 
     @IsOptional()
     @IsBoolean()
     @ApiProperty()
-    giftt?: boolean;
+    gift?: boolean;
 
     @IsOptional()
-    @IsNumber()
+    @IsNumber({ maxDecimalPlaces: 2 })
     @ApiProperty()
-    purchaseprice?: boolean;
-
-    @IsOptional()
-    @IsDate()
-    @ApiProperty()
-    lastupdatedat?: boolean;
+    purchaseprice?: number;
 
     @IsOptional()
     @IsDate()
     @ApiProperty()
-    addedat?: boolean;
+    lastupdatedat?: Date;
 
-    @IsNotEmpty()
+    @IsOptional()
+    @IsDate()
+    @ApiProperty()
+    addedat?: Date;
+
+    @IsOptional()
     @ApiProperty()
     set: LegosetDto;
 }
