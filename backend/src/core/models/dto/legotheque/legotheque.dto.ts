@@ -43,6 +43,7 @@ export class LegothequeDto {
 
     @IsOptional()
     @IsDate()
+    @Type(() => Date)
     @ApiProperty()
     wantedat?: Date;
 
@@ -54,11 +55,13 @@ export class LegothequeDto {
 
     @IsOptional()
     @IsDate()
+    @Type(() => Date)
     @ApiProperty()
     builtat?: Date;
 
     @IsOptional()
     @IsDate()
+    @Type(() => Date)
     @ApiProperty()
     builtbeginat?: Date;
 
