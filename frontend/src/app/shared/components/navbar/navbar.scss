@@ -1,0 +1,21 @@
+@use "theme" as *;
+
+.menu {
+  background-color: $red;
+  padding: 15px 0;
+  position: fixed;
+  width: 100%;
+
+  ul {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    height: 30px;
+  }
+
+  a {
+    color: $yellow;
+  }
+}
