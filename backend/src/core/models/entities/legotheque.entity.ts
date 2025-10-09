@@ -47,6 +47,9 @@ export class Legotheque {
     @Column({ nullable: true })
     purchaseprice?: number;
 
+    @Column({ nullable: true })
+    fav?: boolean;
+
     @UpdateDateColumn()
     lastupdatedat: Date;
 

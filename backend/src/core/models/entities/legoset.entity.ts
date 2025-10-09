@@ -81,7 +81,7 @@ export class Legoset {
     themeid: number;
 
     @Column({ default: false })
-    fetch_brick_economy: boolean;
+    fetch_bricklink: boolean;
 
     @UpdateDateColumn({ default: new Date() })
     lastupdatedat: Date;

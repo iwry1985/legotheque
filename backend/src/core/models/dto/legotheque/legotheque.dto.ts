@@ -76,6 +76,11 @@ export class LegothequeDto {
     purchaseprice?: number;
 
     @IsOptional()
+    @IsBoolean()
+    @ApiProperty()
+    fav?: boolean;
+
+    @IsOptional()
     @IsDate()
     @ApiProperty()
     lastupdatedat?: Date;
