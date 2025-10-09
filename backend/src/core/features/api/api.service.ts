@@ -5,13 +5,11 @@ import { Legoset } from 'src/core/models/entities/legoset.entity';
 import { Theme } from 'src/core/models/entities/theme.entity';
 import { Repository } from 'typeorm';
 import * as striptags from 'striptags';
-import { LegosetDto } from 'src/core/models/dto/legoset/legoset.dto';
 
 @Injectable()
 export class ApiService {
     private _bricksetHash?: string;
     private readonly _bricksetUrl: string = 'https://brickset.com/api/v3.asmx/';
-    private readonly _brickeconomy: string = '';
 
     constructor(
         @InjectRepository(Legoset)
@@ -69,7 +67,7 @@ export class ApiService {
         const pageSize = 500;
         let pageNumber = 1;
         let hasMore = true;
-        const toYear = 2024;
+        const toYear = 1990;
 
         while (hasMore) {
             let params = {
@@ -90,6 +88,7 @@ export class ApiService {
             });
 
             const data = await resp.json();
+            console.log('data', data, resp);
             console.log(
                 '[API Service] Matches',
                 data.matches,
@@ -109,8 +108,8 @@ export class ApiService {
                     isNumber &&
                     set.packagingType === 'Box' &&
                     set.pieces &&
-                    set.name !== '{?}' &&
-                    set.LEGOCom?.US?.retailPrice
+                    set.name !== '{?}'
+                    //set.LEGOCom?.US?.retailPrice
                 ) {
                     console.log(
                         '[API Service] Set :',
@@ -180,7 +179,7 @@ export class ApiService {
                     }
 
                     //delay
-                    await new Promise((resolve) => setTimeout(resolve, 2000));
+                    await new Promise((resolve) => setTimeout(resolve, 1000));
                 }
             }
 
@@ -198,5 +197,7 @@ export class ApiService {
 
             console.log('[API Service] hasMore', hasMore, pageNumber, year);
         }
+
+        console.log('DONE');
     };
 }

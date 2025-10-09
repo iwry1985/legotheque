@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 # =========================
 # CONFIG
 # =========================
-SET_ID = "75936-1"   # ex: "10218-1"
+SET_ID = "71040-1"   # ex: "10218-1"
 URL = f"https://www.bricklink.com/v2/catalog/catalogitem.page?S={SET_ID}#T=P"
 HEADLESS = False
 NAV_TIMEOUT = 120_000
