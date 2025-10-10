@@ -6,6 +6,7 @@ import {
     Param,
     Patch,
     Post,
+    UseGuards,
 } from '@nestjs/common';
 import { LegothequeService } from './legotheque.service';
 import { ApiOperation } from '@nestjs/swagger';

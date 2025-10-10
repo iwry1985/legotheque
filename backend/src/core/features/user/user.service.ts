@@ -6,12 +6,15 @@ import { User } from 'src/core/models/entities/user.entity';
 import { Repository } from 'typeorm';
 import { DateTime } from 'luxon';
 import * as bcrypt from 'bcrypt';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User)
-        private readonly _userRepository: Repository<User>
+        private readonly _userRepository: Repository<User>,
+
+        private readonly _mailerService: MailerService
     ) {}
 
     private getAge = (birthdate: Date): number => {
@@ -46,7 +49,13 @@ export class UserService {
 
         const resp = await this._userRepository.save({ ...user, pwd });
 
-        //TODO: envoi email
+        //TODO: envoi email (with gmail or create account on mailtrap or use smtp4dev)
+        // this._mailerService.sendMail({
+        //     from: 'no-reply<www.legothec.com>',
+        //     to: `${resp.username}<${resp.email}>`,
+        //     subject: 'Inscription sur notre plateforme',
+        //     html: 'Votre inscription sur Legothec a réussi !',
+        // });
 
         return { ...resp, age: this.getAge(user.birthdate) };
     };
