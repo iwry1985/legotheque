@@ -1,3 +1,5 @@
+/node_modules
+
 # BACKEND -----------------------------------------
 # compiled output
 /backend/dist

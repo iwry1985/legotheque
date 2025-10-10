@@ -8,6 +8,7 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 import { Legoset } from './legoset.entity';
+import { User } from './user.entity';
 
 @Entity({ name: 'legotheque_dev' })
 export class Legotheque {
@@ -60,4 +61,9 @@ export class Legotheque {
     @ManyToOne(() => Legoset)
     @JoinColumn({ name: 'setid', referencedColumnName: 'setid' })
     set: Legoset;
+
+    //user
+    @ManyToOne(() => User, (user) => user.legotheque)
+    @JoinColumn({ name: 'userid', referencedColumnName: 'userid' }) //name => column from this table, referencedColumnName => column in joined table
+    user: User;
 }
