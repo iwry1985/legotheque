@@ -98,6 +98,9 @@ export class LegosetService {
          * @return set of corresponding id or null if none is found
          */
         console.log('[LEGOSET Service] get set by id ', id);
-        return this._legosetRepository.findOne({ where: { setid: id } });
+        return this._legosetRepository.findOne({
+            where: { setid: id },
+            relations: ['theme'],
+        });
     };
 }

@@ -13,4 +13,7 @@ export class Theme {
 
     @Column()
     name: string;
+
+    @Column()
+    img_num: number;
 }

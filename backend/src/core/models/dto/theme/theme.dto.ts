@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class ThemeDto {
     @IsNotEmpty()
@@ -11,4 +11,9 @@ export class ThemeDto {
     @IsString()
     @ApiProperty()
     name: string;
+
+    @IsOptional()
+    @IsInt()
+    @ApiProperty()
+    img_num: number;
 }
