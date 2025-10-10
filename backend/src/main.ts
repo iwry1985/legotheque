@@ -10,6 +10,8 @@ async function bootstrap() {
         origin: 'http://localhost:4200',
     });
 
+    //pipeline des middleware globaux
+
     //validation pipe
     app.useGlobalPipes(
         new ValidationPipe({

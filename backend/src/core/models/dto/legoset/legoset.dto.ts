@@ -1,3 +1,5 @@
+//DTO = data transfer object
+
 import { Optional } from '@nestjs/common';
 import { ApiOAuth2, ApiProperty } from '@nestjs/swagger';
 import {

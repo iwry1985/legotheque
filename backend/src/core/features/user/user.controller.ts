@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from 'src/core/models/dto/user/user.dto';
 import { CreateUserDto } from 'src/core/models/dto/user/user-create.dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { todo } from 'node:test';
 
 @Controller('users')
@@ -11,18 +11,22 @@ export class UserController {
 
     @Get()
     @ApiOperation({ summary: 'Retourne une liste de users' })
+    @ApiResponse({ type: UserDto })
     users(): Promise<UserDto[]> {
         return this._userService.getUsers();
     }
 
     @Get('/:id')
     @ApiOperation({ summary: "Retourner le user correspondant à l'id" })
+    @ApiResponse({ type: UserDto })
     user(@Param('id') id: number): Promise<UserDto | null> {
         return this._userService.getUser(id);
     }
 
     @Post()
     @ApiOperation({ summary: 'Création de compte' })
+    @ApiBody({ type: CreateUserDto })
+    @ApiResponse({ type: UserDto })
     create(@Body() body: CreateUserDto): Promise<UserDto> {
         return this._userService.createUser(body);
     }
@@ -30,6 +34,7 @@ export class UserController {
     TODO: 'only admin or concerned user can suppress account';
     @Delete('/:id')
     @ApiOperation({ summary: 'Suppression de compte' })
+    @ApiResponse({ type: Boolean })
     delete(@Param('id') id: number): Promise<boolean> {
         return this._userService.deleteUser(id);
     }

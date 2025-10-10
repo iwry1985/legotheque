@@ -16,14 +16,17 @@ export class User {
     @PrimaryGeneratedColumn()
     userid: number;
 
-    @Column()
+    @Column({ length: 150 })
     username: string;
 
     @Column()
-    age: number;
+    birthdate: Date;
 
     @Column({ unique: true })
     email: string;
+
+    @Column()
+    pwd: string;
 
     @UpdateDateColumn()
     lastupdatedat: Date;

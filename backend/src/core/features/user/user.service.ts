@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from 'src/core/models/dto/user/user.dto';
 import { CreateUserDto } from 'src/core/models/dto/user/user-create.dto';
 import { User } from 'src/core/models/entities/user.entity';
 import { Repository } from 'typeorm';
+import { DateTime } from 'luxon';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -12,6 +14,15 @@ export class UserService {
         private readonly _userRepository: Repository<User>
     ) {}
 
+    private getAge = (birthdate: Date): number => {
+        const age = DateTime.now().diff(
+            DateTime.fromJSDate(birthdate),
+            'years'
+        ).years;
+
+        return Math.floor(age);
+    };
+
     createUser = async (user: CreateUserDto): Promise<UserDto> => {
         /**
          * @param user: CreateUserDto obj user to save
@@ -19,7 +30,25 @@ export class UserService {
          */
         console.log('[USER Service] create user...', user);
 
-        return await this._userRepository.save(user);
+        //check if user exists
+        const exists = await this._userRepository.exists({
+            where: [{ username: user.username }, { email: user.email }],
+        });
+
+        if (exists)
+            throw new ConflictException('Email ou username déjà utilisé');
+        //BadRequestException
+        //UnauthorizedException
+        //ForbiddenException
+
+        //hash + sel
+        const pwd = await bcrypt.hash(user.pwd, await bcrypt.genSalt());
+
+        const resp = await this._userRepository.save({ ...user, pwd });
+
+        //TODO: envoi email
+
+        return { ...resp, age: this.getAge(user.birthdate) };
     };
 
     getUsers = async (): Promise<UserDto[]> => {
@@ -36,9 +65,11 @@ export class UserService {
          * @returns user or null if doesn't exist
          */
         console.log('[USER Service] get user...', id);
-        return await this._userRepository.findOne({
+        const user = await this._userRepository.findOne({
             where: [{ userid: id }],
         });
+
+        return user ? { ...user, age: this.getAge(user.birthdate) } : null;
     };
 
     deleteUser = async (id: number): Promise<boolean> => {

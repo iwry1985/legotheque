@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { ApiModule } from './core/features/api/api.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -26,7 +24,7 @@ import { LegothequeModule } from './core/features/legotheque/legotheque.module';
         LegosetModule,
         LegothequeModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [],
 })
 export class AppModule {}
