@@ -1,7 +1,7 @@
 INSERT INTO d_legoset (
     set_id, pieces, retail_price, name,
     launch_year, rating, min_age, height, width,
-    minifigs, review_count, theme
+    minifigs, review_count, theme, theme_id
 )
 SELECT *
 FROM dblink(
@@ -19,7 +19,8 @@ FROM dblink(
         width,
         minifigs,
         reviewcount,
-        th.name AS theme
+        th.name AS theme,
+		th.themeid AS theme_id
     FROM legoset AS lego
     LEFT JOIN theme AS th ON th.themeid = lego.themeid
 	WHERE year IS NOT NULL
@@ -36,7 +37,8 @@ FROM dblink(
     width NUMERIC,
     minifigs INT,
     review_count INT,
-    theme TEXT
+    theme TEXT,
+	theme_id INT
 )
 WHERE NOT EXISTS (
     SELECT 1 FROM d_legoset d WHERE d.set_id = src.set_id
