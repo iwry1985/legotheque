@@ -1,0 +1,98 @@
+2025-10-13 08:41:48,946 [INFO] Fichier de log actif : logs\bricklink_20251013_0641.log
+2025-10-13 08:41:49,571 [INFO] 50 sets à scrapper récupérés depuis la DB.
+2025-10-13 08:41:49,583 [INFO] Fetching 75021-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=75021-1#T=P
+2025-10-13 08:42:12,141 [INFO] Appended 4 rows — CSV now has 472 rows.
+2025-10-13 08:42:12,142 [INFO] Sleeping 69s before next set.
+2025-10-13 08:43:21,896 [INFO] Fetching 10241-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10241-1#T=P
+2025-10-13 08:43:35,208 [INFO] Appended 4 rows — CSV now has 476 rows.
+2025-10-13 08:43:35,210 [INFO] Sleeping 63s before next set.
+2025-10-13 08:44:38,825 [INFO] Fetching 10242-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10242-1#T=P
+2025-10-13 08:44:52,176 [INFO] Appended 4 rows — CSV now has 480 rows.
+2025-10-13 08:44:52,178 [INFO] Sleeping 61s before next set.
+2025-10-13 08:45:53,244 [INFO] Fetching 10243-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10243-1#T=P
+2025-10-13 08:46:03,056 [INFO] Appended 4 rows — CSV now has 484 rows.
+2025-10-13 08:46:03,057 [INFO] Sleeping 65s before next set.
+2025-10-13 08:47:08,877 [INFO] Fetching 10244-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10244-1#T=P
+2025-10-13 08:47:19,180 [INFO] Appended 4 rows — CSV now has 488 rows.
+2025-10-13 08:47:19,182 [INFO] Sleeping 81s before next set.
+2025-10-13 08:48:40,706 [INFO] Fetching 10682-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10682-1#T=P
+2025-10-13 08:48:46,164 [INFO] Appended 4 rows — CSV now has 492 rows.
+2025-10-13 08:48:46,166 [INFO] Sleeping 93s before next set.
+2025-10-13 08:50:20,083 [INFO] Fetching 31026-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=31026-1#T=P
+2025-10-13 08:50:37,754 [INFO] Appended 4 rows — CSV now has 496 rows.
+2025-10-13 08:50:37,756 [INFO] Sleeping 86s before next set.
+2025-10-13 08:52:04,128 [INFO] Fetching 41058-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=41058-1#T=P
+2025-10-13 08:52:20,875 [INFO] Appended 4 rows — CSV now has 500 rows.
+2025-10-13 08:52:20,876 [INFO] Sleeping 116s before next set.
+2025-10-13 08:54:17,362 [INFO] Fetching 42025-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42025-1#T=P
+2025-10-13 08:54:27,117 [INFO] Appended 4 rows — CSV now has 504 rows.
+2025-10-13 08:54:27,118 [INFO] Sleeping 61s before next set.
+2025-10-13 08:55:29,062 [INFO] Fetching 42029-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42029-1#T=P
+2025-10-13 08:55:38,477 [INFO] Appended 4 rows — CSV now has 508 rows.
+2025-10-13 08:55:38,479 [INFO] Sleeping 116s before next set.
+2025-10-13 08:57:34,552 [INFO] Fetching 42030-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42030-1#T=P
+2025-10-13 08:57:43,951 [INFO] Appended 4 rows — CSV now has 512 rows.
+2025-10-13 08:57:43,952 [INFO] Sleeping 77s before next set.
+2025-10-13 08:59:01,727 [INFO] Fetching 70146-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70146-1#T=P
+2025-10-13 08:59:19,044 [INFO] Appended 4 rows — CSV now has 516 rows.
+2025-10-13 08:59:19,046 [INFO] Sleeping 65s before next set.
+2025-10-13 09:00:24,838 [INFO] Fetching 70165-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70165-1#T=P
+2025-10-13 09:00:40,917 [INFO] Appended 4 rows — CSV now has 520 rows.
+2025-10-13 09:00:40,919 [INFO] Sleeping 111s before next set.
+2025-10-13 09:02:32,271 [INFO] Fetching 70728-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70728-1#T=P
+2025-10-13 09:02:41,930 [INFO] Appended 4 rows — CSV now has 524 rows.
+2025-10-13 09:02:41,932 [INFO] Sleeping 64s before next set.
+2025-10-13 09:03:46,442 [INFO] Fetching 70810-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70810-1#T=P
+2025-10-13 09:03:55,865 [INFO] Appended 4 rows — CSV now has 528 rows.
+2025-10-13 09:03:55,866 [INFO] Sleeping 69s before next set.
+2025-10-13 09:05:05,668 [INFO] Fetching 71006-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=71006-1#T=P
+2025-10-13 09:05:34,612 [INFO] Appended 4 rows — CSV now has 532 rows.
+2025-10-13 09:05:34,614 [INFO] Sleeping 98s before next set.
+2025-10-13 09:07:12,995 [INFO] Fetching 75054-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=75054-1#T=P
+2025-10-13 09:07:29,994 [INFO] Appended 4 rows — CSV now has 536 rows.
+2025-10-13 09:07:29,995 [INFO] Sleeping 97s before next set.
+2025-10-13 09:09:07,493 [INFO] Fetching 75055-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=75055-1#T=P
+2025-10-13 09:09:19,053 [INFO] Appended 4 rows — CSV now has 540 rows.
+2025-10-13 09:09:19,056 [INFO] Sleeping 108s before next set.
+2025-10-13 09:11:07,677 [INFO] Fetching 75059-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=75059-1#T=P
+2025-10-13 09:11:21,841 [INFO] Appended 4 rows — CSV now has 544 rows.
+2025-10-13 09:11:21,842 [INFO] Sleeping 90s before next set.
+2025-10-13 09:12:52,174 [INFO] Fetching 76023-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=76023-1#T=P
+2025-10-13 09:13:05,611 [INFO] Appended 4 rows — CSV now has 548 rows.
+2025-10-13 09:13:05,613 [INFO] Sleeping 131s before next set.
+2025-10-13 09:15:16,844 [INFO] Fetching 10247-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10247-1#T=P
+2025-10-13 09:15:35,874 [INFO] Appended 4 rows — CSV now has 552 rows.
+2025-10-13 09:15:35,877 [INFO] Sleeping 73s before next set.
+2025-10-13 09:16:49,401 [INFO] Fetching 10248-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10248-1#T=P
+2025-10-13 09:17:01,320 [INFO] Appended 4 rows — CSV now has 556 rows.
+2025-10-13 09:17:01,321 [INFO] Sleeping 108s before next set.
+2025-10-13 09:18:49,404 [INFO] Fetching 41101-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=41101-1#T=P
+2025-10-13 09:18:58,933 [INFO] Appended 4 rows — CSV now has 560 rows.
+2025-10-13 09:18:58,934 [INFO] Sleeping 60s before next set.
+2025-10-13 09:19:59,432 [INFO] Fetching 42039-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42039-1#T=P
+2025-10-13 09:20:08,868 [INFO] Appended 4 rows — CSV now has 564 rows.
+2025-10-13 09:20:08,870 [INFO] Sleeping 102s before next set.
+2025-10-13 09:21:51,201 [INFO] Fetching 42042-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42042-1#T=P
+2025-10-13 09:22:07,724 [INFO] Appended 4 rows — CSV now has 568 rows.
+2025-10-13 09:22:07,726 [INFO] Sleeping 95s before next set.
+2025-10-13 09:23:42,734 [INFO] Fetching 42043-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42043-1#T=P
+2025-10-13 09:24:00,793 [INFO] Appended 4 rows — CSV now has 572 rows.
+2025-10-13 09:24:00,794 [INFO] Sleeping 110s before next set.
+2025-10-13 09:25:51,582 [INFO] Fetching 60097-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=60097-1#T=P
+2025-10-13 09:26:10,601 [INFO] Appended 4 rows — CSV now has 576 rows.
+2025-10-13 09:26:10,602 [INFO] Sleeping 103s before next set.
+2025-10-13 09:27:54,221 [INFO] Fetching 70173-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70173-1#T=P
+2025-10-13 09:29:12,086 [INFO] Aucune donnée parsée pour 70173-1.
+2025-10-13 09:29:12,087 [INFO] Sleeping 66s before next set.
+2025-10-13 09:30:19,059 [INFO] Fetching 70732-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70732-1#T=P
+2025-10-13 09:30:35,864 [INFO] Appended 4 rows — CSV now has 580 rows.
+2025-10-13 09:30:35,866 [INFO] Sleeping 99s before next set.
+2025-10-13 09:32:15,788 [INFO] Fetching 70738-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70738-1#T=P
+2025-10-13 09:32:25,430 [INFO] Appended 4 rows — CSV now has 584 rows.
+2025-10-13 09:32:25,432 [INFO] Sleeping 90s before next set.
+2025-10-13 09:33:56,119 [INFO] Fetching 70751-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70751-1#T=P
+2025-10-13 09:34:05,603 [INFO] Appended 4 rows — CSV now has 588 rows.
+2025-10-13 09:34:05,604 [INFO] Sleeping 66s before next set.
+2025-10-13 09:35:12,188 [INFO] Fetching 71016-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=71016-1#T=P
+2025-10-13 09:35:33,440 [INFO] Appended 4 rows — CSV now has 592 rows.
+2025-10-13 09:35:33,442 [INFO] Sleeping 111s before next set.

@@ -11,9 +11,9 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 
 # =========================
-# CONFIG — ajuste si besoin
+# CONFIG
 # =========================
-SET_ID = "71040-1"   # ex: "10218-1" — tu peux remplacer par une boucle listée plus bas
+SET_ID = "71040-1"   # ex: "10218-1" 
 URL_TEMPLATE = "https://www.bricklink.com/v2/catalog/catalogitem.page?S={set_id}#T=P"
 
 HEADLESS = True
@@ -24,8 +24,8 @@ WAIT_TIMEOUT = 60_000
 MIN_DELAY = 60         # secondes mini entre deux sets
 MAX_DELAY = 120        # secondes maxi (jitter)
 BLOCK_DURATION = 15*60 # durée mini après un block apparent (ex : 15 minutes)
-DAILY_MAX_SETS = 150   # budget quotidien conservateur (ajuste comme tu veux)
-BLOCKS_PER_DAY = 3     # nombre de blocs de scraping par jour (facultatif si tu lances manuellement)
+DAILY_MAX_SETS = 150   # budget quotidien conservateur
+BLOCKS_PER_DAY = 3     # nombre de blocs de scraping par jour
 
 # cache / TTL
 CACHE_FILE = "fetch_cache.json"   # stocke last_fetch par set
@@ -33,7 +33,7 @@ TTL_DAYS = 7                      # ne pas re-fetch si < TTL_DAYS
 
 # output
 OUT_CSV = "bricklink_summary_history.csv"
-RAW_HTML_DIR = "raw_html"         # sauvegarde html (utile pour debug / parsing offline)
+RAW_HTML_DIR = "raw_html"         # sauvegarde html 
 
 # =========================
 # LOGGING

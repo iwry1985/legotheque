@@ -1,7 +1,0 @@
-2025-10-11 16:28:06,756 [INFO] Fichier de log actif : logs\bricklink_20251011_1428.log
-2025-10-11 16:28:07,096 [INFO] 1 sets à scrapper récupérés depuis la DB.
-2025-10-11 16:28:07,097 [INFO] Fetching 10030-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=10030-1#T=P
-2025-10-11 16:28:16,426 [INFO] Saved raw html to raw_html\10030-1_20251011T142816Z.html
-2025-10-11 16:28:16,572 [INFO] Appended 4 rows — CSV now has 72 rows.
-2025-10-11 16:28:16,573 [INFO] Sleeping 61s before next set.
-2025-10-11 16:29:18,052 [INFO] Finished run.
