@@ -2,3 +2,24 @@
 2025-10-13 12:54:13,578 [INFO] 50 sets à scrapper récupérés depuis la DB.
 2025-10-13 12:54:13,599 [INFO] Skip 70173-1 (fetch récent < 7 jours).
 2025-10-13 12:54:13,619 [INFO] Fetching 42053-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42053-1#T=P
+2025-10-13 12:54:26,183 [INFO] Appended 4 rows — CSV now has 668 rows.
+2025-10-13 12:54:26,185 [INFO] Sleeping 115s before next set.
+2025-10-13 12:56:21,588 [INFO] Fetching 42054-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42054-1#T=P
+2025-10-13 12:56:31,272 [INFO] Appended 4 rows — CSV now has 672 rows.
+2025-10-13 12:56:31,273 [INFO] Sleeping 70s before next set.
+2025-10-13 12:57:41,685 [INFO] Fetching 42055-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42055-1#T=P
+2025-10-13 12:58:01,835 [INFO] Appended 4 rows — CSV now has 676 rows.
+2025-10-13 12:58:01,836 [INFO] Sleeping 100s before next set.
+2025-10-13 12:59:42,685 [INFO] Fetching 42056-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=42056-1#T=P
+2025-10-13 12:59:52,088 [INFO] Appended 4 rows — CSV now has 680 rows.
+2025-10-13 12:59:52,089 [INFO] Sleeping 68s before next set.
+2025-10-13 13:01:00,248 [INFO] Fetching 60125-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=60125-1#T=P
+2025-10-13 13:01:09,778 [INFO] Appended 4 rows — CSV now has 684 rows.
+2025-10-13 13:01:09,780 [INFO] Sleeping 103s before next set.
+2025-10-13 13:02:53,680 [INFO] Fetching 70317-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70317-1#T=P
+2025-10-13 13:03:03,405 [INFO] Appended 4 rows — CSV now has 688 rows.
+2025-10-13 13:03:03,407 [INFO] Sleeping 81s before next set.
+2025-10-13 13:04:25,015 [INFO] Fetching 70323-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70323-1#T=P
+2025-10-13 13:04:34,620 [INFO] Appended 4 rows — CSV now has 692 rows.
+2025-10-13 13:04:34,621 [INFO] Sleeping 86s before next set.
+2025-10-13 13:06:00,916 [INFO] Fetching 70595-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=70595-1#T=P

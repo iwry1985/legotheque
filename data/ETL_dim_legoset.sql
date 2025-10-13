@@ -1,5 +1,5 @@
 INSERT INTO d_legoset (
-    pk_setid, pieces, retail_price, name,
+    set_id, pieces, retail_price, name,
     launch_year, rating, min_age, height, width,
     minifigs, review_count, theme
 )
@@ -25,7 +25,7 @@ FROM dblink(
 	WHERE year IS NOT NULL
     $$
 ) AS src(
-    pk_setid TEXT,
+    set_id TEXT,
     pieces INT,
     retail_price NUMERIC,
     name TEXT,
@@ -39,6 +39,6 @@ FROM dblink(
     theme TEXT
 )
 WHERE NOT EXISTS (
-    SELECT 1 FROM d_legoset d WHERE d.pk_setid = src.pk_setid
+    SELECT 1 FROM d_legoset d WHERE d.set_id = src.set_id
 );
 
