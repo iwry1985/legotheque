@@ -1,47 +1,28 @@
 import { Component, inject, signal } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+
+import { ButtonModule } from 'primeng/button';
+import { DialogService } from 'primeng/dynamicdialog';
+import { LoginForm } from '../../components/login-form/login-form';
+import { AuthService } from 'app/features/services/auth-service.service';
 
 @Component({
   selector: 'app-login',
-  imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule],
+  imports: [ButtonModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
-  private readonly _fb = inject(FormBuilder);
+  private readonly _dialogService: DialogService = inject(DialogService);
+  protected readonly _authService: AuthService = inject(AuthService);
 
-  loginForm: FormGroup;
-  errorMessage = signal('');
-
-  constructor() {
-    this.loginForm = this._fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      pwd: ['', [Validators.required]],
+  openDialog = () => {
+    this._dialogService.open(LoginForm, {
+      closable: true,
+      resizable: true,
+      maximizable: true,
+      width: '30vw',
+      modal: true,
+      dismissableMask: true,
     });
-  }
-
-  updateErrorMessage() {
-    console.log('loginForm', this.loginForm.get('email')?.hasError);
-
-    if (this.loginForm.get('email')?.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
-    } else if (this.loginForm.get('email')?.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
-    } else {
-      this.errorMessage.set('');
-    }
-  }
-
-  onSubmit = () => {
-    if (this.loginForm.dirty && this.loginForm.valid) {
-      const values = this.loginForm.value;
-    }
   };
 }

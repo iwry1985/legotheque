@@ -28,4 +28,25 @@ export class AuthService {
             username: user.username,
         });
     };
+
+    refresh = async (token: string): Promise<string> => {
+        try {
+            const decoded = this._jwtService.verify(token, {
+                ignoreExpiration: true, //on ne veut pas vérifier l'expiration
+            });
+
+            const user = await this._userRepository.findOne({
+                where: { userid: decoded.id },
+            });
+
+            if (!user) throw new UnauthorizedException();
+
+            return this._jwtService.sign({
+                userid: user.userid,
+                username: user.username,
+            });
+        } catch (err) {
+            throw new UnauthorizedException();
+        }
+    };
 }

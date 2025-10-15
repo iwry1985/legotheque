@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="p-5">
+  <p-float-label>
+    <label>Email</label>
+    <input pInputText formControlName="email" />
+  </p-float-label>
+
+  <p-float-label>
+    <label>Password</label>
+    <p-password formControlName="pwd"></p-password>
+  </p-float-label>
+
+  <p-button label="Se connecter" icon="pi pi-send" type="submit"></p-button>
+</form>

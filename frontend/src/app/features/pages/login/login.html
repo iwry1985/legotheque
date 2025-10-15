@@ -1,19 +1,5 @@
-<div class="content">
-  <div class="card">
-    <form [formGroup]="loginForm">
-      <mat-form-field>
-        <mat-label>Email :</mat-label>
-        <input
-          matInput
-          placeholder="pat@example.com"
-          MatFormFieldControl="email"
-          (blur)="updateErrorMessage()"
-          required
-        />
-        @if (loginForm.get('email')?.touched && errorMessage()) {
-        <mat-error>{{errorMessage()}}</mat-error>
-        }
-      </mat-form-field>
-    </form>
-  </div>
-</div>
+@if(_authService.connectedUser()) {
+<p-button (onClick)="_authService.logout()" icon="pi pi-power-off"></p-button>
+} @else {
+<p-button (onClick)="openDialog()" icon="pi pi-power-off"></p-button>
+}
