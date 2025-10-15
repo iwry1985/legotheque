@@ -3,6 +3,11 @@ import { legosetResolver } from './core/resolvers/legoset-resolver';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    loadComponent: () =>
+      import('./features/pages/login/login').then((c) => c.Login),
+  },
+  {
     path: 'themes',
     loadComponent: () =>
       import('./features/pages/theme-list/theme-list').then((c) => c.ThemeList),
