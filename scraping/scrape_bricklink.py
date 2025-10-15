@@ -403,7 +403,7 @@ def get_sets_to_scrape(limit=MAX_SETS_FROM_DB):
     query = text("""
         SELECT bricksetid
         FROM legoset
-        WHERE fetch_bricklink=false AND retailprice > 0 AND pieces >= 1000
+        WHERE fetch_bricklink=false AND retailprice > 0 AND pieces >= 750
         ORDER BY year ASC
         LIMIT :limit;
     """)
