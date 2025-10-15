@@ -1,0 +1,32 @@
+<form [formGroup]="form" class="mb-5" (ngSubmit)="search()">
+  <input pInputText formControlName="search" />
+  <input pInputText formControlName="themeid" />
+  <p-button label="Search" icon="pi pi-send" type="submit"></p-button>
+</form>
+
+<p-table
+  [value]="legosets.value()?.data ?? []"
+  [loading]="legosets.isLoading()"
+>
+  <ng-template #header>
+    <tr>
+      <th>Nom</th>
+      <th>Prix</th>
+      <th>Thème</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-l>
+    <tr>
+      <td>{{l.name}}</td>
+      <td>{{l.retailprice}}</td>
+      <td>{{l.theme.name}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-paginator
+  #paginator
+  [totalRecords]="legosets.value()?.total"
+  [rows]="legosets.value().limit"
+  (onPageChange)="changePage($event)"
+></p-paginator>

@@ -64,6 +64,6 @@ export class Legotheque {
 
     //user
     @ManyToOne(() => User, (user) => user.legotheque)
-    @JoinColumn({ name: 'userid', referencedColumnName: 'userid' }) //name => column from this table, referencedColumnName => column in joined table
+    @JoinColumn({ name: 'userid' }) //name => column from this table, referencedColumnName => column in joined table
     user: User;
 }

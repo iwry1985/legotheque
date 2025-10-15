@@ -1,5 +1,5 @@
 @if(_authService.connectedUser()) {
 <p-button (onClick)="_authService.logout()" icon="pi pi-power-off"></p-button>
 } @else {
-<p-button (onClick)="openDialog()" icon="pi pi-power-off"></p-button>
+<p-button (onClick)="openDialog()" icon="pi-pen-to-square"></p-button>
 }

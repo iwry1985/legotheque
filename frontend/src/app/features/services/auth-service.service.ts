@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from 'environments/environment';
 import { tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { tokenIntercept } from 'app/core/interceptors/token-interceptor';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -30,7 +31,7 @@ export class AuthService {
       username: string;
     }>(token);
 
-    this._connectedUser.set({ token, role: decoded });
+    this._connectedUser.set({ token, ...decoded });
   }
 
   login = (email: string, pwd: string) => {
@@ -47,18 +48,16 @@ export class AuthService {
   };
 
   refresh = () => {
-    if (this._connectedUser) {
-      return this._httpClient
-        .get<{ token: string }>(environment.apiUrl + 'auth/refresh', {
-          params: { token: this._connectedUser().token },
+    return this._httpClient
+      .get<{ token: string }>(environment.apiUrl + 'auth/refresh', {
+        params: { token: this._connectedUser().token },
+        context: new HttpContext().set(tokenIntercept, false),
+      })
+      .pipe(
+        tap(({ token }) => {
+          this.setConnectedUser(token);
         })
-        .pipe(
-          tap(({ token }) => {
-            this.setConnectedUser(token);
-          })
-        );
-    }
-    return;
+      );
   };
 
   logout = () => {

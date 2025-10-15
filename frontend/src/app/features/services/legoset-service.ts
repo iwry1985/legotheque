@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Injectable, Signal } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { ILegoset } from '../models/legoset.model';
 
@@ -13,5 +13,12 @@ export class LegosetService {
 
   getLegoset = (id: number): Observable<ILegoset> => {
     return this._http.get<ILegoset>(`${this._url}/${id}`);
+  };
+
+  getList = (filters: Signal<any>) => {
+    return httpResource(() => ({
+      url: environment.apiUrl + 'legoset',
+      params: filters(),
+    }));
   };
 }

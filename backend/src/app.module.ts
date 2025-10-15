@@ -22,6 +22,7 @@ import { SharedModule } from './core/features/shared/shared.module';
             password: process.env.DB_PASSWORD,
             synchronize: false,
             autoLoadEntities: true,
+            logging: true,
         }),
         //config pour envoi de mails
         MailerModule.forRoot({

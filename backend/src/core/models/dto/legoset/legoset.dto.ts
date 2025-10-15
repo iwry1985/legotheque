@@ -5,6 +5,7 @@ import { ApiOAuth2, ApiProperty } from '@nestjs/swagger';
 import {
     IsBoolean,
     IsDate,
+    IsDecimal,
     IsInt,
     IsNotEmpty,
     IsNumber,

@@ -4,7 +4,12 @@ import { LegosetDto } from 'src/core/models/dto/legoset/legoset.dto';
 import { GetLegosetFilterDto } from 'src/core/models/dto/legoset/legoset-filters.dto';
 import { UseFilters } from '@nestjs/common';
 import { LegosetListDto } from 'src/core/models/dto/legoset/legoset-list.dto';
-import { ApiOperation, ApiProduces, ApiResponse } from '@nestjs/swagger';
+import {
+    ApiOperation,
+    ApiProduces,
+    ApiQuery,
+    ApiResponse,
+} from '@nestjs/swagger';
 
 @Controller('legoset')
 export class LegosetController {

@@ -69,7 +69,7 @@ export class LegosetService {
 
         if (search)
             query.andWhere(
-                '(LOWER(legoset.name) LIKE LOWER(:search) OR legoset.reference::text LIKE :search OR LOWER(legoset  .tags) LIKE LOWER(:search))',
+                '(LOWER(legoset.name) LIKE LOWER(:search) OR legoset.reference::text LIKE :search OR LOWER(legoset.tags) LIKE LOWER(:search))',
                 { search: `%${search}%` }
             );
 

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { legosetResolver } from './core/resolvers/legoset-resolver';
+import { isUserGuard } from './core/guards/is-user-guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,11 @@ export const routes: Routes = [
     path: 'themes',
     loadComponent: () =>
       import('./features/pages/theme-list/theme-list').then((c) => c.ThemeList),
+  },
+  {
+    path: 'lego',
+    loadComponent: () =>
+      import('./features/pages/lego-list/lego-list').then((c) => c.LegoList),
   },
   {
     path: 'lego/:id',

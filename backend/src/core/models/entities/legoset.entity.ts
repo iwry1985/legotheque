@@ -47,10 +47,10 @@ export class Legoset {
     @Column({ nullable: true })
     thumbnail?: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'decimal' })
     retailprice?: number;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'decimal' })
     rating?: number;
 
     @Column({ nullable: true })
@@ -62,10 +62,10 @@ export class Legoset {
     @Column({ nullable: true })
     description?: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'decimal' })
     height?: number;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'decimal' })
     width?: number;
 
     @Column({ nullable: true })
@@ -88,6 +88,6 @@ export class Legoset {
 
     //theme
     @ManyToOne(() => Theme)
-    @JoinColumn({ name: 'themeid', referencedColumnName: 'themeid' })
+    @JoinColumn({ name: 'themeid' })
     theme: Theme;
 }

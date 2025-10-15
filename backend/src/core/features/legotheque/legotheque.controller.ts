@@ -9,7 +9,7 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { LegothequeService } from './legotheque.service';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { LegothequeDto } from 'src/core/models/dto/legotheque/legotheque.dto';
 import { CreateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-create.dto';
 import { UpdateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-update.dto';
@@ -21,6 +21,7 @@ export class LegothequeController {
 
     @Get()
     @ApiOperation({ summary: 'Get all sets from collection' })
+    @ApiBearerAuth()
     getCollection(): Promise<LegothequeDto[]> {
         return this._legothequeService.getLegotheque(1);
     }
