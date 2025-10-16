@@ -1,4 +1,38 @@
-<img [src]="legoset.thumbnail" [alt]="legoset.name" />
-{{ legoset.name }} @if(themeLogo) {
-<img [src]="themeLogo.logo" [alt]="themeLogo.name" />
-}
+<div class="layout">
+  <div class="details flex space-between">
+    <div class="right img">
+      <img [src]="legoset.thumbnail" [alt]="legoset.thumbnail" />
+    </div>
+    <div class="left">
+      @if(themeLogo) {
+      <div class="theme">
+        @if(themeLogo.logo) {
+        <img [src]="themeLogo.logo" [alt]="themeLogo.name" />
+        } @else {
+        <h6>{{themeLogo.name}}</h6>
+        }
+      </div>
+      }
+
+      <h2>{{legoset.name}}</h2>
+      <div class="infos flex">
+        <div class="item-flex">{{legoset.reference | ref}}</div>
+        <div class="item-flex">{{legoset.pieces | pieces}}</div>
+        <div class="item-flex">{{legoset.year}}</div>
+      </div>
+
+      @if(authService.connectedUser()) {
+      <div class="actions flex">
+        <p-button label="Ajouter" icon="pi pi-plus" size="large"></p-button>
+        <p-button
+          label="Je le veux"
+          icon="pi pi-heart"
+          size="large"
+          severity="danger"
+          class="item-flex"
+        ></p-button>
+      </div>
+      }
+    </div>
+  </div>
+</div>

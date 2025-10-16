@@ -27,9 +27,9 @@
             ],
             "styles": [
               "src/styles/styles.scss",
-              "src/styles/theme.scss",
               "node_modules/primeflex/primeflex.min.css",
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/primeicons/primeicons.css",
+              "src/styles/theme.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]

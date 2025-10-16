@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { ApiModule } from './core/features/api/api.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './core/features/user/user.module';
 import { LegosetModule } from './core/features/legoset/legoset.module';
 import { LegothequeModule } from './core/features/legotheque/legotheque.module';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { hostname } from 'os';
-import { JwtModule } from '@nestjs/jwt';
+
 import { AuthModule } from './core/features/auth/auth.module';
 import { SharedModule } from './core/features/shared/shared.module';
 
@@ -22,7 +20,7 @@ import { SharedModule } from './core/features/shared/shared.module';
             password: process.env.DB_PASSWORD,
             synchronize: false,
             autoLoadEntities: true,
-            logging: true,
+            logging: false,
         }),
         //config pour envoi de mails
         MailerModule.forRoot({

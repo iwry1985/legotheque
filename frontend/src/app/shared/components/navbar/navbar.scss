@@ -1,12 +1,11 @@
 @use "theme" as *;
 
 .menu {
-  background-color: $red;
   padding: 15px;
   position: fixed;
   width: 100%;
-  border-bottom: 2px solid $dark;
   top: 0;
+  left: 0;
 
   ul {
     display: flex;

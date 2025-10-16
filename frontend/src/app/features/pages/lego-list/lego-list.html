@@ -13,6 +13,7 @@
       <th>Nom</th>
       <th>Prix</th>
       <th>Thème</th>
+      <th>id</th>
     </tr>
   </ng-template>
   <ng-template #body let-l>
@@ -20,6 +21,7 @@
       <td>{{l.name}}</td>
       <td>{{l.retailprice}}</td>
       <td>{{l.theme.name}}</td>
+      <td>{{l.setid}}</td>
     </tr>
   </ng-template>
 </p-table>
@@ -27,6 +29,6 @@
 <p-paginator
   #paginator
   [totalRecords]="legosets.value()?.total"
-  [rows]="legosets.value().limit"
+  [rows]="legosets.value()?.limit"
   (onPageChange)="changePage($event)"
 ></p-paginator>

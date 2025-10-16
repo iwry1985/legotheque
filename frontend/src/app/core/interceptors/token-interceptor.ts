@@ -1,6 +1,6 @@
 import { HttpContextToken, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from 'app/features/services/auth-service.service';
+import { AuthService } from 'app/features/services/auth.service';
 import { switchMap } from 'rxjs';
 
 export const tokenIntercept = new HttpContextToken<boolean>(() => true);

@@ -3,7 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LoginForm } from '../../components/login-form/login-form';
-import { AuthService } from 'app/features/services/auth-service.service';
+import { AuthService } from 'app/features/services/auth.service';
 
 @Component({
   selector: 'app-login',

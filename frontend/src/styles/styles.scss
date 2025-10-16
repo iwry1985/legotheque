@@ -4,9 +4,11 @@
 
 body {
   font-family: $font-body;
-  background-color: $light;
+  //background-color: $light;
   padding-top: 80px;
   position: relative;
+  max-width: 1200px;
+  margin: auto;
 
   h1,
   h2,
@@ -16,4 +18,33 @@ body {
   h6 {
     font-family: $font-title;
   }
+}
+
+.flex {
+  display: flex;
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.space-between {
+    justify-content: space-between;
+  }
+
+  .item-flex {
+    margin: 0 15px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+img {
+  max-width: 100%;
+  object-fit: cover;
 }

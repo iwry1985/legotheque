@@ -1,5 +1,5 @@
 import { Component, inject, signal, ViewChild } from '@angular/core';
-import { LegosetService } from 'app/features/services/legoset-service';
+import { LegosetService } from 'app/features/services/legoset.service';
 import { TableModule } from 'primeng/table';
 import { Paginator, PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { InputText } from 'primeng/inputtext';
@@ -29,7 +29,7 @@ export class LegoList {
   filters = signal({ page: 1 });
   legosets: any = this._legosetService.getList(this.filters);
   form = this._fb.group({
-    themeid: [null],
+    themeid: [''],
     search: [''],
   });
 
@@ -40,8 +40,10 @@ export class LegoList {
   search = () => {
     // on enlève les clés dont la valeur est null ou undefined
     const cleanFilters = Object.fromEntries(
-      Object.entries(this.form.value).filter(([_, v]) => v != null)
+      Object.entries(this.form.value).filter((f) => f != null)
     );
+
+    console.log('cleanFilters', cleanFilters, this.form.value);
 
     this.filters.set({ ...cleanFilters, page: 1 });
 

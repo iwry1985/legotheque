@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    ForbiddenException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-create.dto';
 import { ChangeStatusLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-status.dto';
@@ -21,7 +25,8 @@ export class LegothequeService {
     };
 
     getOneSetFromLegotheque = async (
-        legothequeid: number,
+        userid: number,
+        setid: number,
         noRelations?: boolean
     ): Promise<Legotheque | null> => {
         /**
@@ -33,10 +38,10 @@ export class LegothequeService {
         try {
             console.log(
                 '[LEGOTHEQUE Service] get one line from legotheque',
-                legothequeid
+                setid
             );
 
-            let options: FindOneOptions = { where: { legothequeid } };
+            let options: FindOneOptions = { where: { setid, userid } };
             if (!noRelations) options.relations = ['set'];
 
             return this._legothequeRepository.findOne(options);
@@ -46,6 +51,7 @@ export class LegothequeService {
     };
 
     addSetToCollection = async (
+        userid: number,
         body: CreateLegothequeDto
     ): Promise<LegothequeDto> => {
         /**
@@ -59,22 +65,42 @@ export class LegothequeService {
             );
             return await this._legothequeRepository.save({
                 ...body,
-                set: { setid: body.setid } as Legoset,
+                set: { setid: body.setid, userid },
             });
         } catch (error) {
             throw new Error(error);
         }
     };
 
+    private getSetFromUserLegotheque = async (
+        legothequeid: number,
+        userid: number
+    ): Promise<LegothequeDto> => {
+        let lego = await this._legothequeRepository.findOne({
+            where: { legothequeid },
+        });
+
+        if (!lego) throw new NotFoundException('Aucun set correspondant');
+
+        if (lego.userid !== userid)
+            throw new ForbiddenException(
+                "Vous n'avez pas le droit de modifier cette collection"
+            );
+
+        return lego;
+    };
+
     updateCollectionSet = async (
         legothequeid: number,
-        body: UpdateLegothequeDto
+        body: UpdateLegothequeDto,
+        userid: number
     ): Promise<LegothequeDto> => {
         console.log('[LEGOTHEQUE Service] Update... ', body);
         try {
-            let lego = await this.getOneSetFromLegotheque(legothequeid, true);
-
-            if (!lego) throw new NotFoundException('Aucun set correspondant');
+            let lego = await this.getSetFromUserLegotheque(
+                legothequeid,
+                userid
+            );
 
             lego = { ...lego, ...body };
 
@@ -86,15 +112,17 @@ export class LegothequeService {
 
     changeSetStatus = async (
         legothequeid: number,
-        body: ChangeStatusLegothequeDto
+        body: ChangeStatusLegothequeDto,
+        userid: number
     ): Promise<LegothequeDto> => {
         console.log('[LEGOTHEQUE Service], change status...', body);
         try {
             const { status, date, type } = body;
 
-            const lego = await this.getOneSetFromLegotheque(legothequeid, true);
-
-            if (!lego) throw new NotFoundException('Aucun set correspondant');
+            const lego = await this.getSetFromUserLegotheque(
+                legothequeid,
+                userid
+            );
 
             const statusDate: string = `${status}at`;
 
@@ -108,7 +136,8 @@ export class LegothequeService {
     };
 
     removeSetFromCollection = async (
-        legothequeid: number
+        legothequeid: number,
+        userid: number
     ): Promise<boolean> => {
         console.log(
             '[LEGOTHEQUE Service], remove from legotheque...',

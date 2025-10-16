@@ -377,6 +377,8 @@ def run_for_sets(set_ids):
         # marque comme fetché
         mark_fetched(cache, set_id)
         fetched_today += 1
+        
+        logger.info(f"{fetched_today} fetched")
 
         # délai aléatoire entre 2 sets (politeness)
         delay = random.uniform(MIN_DELAY, MAX_DELAY)

@@ -4,7 +4,7 @@ import {
   ResolveFn,
   RouterStateSnapshot,
 } from '@angular/router';
-import { LegosetService } from '../../features/services/legoset-service';
+import { LegosetService } from '../../features/services/legoset.service';
 import { tap } from 'rxjs';
 import { ILegoset } from '../../features/models/legoset.model';
 
