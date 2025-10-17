@@ -14,7 +14,7 @@ export class AuthService {
   constructor() {
     const token = localStorage.getItem('token');
 
-    if (token) this._connectedUser.set(token);
+    if (token) this.setConnectedUser(token);
   }
 
   get connectedUser() {

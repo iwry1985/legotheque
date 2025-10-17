@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { legosetResolver } from './core/resolvers/legoset-resolver';
-import { isUserGuard } from './core/guards/is-user-guard';
+import { LegoDetailResolver } from './core/resolvers/legodetail.resolver';
 
 export const routes: Routes = [
   {
@@ -24,6 +23,6 @@ export const routes: Routes = [
       import('./features/pages/lego-detail/lego-detail').then(
         (c) => c.LegoDetail
       ),
-    resolve: { legoset: legosetResolver },
+    resolve: { data: LegoDetailResolver },
   },
 ];

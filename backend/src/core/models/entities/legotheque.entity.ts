@@ -25,16 +25,10 @@ export class Legotheque {
     owned?: boolean;
 
     @Column({ nullable: true })
-    wanted?: boolean;
-
-    @Column({ nullable: true })
     built?: boolean;
 
     @Column({ nullable: true })
     ownedat?: Date;
-
-    @Column({ nullable: true })
-    wantedat?: Date;
 
     @Column({ nullable: true })
     builtat?: Date;

@@ -8,6 +8,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
 import { AuthModule } from './core/features/auth/auth.module';
 import { SharedModule } from './core/features/shared/shared.module';
+import { WantedModule } from './core/features/wanted/wanted.module';
 
 @Module({
     imports: [
@@ -42,6 +43,7 @@ import { SharedModule } from './core/features/shared/shared.module';
         LegothequeModule,
         AuthModule,
         SharedModule,
+        WantedModule,
     ],
     controllers: [],
     providers: [],

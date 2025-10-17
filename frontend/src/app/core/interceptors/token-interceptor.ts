@@ -20,12 +20,16 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
         switchMap(({ token }) =>
           next(
             req.clone({
-              setHeaders: { authorization: 'Bearer +' + token },
+              setHeaders: { authorization: 'Bearer ' + token },
             })
           )
         )
       );
     }
+
+    return next(
+      req.clone({ setHeaders: { authorization: 'Bearer ' + token } })
+    );
   }
 
   return next(req);

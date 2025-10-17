@@ -34,18 +34,7 @@ export class LegothequeDto {
     @IsOptional()
     @IsBoolean()
     @ApiProperty()
-    wanted?: boolean;
-
-    @IsOptional()
-    @IsBoolean()
-    @ApiProperty()
     built?: boolean;
-
-    @IsOptional()
-    @IsDate()
-    @Type(() => Date)
-    @ApiProperty()
-    wantedat?: Date;
 
     @IsOptional()
     @IsDate()

@@ -21,8 +21,8 @@ NAV_TIMEOUT = 120_000
 WAIT_TIMEOUT = 60_000
 
 # politeness / cadence
-MIN_DELAY = 60         # secondes mini entre deux sets
-MAX_DELAY = 120        # secondes maxi (jitter)
+MIN_DELAY = 30         # secondes mini entre deux sets
+MAX_DELAY = 90        # secondes maxi (jitter)
 BLOCK_DURATION = 15*60 # durée mini après un block apparent (ex : 15 minutes)
 DAILY_MAX_SETS = 150   # budget quotidien conservateur
 BLOCKS_PER_DAY = 3     # nombre de blocs de scraping par jour
@@ -397,7 +397,7 @@ def run_for_sets(set_ids):
 from sqlalchemy import create_engine, text
 
 DB_URL = "postgresql://postgres:technofutur2025@localhost:5432/legothec"
-MAX_SETS_FROM_DB = 50  # nombre maximum de sets à scrapper par exécution
+MAX_SETS_FROM_DB = 100  # nombre maximum de sets à scrapper par exécution
 
 def get_sets_to_scrape(limit=MAX_SETS_FROM_DB):
     """Récupère les références à scrapper depuis la table legoset."""
@@ -405,7 +405,7 @@ def get_sets_to_scrape(limit=MAX_SETS_FROM_DB):
     query = text("""
         SELECT bricksetid
         FROM legoset
-        WHERE fetch_bricklink=false AND retailprice > 0 AND pieces >= 750
+        WHERE fetch_bricklink=false AND retailprice > 0 AND pieces >= 500
         ORDER BY year ASC
         LIMIT :limit;
     """)

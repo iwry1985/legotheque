@@ -1,4 +1,5 @@
 import {
+    BadRequestException,
     ForbiddenException,
     Injectable,
     NotFoundException,
@@ -10,13 +11,17 @@ import { UpdateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-u
 import { LegothequeDto } from 'src/core/models/dto/legotheque/legotheque.dto';
 import { Legoset } from 'src/core/models/entities/legoset.entity';
 import { Legotheque } from 'src/core/models/entities/legotheque.entity';
+import { Wanted } from 'src/core/models/entities/wanted.entity';
 import { FindOneOptions, Repository } from 'typeorm';
 
 @Injectable()
 export class LegothequeService {
     constructor(
         @InjectRepository(Legotheque)
-        private readonly _legothequeRepository: Repository<Legotheque>
+        private readonly _legothequeRepository: Repository<Legotheque>,
+
+        @InjectRepository(Wanted)
+        private readonly _wantedRepository: Repository<Wanted>
     ) {}
 
     //TODO: obj with pagination to return
@@ -61,18 +66,40 @@ export class LegothequeService {
         try {
             console.log(
                 '[LEGOTHEQUE Service] add set to user collection...',
-                body
+                body,
+                userid
             );
-            return await this._legothequeRepository.save({
+
+            const myLego = await this.getOneSetFromLegotheque(
+                userid,
+                body.setid
+            );
+
+            if (myLego) return myLego;
+
+            body.owned = true;
+
+            const setAdded = await this._legothequeRepository.save({
                 ...body,
-                set: { setid: body.setid, userid },
+                userid,
             });
+
+            //update boughtat in wanted list
+            await this._wantedRepository.update(
+                {
+                    setid: body.setid,
+                    userid,
+                },
+                { boughtat: body.ownedat || new Date() }
+            );
+
+            return setAdded;
         } catch (error) {
             throw new Error(error);
         }
     };
 
-    private getSetFromUserLegotheque = async (
+    private getSetFromCollectionWithError = async (
         legothequeid: number,
         userid: number
     ): Promise<LegothequeDto> => {
@@ -97,37 +124,12 @@ export class LegothequeService {
     ): Promise<LegothequeDto> => {
         console.log('[LEGOTHEQUE Service] Update... ', body);
         try {
-            let lego = await this.getSetFromUserLegotheque(
+            let lego = await this.getSetFromCollectionWithError(
                 legothequeid,
                 userid
             );
 
             lego = { ...lego, ...body };
-
-            return this._legothequeRepository.save(lego);
-        } catch (error) {
-            throw new Error(error);
-        }
-    };
-
-    changeSetStatus = async (
-        legothequeid: number,
-        body: ChangeStatusLegothequeDto,
-        userid: number
-    ): Promise<LegothequeDto> => {
-        console.log('[LEGOTHEQUE Service], change status...', body);
-        try {
-            const { status, date, type } = body;
-
-            const lego = await this.getSetFromUserLegotheque(
-                legothequeid,
-                userid
-            );
-
-            const statusDate: string = `${status}at`;
-
-            lego[status] = type === 'remove' ? false : true;
-            lego[statusDate] = type === 'remove' ? null : date || new Date();
 
             return this._legothequeRepository.save(lego);
         } catch (error) {
@@ -144,6 +146,8 @@ export class LegothequeService {
             legothequeid
         );
         try {
+            await this.getSetFromCollectionWithError(legothequeid, userid);
+
             await this._legothequeRepository.delete(legothequeid);
 
             return true;

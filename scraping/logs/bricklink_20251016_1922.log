@@ -1,0 +1,5 @@
+2025-10-16 21:22:07,927 [INFO] Fichier de log actif : logs\bricklink_20251016_1922.log
+2025-10-16 21:22:08,512 [INFO] 2 sets à scrapper récupérés depuis la DB.
+2025-10-16 21:22:08,531 [INFO] Skip 10282-2 (fetch récent < 7 jours).
+2025-10-16 21:22:08,531 [INFO] Skip 910056-1 (fetch récent < 7 jours).
+2025-10-16 21:22:08,532 [INFO] Finished run.

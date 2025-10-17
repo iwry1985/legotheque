@@ -6,8 +6,6 @@ class BaseUpdateLegothqueDto extends OmitType(CreateLegothequeDto, [
     'setid',
     'owned',
     'ownedat',
-    'wanted',
-    'wantedat',
     'built',
     'builtat',
 ] as const) {}

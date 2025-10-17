@@ -40,7 +40,7 @@ export class LegoList {
   search = () => {
     // on enlève les clés dont la valeur est null ou undefined
     const cleanFilters = Object.fromEntries(
-      Object.entries(this.form.value).filter((f) => f != null)
+      Object.entries(this.form.value).filter((f) => !f)
     );
 
     console.log('cleanFilters', cleanFilters, this.form.value);

@@ -48,13 +48,14 @@ export class LegothequeController {
         @Body() body: CreateLegothequeDto,
         @Req() req: any
     ): Promise<LegothequeDto> {
+        console.log('[Legotheque Controller] Add set', body);
         return this._legothequeService.addSetToCollection(
             req.user.userid,
             body
         );
     }
 
-    @Patch('/update/:legothequeid')
+    @Patch(':legothequeid')
     @ApiOperation({ summary: 'update set from collection' })
     updateSet(
         @Param('legothequeid') legothequeid: number,
@@ -68,21 +69,7 @@ export class LegothequeController {
         );
     }
 
-    @Patch('/update/:legothequeid/status')
-    @ApiOperation({ summary: 'Change set status from collection' })
-    changeSetStatus(
-        @Param('legothequeid') legothequeid: number,
-        @Body() body: ChangeStatusLegothequeDto,
-        @Req() req: any
-    ): Promise<LegothequeDto> {
-        return this._legothequeService.changeSetStatus(
-            legothequeid,
-            body,
-            req.user.userid
-        );
-    }
-
-    @Delete('delete/:legothequeid')
+    @Delete(':legothequeid')
     @ApiOperation({ summary: 'Remove set from collection' })
     removeSet(
         @Param('legothequeid') legothequeid: number,

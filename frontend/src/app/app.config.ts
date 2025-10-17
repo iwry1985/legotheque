@@ -7,11 +7,12 @@ import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { definePreset } from '@primeuix/themes';
+import { tokenInterceptor } from './core/interceptors/token-interceptor';
 
 export const LegoPreset = definePreset(Aura, {
   semantic: {
@@ -36,7 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([tokenInterceptor])),
     provideAnimations(),
     providePrimeNG({
       theme: { preset: LegoPreset },
