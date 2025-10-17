@@ -38,34 +38,56 @@ export class LegoCollection implements OnInit {
   myLego = input.required<ILegotheque>();
   updateLegotheque = output<ILegotheque>();
 
-  //maxdate for ownedat
   maxDate: Date = new Date();
   minDate!: Date | undefined;
   editMode = false;
   newPrice: number | undefined = 0;
   ownedat!: Date | undefined;
+  builtbeginat!: Date | null;
+  builtat: Date | undefined;
+  minDateBuilt!: Date | undefined;
+
+  keys: string[] = ['ownedat', 'builtbeginat', 'builtat'];
 
   ngOnInit(): void {
     const legoset = this.legoset();
+    const myLego = this.myLego();
+
     this.minDate = legoset?.launchdate
       ? new Date(legoset.launchdate)
       : legoset?.year
       ? new Date(legoset.year, 0, 1)
       : undefined;
 
-    this.newPrice = this.myLego().purchaseprice
-      ? this.myLego().purchaseprice
-      : this.legoset().retailprice
-      ? this.legoset().retailprice
+    this.newPrice = myLego.purchaseprice
+      ? myLego.purchaseprice
+      : legoset.retailprice
+      ? legoset.retailprice
       : 0;
 
-    const legoOwnedAt = this.myLego().ownedat;
-    if (legoOwnedAt) this.ownedat = new Date(legoOwnedAt);
+    this.minDateBuilt = myLego.builtbeginat && new Date(myLego.builtbeginat);
+
+    this.keys.forEach((key: string) => {
+      const field = this.myLego()[key as keyof ILegotheque];
+
+      if (field) (this as any)[key] = new Date(field as Date);
+    });
   }
 
-  updateLego = () => {
-    if (this.ownedat) this.myLego().ownedat = this.ownedat;
-    const body = omit(this.myLego(), UPDATE_LEGOTHEQUE_OMIT_KEYS);
+  updateLego = (updated?: Partial<ILegotheque>) => {
+    const lego = { ...this.myLego() };
+
+    type LegoKey = keyof ILegotheque;
+
+    let body: Partial<ILegotheque> = { ...lego, ...updated };
+
+    this.keys.forEach((key) => {
+      const k = key as LegoKey;
+      const value = (this as any)[k] as ILegotheque[LegoKey];
+      (body as any)[k] = value;
+    });
+
+    body = omit(body, UPDATE_LEGOTHEQUE_OMIT_KEYS);
 
     this._legothequeService
       .updateCollection(this.myLego().legothequeid, body)
@@ -75,7 +97,8 @@ export class LegoCollection implements OnInit {
   };
 
   savePrice() {
-    this.myLego().purchaseprice = this.newPrice;
+    const purchasePrice = Number(this.newPrice);
+    this.myLego().purchaseprice = purchasePrice;
     this.editMode = false;
 
     this.updateLego();
@@ -83,5 +106,19 @@ export class LegoCollection implements OnInit {
 
   cancelEdit() {
     this.editMode = false;
+  }
+
+  built(undone?: boolean) {
+    const section = document.querySelector('.build') as HTMLElement;
+    if (section) {
+      section.classList.add('fade-out');
+      setTimeout(() => {
+        this.myLego().built = !this.myLego().built;
+        this.updateLego();
+        section.classList.remove('fade-out');
+        section.classList.add('fade-in');
+        setTimeout(() => section.classList.remove('fade-in'), 300);
+      }, 300);
+    }
   }
 }

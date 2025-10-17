@@ -4,10 +4,20 @@
   .right {
     width: 52%;
     text-align: center;
+
+    .lego {
+      max-height: 400px;
+    }
   }
 
   .left {
     width: 45%;
+
+    .theme {
+      max-width: 10rem;
+      margin-bottom: 3rem;
+    }
+
     .infos {
       margin: 0.5rem 0;
     }
@@ -23,13 +33,96 @@
         }
       }
     }
+
+    .wanted-since {
+      margin-top: 1rem;
+    }
   }
 }
 
 .collection {
   margin: 2rem 0;
+  justify-content: space-between;
+  gap: 2vw;
+  animation-delay: 0.2s;
 
   .left {
-    width: 65%;
+    width: 60vw;
+  }
+
+  .right {
+    width: 30vw;
+  }
+}
+
+.page {
+  .layout,
+  .collection {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  // L'effet s'applique légèrement décalé sur la partie collection
+  .collection {
+    animation-delay: 0.2s;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.actions p-button {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: popIn 0.4s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.collection {
+  .left app-lego-collection {
+    display: block;
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeInCard 0.4s ease-out forwards;
+    animation-delay: 0.1s; // un léger décalage après le reste de la page
+  }
+
+  .right app-lego-summary {
+    display: block;
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeInCard 0.5s ease-out forwards;
+    animation-delay: 0.25s;
+  }
+
+  @keyframes fadeInCard {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }

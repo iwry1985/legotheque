@@ -2,7 +2,7 @@
   <div class="layout">
     <div class="details flex space-between">
       <div class="right img">
-        <img [src]="legoset.thumbnail" [alt]="legoset.thumbnail" />
+        <img class="lego" [src]="legoset.thumbnail" [alt]="legoset.thumbnail" />
       </div>
       <div class="left">
         @if(themeLogo) {
@@ -23,54 +23,62 @@
         </div>
 
         @if(authService.connectedUser()) {
-        <div class="actions flex">
-          <!-- si le set n'est pas dans ma collection, afficher le bouton ajouter -->
-          @if(!myLego()) {
-          <p-button
-            label="Ajouter"
-            icon="pi pi-plus"
-            size="large"
-            (onClick)="ownSet()"
-          ></p-button>
-          } @else {
-          <p-tag
-            icon="pi pi-face-smile"
-            value="Possédé"
-            severity="info"
-          ></p-tag>
+        <div class="user-actions">
+          <div class="actions flex">
+            <!-- si le set n'est pas dans ma collection, afficher le bouton ajouter -->
+            @if(!myLego()) {
+            <p-button
+              label="Ajouter"
+              icon="pi pi-plus"
+              size="large"
+              (onClick)="ownSet()"
+            ></p-button>
+            } @else {
+            <p-tag
+              icon="pi pi-face-smile"
+              value="Possédé"
+              severity="info"
+            ></p-tag>
 
-          <!-- si le set n'est pas encore construit -->
-          @if(!myLego()!.built) {
-          <p-tag icon="pi pi-circle-off" value="Non construit"></p-tag>
-          } @else {
-          <p-tag
-            icon="pi pi-check-circle"
-            value="construit"
-            severity="success"
-          ></p-tag>
-          } }
+            <!-- si le set n'est pas encore construit -->
+            @if(!myLego()!.built) {
+            <p-tag icon="pi pi-circle-off" value="Non construit"></p-tag>
+            } @else {
+            <p-tag
+              icon="pi pi-check-circle"
+              value="construit"
+              severity="success"
+            ></p-tag>
+            } }
 
-          <!-- si le set n'est ni dans ma legotheque ni dans ma liste de wanted, afficher le bouton 'je le veux !' -->
-          @if(!myLego() && !wanted()) {
-          <p-button
-            label="Je le veux !"
-            icon="pi pi-heart-fill"
-            size="large"
-            severity="danger"
-            class="item-flex"
-            (onClick)="addAsWanted()"
-          ></p-button>
-          }
-          <!-- si le set est dans ma liste de wanted pas dans ma legotheque, afficher le bouton 'je ne le veux plus' -->
+            <!-- si le set n'est ni dans ma legotheque ni dans ma liste de wanted, afficher le bouton 'je le veux !' -->
+            @if(!myLego() && !wanted()) {
+            <p-button
+              label="Je le veux !"
+              icon="pi pi-heart-fill"
+              size="large"
+              severity="danger"
+              class="item-flex"
+              (onClick)="addAsWanted()"
+            ></p-button>
+            }
+            <!-- si le set est dans ma liste de wanted pas dans ma legotheque, afficher le bouton 'je ne le veux plus' -->
+            @if(wanted() && !myLego()) {
+            <p-button
+              label="Je ne le veux plus !"
+              icon="pi pi-heart"
+              size="large"
+              severity="contrast"
+              class="item-flex"
+              (onClick)="removeFromWanted()"
+            ></p-button>
+            }
+          </div>
           @if(wanted() && !myLego()) {
-          <p-button
-            label="Je ne le veux plus !"
-            icon="pi pi-heart"
-            size="large"
-            severity="contrast"
-            class="item-flex"
-            (onClick)="removeFromWanted()"
-          ></p-button>
+          <div class="wanted-since">
+            Dans la liste de souhaits depuis {{ wanted()?.wantedat | date:
+            'dd/MM/yyyy' }}
+          </div>
           }
         </div>
         }
@@ -81,9 +89,15 @@
   @if(myLego()) {
   <div class="collection flex">
     <div class="left">
-      <app-lego-collection [legoset]="legoset" [myLego]="myLego()!" />
+      <app-lego-collection
+        [legoset]="legoset"
+        [myLego]="myLego()!"
+        (updateLegotheque)="updateLegotheque($event)"
+      />
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <app-lego-summary [myLego]="myLego()!"></app-lego-summary>
+    </div>
   </div>
   }
 </div>

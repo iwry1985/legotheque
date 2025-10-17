@@ -1,0 +1,22 @@
+<div class="layout">
+  <h3 class="section-title">
+    <i class="pi pi-box"></i>
+    Possède
+  </h3>
+
+  @if (myLego().ownedat) {
+  <p class="ownedat">
+    Depuis: {{ myLego().ownedat | date: "MMMM yyyy": "Europe/Brussels": "fr-FR"
+    }}
+  </p>
+  } @if (myLego().built) {
+  <p class="built">Construit: Oui</p>
+  } @else {
+  <p class="not-built">Construit: Non</p>
+  } @if (inProgress > 0) {
+  <p class="in-progress">
+    En cours: {{ inProgress }}
+    <span>@if (inProgress === 1) { jour } @else { jours }</span>
+  </p>
+  }
+</div>

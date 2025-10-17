@@ -17,11 +17,21 @@ import { ILegotheque } from 'app/features/models/legotheque.model';
 import { WantedService } from 'app/features/services/wanted.service';
 import { IWanted } from 'app/features/models/wanted.model';
 import { TagModule } from 'primeng/tag';
-import { LegoCollection } from 'app/features/components/lego-collection/lego-collection/lego-collection';
+import { LegoCollection } from 'app/features/components/lego-collection/lego-collection';
+import { LegoSummary } from 'app/features/components/lego-summary/lego-summary';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-lego-detail',
-  imports: [ButtonModule, RefPipe, PiecesPipe, TagModule, LegoCollection],
+  imports: [
+    ButtonModule,
+    RefPipe,
+    PiecesPipe,
+    TagModule,
+    LegoCollection,
+    LegoSummary,
+    DatePipe,
+  ],
   templateUrl: './lego-detail.html',
   styleUrl: './lego-detail.scss',
 })
@@ -60,7 +70,7 @@ export class LegoDetail implements OnInit {
     this.themeLogo = { name: theme.name };
 
     if (num) {
-      const logo = `/themes_assets/logo_${num}.png`;
+      const logo = `/themes_assets/logo_${num.toString().padStart(2, '0')}.png`;
       if (logo) this.themeLogo.logo = logo;
     }
   };
@@ -87,5 +97,9 @@ export class LegoDetail implements OnInit {
     this._legothequeService.addSet(this.legoset.setid).subscribe({
       next: (res) => this.myLego.set(res),
     });
+  };
+
+  updateLegotheque = (legotheque: ILegotheque) => {
+    this.myLego.set(legotheque);
   };
 }

@@ -7,7 +7,7 @@ body {
   background-color: $light;
   padding-top: 5rem;
   position: relative;
-  max-width: 90vw;
+  max-width: 70vw;
   margin: auto;
 
   h1,
@@ -56,4 +56,23 @@ img {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #374151;
+
+  i {
+    font-size: 1.3rem;
+    color: #eab308; // jaune LEGO
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: rotate(10deg) scale(1.1);
+    }
+  }
 }

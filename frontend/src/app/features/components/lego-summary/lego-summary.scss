@@ -1,0 +1,51 @@
+.layout {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 250px;
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+
+    &.ownedat::before {
+      content: "\e94e"; // pi-calendar
+      font-family: "PrimeIcons";
+      color: #60a5fa;
+    }
+
+    &.built::before {
+      content: "\e9a1"; // pi-cog
+      font-family: "PrimeIcons";
+      color: #22c55e; // vert LEGO
+    }
+
+    &.not-built::before {
+      content: "\e9a1"; // pi-cog
+      font-family: "PrimeIcons";
+      color: #9ca3af; // gris neutre
+    }
+
+    &.in-progress::before {
+      content: "\e942"; // pi-clock
+      font-family: "PrimeIcons";
+      color: #f97316; // orange
+    }
+  }
+}

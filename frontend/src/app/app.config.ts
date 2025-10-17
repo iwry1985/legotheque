@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  LOCALE_ID,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -13,6 +14,10 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { definePreset } from '@primeuix/themes';
 import { tokenInterceptor } from './core/interceptors/token-interceptor';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr);
 
 export const LegoPreset = definePreset(Aura, {
   semantic: {
@@ -44,5 +49,9 @@ export const appConfig: ApplicationConfig = {
     }),
     MessageService,
     DialogService,
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr-FR',
+    },
   ],
 };

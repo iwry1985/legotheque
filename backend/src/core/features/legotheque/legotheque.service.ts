@@ -75,6 +75,7 @@ export class LegothequeService {
             if (myLego) return myLego;
 
             body.owned = true;
+            body.ownedat = new Date();
 
             const setAdded = await this._legothequeRepository.save({
                 ...body,
@@ -125,6 +126,13 @@ export class LegothequeService {
                 legothequeid,
                 userid
             );
+
+            //replace null by false
+            const keys = ['built', 'gift', 'fav'];
+
+            keys.forEach((key) => {
+                if (!body[key]) body[key] = false;
+            });
 
             lego = { ...lego, ...body };
 

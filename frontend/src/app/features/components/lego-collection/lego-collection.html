@@ -1,9 +1,12 @@
 <div class="layout collection">
-  <h3>Gérer ma collection</h3>
-  <div class="collection-section">
-    <div class="owned">
-      <h4>Achat</h4>
+  <h3 class="section-title">
+    <i class="pi pi-sliders-h"></i>
+    Gérer ma collection
+  </h3>
 
+  <div class="collection-section">
+    <!-- ACHAT -->
+    <div class="owned">
       <!-- gift -->
       <div class="gift">
         <p>Cadeau ?</p>
@@ -14,6 +17,7 @@
         ></p-toggle-switch>
       </div>
 
+      <!-- owned at -->
       <div class="ownedat">
         @if(myLego().gift) {
         <p>Reçu le</p>
@@ -32,6 +36,7 @@
         ></p-datepicker>
       </div>
 
+      <!-- purchase price -->
       @if(legoset().retailprice) {
       <div class="price">
         <p>Prix d'achat</p>
@@ -55,13 +60,11 @@
               (click)="savePrice()"
               icon="pi pi-check"
               severity="success"
-              text
             ></p-button>
             <p-button
               (click)="cancelEdit()"
               icon="pi pi-times"
               severity="danger"
-              text
             ></p-button>
           </span>
           }
@@ -70,6 +73,61 @@
       }
     </div>
 
+    <!-- section divider -->
     <div class="divider"></div>
+
+    <!-- CONSTRUCTION -->
+    <div class="build">
+      <!-- beginBuiltAt -->
+      <div class="beginBuilt">
+        <p>Date de début (optionnel)</p>
+
+        <p-datepicker
+          [(ngModel)]="builtbeginat"
+          dateFormat="dd/mm/yy"
+          [showIcon]="true"
+          [maxDate]="maxDate"
+          [minDate]="minDate"
+          (onSelect)="updateLego()"
+        ></p-datepicker>
+      </div>
+
+      @if(myLego().built) {
+      <div class="builtat">
+        <p>Construit le</p>
+
+        <p-datepicker
+          [(ngModel)]="builtat"
+          dateFormat="dd/mm/yy"
+          [showIcon]="true"
+          [maxDate]="maxDate"
+          [minDate]="minDateBuilt"
+          (onSelect)="updateLego()"
+        ></p-datepicker>
+      </div>
+      }
+
+      <!-- mark as built -->
+      <div class="markAsBuilt">
+        @if(!myLego().built) {
+        <p-button
+          icon="pi pi-chevron-right"
+          label="Marquer comme construit"
+          iconPos="right"
+          size="large"
+          class="built-button"
+          (onClick)="built()"
+        ></p-button>
+        } @else {
+        <p-button
+          icon="pi pi-undo"
+          label="Tout compte fait, je n'ai pas fini"
+          size="large"
+          class="built-button"
+          (onClick)="built(true)"
+        ></p-button>
+        }
+      </div>
+    </div>
   </div>
 </div>
