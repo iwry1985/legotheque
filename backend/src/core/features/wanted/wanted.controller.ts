@@ -1,8 +1,17 @@
-import { Controller, Delete, Get, Param, Req } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Post,
+    Req,
+} from '@nestjs/common';
 import { WantedService } from './wanted.service';
 import { UserGuard } from 'src/core/guards/user.guard';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { WantedDto } from 'src/core/models/dto/wanted/wanted.dto';
+import { CreateWantedDto } from 'src/core/models/dto/wanted/wanted-create.dto';
 
 @ApiBearerAuth()
 @ApiTags('wanted')
@@ -17,6 +26,13 @@ export class WantedController {
         @Req() req: any
     ): Promise<WantedDto | null> {
         return this._wantedService.getWantedSet(req.user.userid, setid);
+    }
+
+    @Post()
+    @ApiOperation({ summary: 'add set to wanted list' })
+    addSet(@Body() body: CreateWantedDto, @Req() req: any): Promise<WantedDto> {
+        console.log('req', req.user);
+        return this._wantedService.addToList(req.user.userid, body);
     }
 
     @Delete(':wantedid')

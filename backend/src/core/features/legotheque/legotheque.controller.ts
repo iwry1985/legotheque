@@ -14,7 +14,6 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LegothequeDto } from 'src/core/models/dto/legotheque/legotheque.dto';
 import { CreateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-create.dto';
 import { UpdateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-update.dto';
-import { ChangeStatusLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-status.dto';
 import { UserGuard } from 'src/core/guards/user.guard';
 
 @UseGuards(UserGuard)
@@ -38,7 +37,8 @@ export class LegothequeController {
     ): Promise<LegothequeDto | null> {
         return this._legothequeService.getOneSetFromLegotheque(
             req.user.userid,
-            setid
+            setid,
+            true
         );
     }
 
@@ -59,7 +59,7 @@ export class LegothequeController {
     @ApiOperation({ summary: 'update set from collection' })
     updateSet(
         @Param('legothequeid') legothequeid: number,
-        @Body() body: UpdateLegothequeDto,
+        @Body('body') body: UpdateLegothequeDto,
         @Req() req: any
     ): Promise<LegothequeDto> {
         return this._legothequeService.updateCollectionSet(

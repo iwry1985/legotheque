@@ -5,9 +5,6 @@ import { CreateLegothequeDto } from './legotheque-create.dto';
 class BaseUpdateLegothqueDto extends OmitType(CreateLegothequeDto, [
     'setid',
     'owned',
-    'ownedat',
-    'built',
-    'builtat',
 ] as const) {}
 
 //put every fields as optionals

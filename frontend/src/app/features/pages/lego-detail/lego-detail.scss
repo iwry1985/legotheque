@@ -1,5 +1,5 @@
 .details {
-  margin: 50px 0;
+  margin: 3rem 0;
 
   .right {
     width: 52%;
@@ -9,7 +9,27 @@
   .left {
     width: 45%;
     .infos {
-      margin: 15px 0;
+      margin: 0.5rem 0;
     }
+
+    .actions {
+      margin-top: 1rem;
+      p-tag {
+        height: 2.5rem;
+        margin: 0 0.5rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+.collection {
+  margin: 2rem 0;
+
+  .left {
+    width: 65%;
   }
 }

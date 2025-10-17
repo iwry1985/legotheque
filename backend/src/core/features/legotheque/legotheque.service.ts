@@ -1,15 +1,12 @@
 import {
-    BadRequestException,
     ForbiddenException,
     Injectable,
     NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-create.dto';
-import { ChangeStatusLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-status.dto';
 import { UpdateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-update.dto';
 import { LegothequeDto } from 'src/core/models/dto/legotheque/legotheque.dto';
-import { Legoset } from 'src/core/models/entities/legoset.entity';
 import { Legotheque } from 'src/core/models/entities/legotheque.entity';
 import { Wanted } from 'src/core/models/entities/wanted.entity';
 import { FindOneOptions, Repository } from 'typeorm';
@@ -122,7 +119,7 @@ export class LegothequeService {
         body: UpdateLegothequeDto,
         userid: number
     ): Promise<LegothequeDto> => {
-        console.log('[LEGOTHEQUE Service] Update... ', body);
+        console.log('[LEGOTHEQUE Service] Update... ', body, legothequeid);
         try {
             let lego = await this.getSetFromCollectionWithError(
                 legothequeid,

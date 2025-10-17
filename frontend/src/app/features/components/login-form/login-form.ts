@@ -18,7 +18,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     FloatLabelModule,
   ],
   templateUrl: './login-form.html',
-  styleUrl: './login-form.css',
+  styleUrl: './login-form.scss',
 })
 export class LoginForm {
   private readonly _fb: FormBuilder = inject(FormBuilder);

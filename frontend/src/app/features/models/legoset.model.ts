@@ -8,7 +8,7 @@ export interface ILegoset {
   year: number;
   released: boolean;
   pieces: number;
-  launchDate?: Date;
+  launchdate?: Date;
   thumbnail?: string;
   retailprice?: number;
   rating?: number;

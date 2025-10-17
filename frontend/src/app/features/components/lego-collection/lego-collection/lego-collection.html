@@ -1,0 +1,75 @@
+<div class="layout collection">
+  <h3>Gérer ma collection</h3>
+  <div class="collection-section">
+    <div class="owned">
+      <h4>Achat</h4>
+
+      <!-- gift -->
+      <div class="gift">
+        <p>Cadeau ?</p>
+        <p-toggle-switch
+          name="gift"
+          (onChange)="updateLego()"
+          [(ngModel)]="myLego().gift"
+        ></p-toggle-switch>
+      </div>
+
+      <div class="ownedat">
+        @if(myLego().gift) {
+        <p>Reçu le</p>
+        } @else {
+        <p>Acheté le</p>
+        }
+
+        <p-datepicker
+          [(ngModel)]="ownedat"
+          dateFormat="mm/yy"
+          [showIcon]="true"
+          [maxDate]="maxDate"
+          [minDate]="minDate"
+          view="month"
+          (onSelect)="updateLego()"
+        ></p-datepicker>
+      </div>
+
+      @if(legoset().retailprice) {
+      <div class="price">
+        <p>Prix d'achat</p>
+
+        <div>
+          @if (!editMode) {
+          <p (click)="editMode = true" class="cursor-pointer hover:underline">
+            {{ myLego().purchaseprice ?? legoset().retailprice | currency:
+            'EUR'}}
+            <i class="pi pi-pencil edit-icon"></i>
+          </p>
+          } @else {
+          <span class="inline-flex gap-2">
+            <input
+              type="number"
+              pInputText
+              [(ngModel)]="newPrice"
+              [pAutoFocus]="true"
+            />
+            <p-button
+              (click)="savePrice()"
+              icon="pi pi-check"
+              severity="success"
+              text
+            ></p-button>
+            <p-button
+              (click)="cancelEdit()"
+              icon="pi pi-times"
+              severity="danger"
+              text
+            ></p-button>
+          </span>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="divider"></div>
+  </div>
+</div>

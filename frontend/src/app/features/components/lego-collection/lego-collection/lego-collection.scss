@@ -1,0 +1,73 @@
+.layout.collection {
+  .collection-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+
+    .owned {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .gift,
+      .ownedat,
+      .price {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .price {
+        .cursor-pointer {
+          color: #eab308; // jaune lego
+          font-weight: 600;
+          transition: color 0.2s ease;
+
+          &:hover {
+            color: #ca9807;
+            text-decoration: none !important;
+          }
+        }
+
+        input {
+          width: 6rem;
+          text-align: right;
+        }
+
+        .p-button {
+          padding: 0.25rem;
+        }
+      }
+    }
+
+    .divider {
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
+      height: auto;
+    }
+  }
+
+  // Mode sombre
+  [data-theme="dark"] & {
+    background-color: #121212;
+    color: #f4f4f4;
+
+    .owned {
+      background-color: #1e1e1e;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+    }
+
+    .divider {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .price .cursor-pointer:hover {
+      color: #fbd93a;
+    }
+  }
+}
