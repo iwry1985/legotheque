@@ -1,3 +1,5 @@
+@use "theme" as *;
+
 .layout.collection {
   padding: 2rem;
   background-color: #fff;
@@ -62,7 +64,7 @@
 
     .price {
       .cursor-pointer {
-        color: #eab308;
+        color: $yellow;
         font-weight: 600;
         transition: color 0.2s ease;
 
@@ -79,7 +81,7 @@
         transition: color 0.2s ease;
 
         &:hover {
-          color: #eab308;
+          color: $yellow;
         }
       }
     }
@@ -90,7 +92,7 @@
         margin-top: 1rem;
 
         .built-button {
-          background-color: #eab308;
+          background-color: $yellow;
           border: none;
           color: #1a1a1a;
           font-weight: 600;

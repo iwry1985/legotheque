@@ -47,9 +47,9 @@ export class LoginForm {
           console.log('ICI');
           this._messageService.add({
             severity: 'success',
-            summary: 'Welcome Foolish Mortal',
+            summary: 'Bienvenue !',
           });
-          this._dialogRef.close();
+          //this._dialogRef.close();
         },
       });
   };

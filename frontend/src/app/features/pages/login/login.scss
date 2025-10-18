@@ -1,0 +1,56 @@
+@use "theme" as *;
+
+.login-page {
+  min-height: calc(100vh - 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .login-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+  }
+
+  .login-card {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-top: 6px solid $yellow;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: $dark;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      p-floatLabel {
+        width: 100%;
+
+        input,
+        .form-input {
+          width: 100%;
+          padding: 0.8rem 0.9rem;
+          font-size: 1rem;
+        }
+
+        label {
+          color: #555;
+        }
+      }
+
+      p-button {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

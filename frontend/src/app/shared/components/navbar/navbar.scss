@@ -1,29 +1,93 @@
 @use "theme" as *;
 
-.menu {
-  padding: 15px;
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 2px solid #f1f1f1;
+  padding: 0.8rem 2rem;
   position: fixed;
-  width: 100%;
   top: 0;
   left: 0;
+  z-index: 1000;
+  width: 100%;
 
-  ul {
+  .nav-left {
     display: flex;
     align-items: center;
+    gap: 0.8rem;
+
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: 0.5px;
+    }
   }
 
-  .logo {
-    height: 30px;
-    margin-right: 20px;
-    cursor: pointer;
+  .nav-center {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    a {
+      color: #444;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #111;
+      }
+
+      &.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #facc15; // ton jaune 234,179,8
+        border-radius: 2px;
+      }
+    }
   }
 
-  a {
-    color: $yellow;
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
-    &:hover {
-      border: 1px solid $yellow;
-      border-radius: 3px;
+    .user-info {
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      color: #333;
+
+      i {
+        color: #555;
+      }
+    }
+
+    button {
+      background-color: #facc15 !important;
+      color: #111 !important;
+      border: none;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: $yellow !important;
+      }
     }
   }
 }

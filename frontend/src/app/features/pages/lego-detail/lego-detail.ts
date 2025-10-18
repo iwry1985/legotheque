@@ -74,6 +74,8 @@ export class LegoDetail implements OnInit {
       const logo = `/themes_assets/logo_${num.toString().padStart(2, '0')}.png`;
       if (logo) this.themeLogo.logo = logo;
     }
+
+    console.log('theme', this.themeLogo);
   };
 
   // add set to user wanted list

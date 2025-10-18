@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
     Column,
     Entity,
@@ -8,12 +9,15 @@ import {
 
 @Entity({ name: 'theme' })
 export class Theme {
+    @Expose()
     @PrimaryGeneratedColumn()
     themeid: number;
 
+    @Expose()
     @Column()
     name: string;
 
+    @Expose()
     @Column()
     img_num: number;
 }

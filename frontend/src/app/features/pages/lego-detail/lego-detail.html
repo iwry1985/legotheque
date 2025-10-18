@@ -37,24 +37,24 @@
         <div class="extra-infos">
           @if(legoset.retailprice) {
           <p>
-            <span class="label">Prix LEGO :</span>
+            <span class="label">Prix LEGO : </span>
             <span class="value"
               >{{ legoset.retailprice | currency: 'EUR' }}</span
             >
           </p>
           } @if(legoset.minage) {
           <p>
-            <span class="label">Âge min :</span>
+            <span class="label">Âge min : </span>
             <span class="value">{{ legoset.minage }}+</span>
           </p>
           } @if(legoset.minifigs && legoset.minifigs > 0) {
           <p>
-            <span class="label">Figurines :</span>
+            <span class="label">Figurines : </span>
             <span class="value">{{ legoset.minifigs }}</span>
           </p>
           } @if(legoset.launchdate) {
           <p>
-            <span class="label">Sortie :</span>
+            <span class="label">Sortie : </span>
             <span class="value">
               {{ legoset.launchdate | date: 'MMMM yyyy': 'Europe/Brussels':
               'fr-FR' }}
@@ -62,7 +62,15 @@
           </p>
           } @if(legoset.exitdate && !legoset.retired) {
           <p>
-            <span class="label">Fin prévue :</span>
+            <span class="label">Fin prévue : </span>
+            <span class="value">
+              {{ legoset.exitdate | date: 'MMMM yyyy': 'Europe/Brussels':
+              'fr-FR' }}
+            </span>
+          </p>
+          } @if(legoset.exitdate && legoset.retired) {
+          <p>
+            <span class="label">Fini depuis : </span>
             <span class="value">
               {{ legoset.exitdate | date: 'MMMM yyyy': 'Europe/Brussels':
               'fr-FR' }}

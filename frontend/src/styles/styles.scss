@@ -22,7 +22,7 @@ body {
 }
 
 .yellow {
-  color: #eab308;
+  color: $yellow;
   font-weight: 600;
 }
 
@@ -73,11 +73,15 @@ img {
 
   i {
     font-size: 1.3rem;
-    color: #eab308; // jaune LEGO
+    color: $yellow;
     transition: transform 0.2s ease;
 
     &:hover {
       transform: rotate(10deg) scale(1.1);
     }
   }
+}
+
+.page {
+  margin-top: 5em;
 }

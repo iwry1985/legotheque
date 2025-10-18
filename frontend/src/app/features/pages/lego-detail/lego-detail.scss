@@ -58,7 +58,6 @@
     .infos {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
       margin-bottom: 1.5rem;
 
       .item-flex {
@@ -133,7 +132,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 2%;
-  margin: 3rem 0;
+  margin: 2rem 0;
 
   .left {
     flex: 0 0 65%;
