@@ -47,7 +47,7 @@ export class LegoCollection implements OnInit {
   builtat: Date | undefined;
   minDateBuilt!: Date | undefined;
 
-  keys: string[] = ['ownedat', 'builtbeginat', 'builtat'];
+  keys: (keyof ILegotheque)[] = ['ownedat', 'builtbeginat', 'builtat'];
 
   ngOnInit(): void {
     const legoset = this.legoset();
@@ -74,26 +74,13 @@ export class LegoCollection implements OnInit {
     });
   }
 
-  updateLego = (updated?: Partial<ILegotheque>) => {
+  updateLego = (updated?: ILegotheque) => {
     const lego = { ...this.myLego() };
+    const body: ILegotheque = { ...lego, ...updated };
 
-    type LegoKey = keyof ILegotheque;
-
-    let body: Partial<ILegotheque> = { ...lego, ...updated };
-
-    this.keys.forEach((key) => {
-      const k = key as LegoKey;
-      const value = (this as any)[k] as ILegotheque[LegoKey];
-      (body as any)[k] = value;
+    this._legothequeService.updateLego(body, this.keys).subscribe({
+      next: (res) => this.updateLegotheque.emit(res),
     });
-
-    body = omit(body, UPDATE_LEGOTHEQUE_OMIT_KEYS);
-
-    this._legothequeService
-      .updateCollection(this.myLego().legothequeid, body)
-      .subscribe({
-        next: (res) => this.updateLegotheque.emit(res),
-      });
   };
 
   savePrice() {

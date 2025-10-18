@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { ILegotheque, ILegothequeUpdate } from '../models/legotheque.model';
+import {
+  ILegotheque,
+  ILegothequeUpdate,
+  UPDATE_LEGOTHEQUE_OMIT_KEYS,
+} from '../models/legotheque.model';
+import { omit } from 'app/core/utilitaires/obj-utils.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +37,22 @@ export class LegothequeService {
     return this._http.patch<ILegotheque>(`${this._url}/${legothequeid}`, {
       body,
     });
+  };
+
+  updateLego = (
+    myLego: ILegotheque,
+    keys: (keyof ILegotheque)[]
+  ): Observable<ILegotheque> => {
+    type LegoKey = keyof ILegotheque;
+
+    keys.forEach((key) => {
+      const k = key as LegoKey;
+      const value = (this as any)[k] as ILegotheque[LegoKey];
+      (myLego as any)[k] = value;
+    });
+
+    const body = omit(myLego, UPDATE_LEGOTHEQUE_OMIT_KEYS);
+
+    return this.updateCollection(myLego.legothequeid, body);
   };
 }

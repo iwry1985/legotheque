@@ -37,7 +37,7 @@
       </div>
 
       <!-- purchase price -->
-      @if(legoset().retailprice) {
+      @if(legoset().retailprice && !myLego().gift) {
       <div class="price">
         <p>Prix d'achat</p>
 
