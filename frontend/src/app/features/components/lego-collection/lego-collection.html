@@ -86,8 +86,8 @@
           [(ngModel)]="builtbeginat"
           dateFormat="dd/mm/yy"
           [showIcon]="true"
-          [maxDate]="maxDate"
-          [minDate]="minDate"
+          [maxDate]="maxEndBuilt()"
+          [minDate]="minBeginBuilt()"
           (onSelect)="updateLego()"
         ></p-datepicker>
       </div>
@@ -101,7 +101,7 @@
           dateFormat="dd/mm/yy"
           [showIcon]="true"
           [maxDate]="maxDate"
-          [minDate]="minDateBuilt"
+          [minDate]="minDateBuilt()"
           (onSelect)="updateLego()"
         ></p-datepicker>
       </div>

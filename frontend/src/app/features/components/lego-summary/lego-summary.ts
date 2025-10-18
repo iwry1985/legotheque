@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, input, OnInit } from '@angular/core';
+import { Component, computed, input, OnInit } from '@angular/core';
 import { ILegotheque } from 'app/features/models/legotheque.model';
 
 @Component({
@@ -8,19 +8,19 @@ import { ILegotheque } from 'app/features/models/legotheque.model';
   templateUrl: './lego-summary.html',
   styleUrl: './lego-summary.scss',
 })
-export class LegoSummary implements OnInit {
+export class LegoSummary {
   myLego = input.required<ILegotheque>();
-  inProgress: number = 0;
-
-  ngOnInit(): void {
+  inProgress = computed(() => {
+    console.log('inProgress');
     const today = new Date();
     const beginBuiltAt = this.myLego().builtbeginat;
+    const builtat = this.myLego().builtat;
 
-    console.log(beginBuiltAt);
+    if (!beginBuiltAt) return 0;
 
-    if (beginBuiltAt) {
-      const diff = today.getTime() - new Date(beginBuiltAt).getTime();
-      this.inProgress = Math.floor(diff / (1000 * 60 * 60 * 24));
-    }
-  }
+    const end = builtat ? new Date(builtat) : today;
+    const diff = end.getTime() - new Date(beginBuiltAt).getTime();
+
+    return Math.floor(diff / (1000 * 60 * 60 * 24));
+  });
 }

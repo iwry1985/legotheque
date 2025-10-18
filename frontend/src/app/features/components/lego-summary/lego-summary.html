@@ -22,15 +22,15 @@
   </p>
   } @else {
   <p class="not-built">Pas encore construit</p>
-  } @if (inProgress > 0 && !myLego().built) {
+  } @if (inProgress() > 0 && !myLego().built) {
   <p class="in-progress">
-    En cours <span class="yellow">{{ inProgress }}</span> @if (inProgress === 1)
-    { jour } @else {jours }
-  </p>
-  } @if(inProgress > 0 && myLego().built) {
-  <p class="in-progress">
-    Construit en <span class="yellow">{{ inProgress }}</span> @if (inProgress
+    En cours <span class="yellow">{{ inProgress() }}</span> @if (inProgress()
     === 1) { jour } @else {jours }
+  </p>
+  } @if(inProgress() > 0 && myLego().built) {
+  <p class="in-progress">
+    Construit en <span class="yellow">{{ inProgress() }}</span> @if
+    (inProgress() === 1) { jour } @else {jours }
   </p>
   }
 </div>

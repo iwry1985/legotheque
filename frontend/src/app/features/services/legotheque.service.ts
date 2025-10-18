@@ -8,6 +8,7 @@ import {
   UPDATE_LEGOTHEQUE_OMIT_KEYS,
 } from '../models/legotheque.model';
 import { omit } from 'app/core/utilitaires/obj-utils.utils';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root',
@@ -34,23 +35,14 @@ export class LegothequeService {
     legothequeid: number,
     body: ILegothequeUpdate
   ): Observable<ILegotheque> => {
-    return this._http.patch<ILegotheque>(`${this._url}/${legothequeid}`, {
-      body,
-    });
+    return this._http
+      .patch<ILegotheque>(`${this._url}/${legothequeid}`, {
+        body,
+      })
+      .pipe();
   };
 
-  updateLego = (
-    myLego: ILegotheque,
-    keys: (keyof ILegotheque)[]
-  ): Observable<ILegotheque> => {
-    type LegoKey = keyof ILegotheque;
-
-    keys.forEach((key) => {
-      const k = key as LegoKey;
-      const value = (this as any)[k] as ILegotheque[LegoKey];
-      (myLego as any)[k] = value;
-    });
-
+  updateLego = (myLego: ILegotheque): Observable<ILegotheque> => {
     const body = omit(myLego, UPDATE_LEGOTHEQUE_OMIT_KEYS);
 
     return this.updateCollection(myLego.legothequeid, body);

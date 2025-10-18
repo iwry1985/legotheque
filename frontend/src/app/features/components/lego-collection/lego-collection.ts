@@ -1,4 +1,12 @@
-import { Component, inject, input, OnInit, output } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  output,
+  Signal,
+} from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { omit } from 'app/core/utilitaires/obj-utils.utils';
 import { ILegoset } from 'app/features/models/legoset.model';
@@ -14,6 +22,7 @@ import { InputText } from 'primeng/inputtext';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { ButtonModule } from 'primeng/button';
 import { CurrencyPipe } from '@angular/common';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lego-collection',
@@ -33,6 +42,7 @@ import { CurrencyPipe } from '@angular/common';
 export class LegoCollection implements OnInit {
   private readonly _legothequeService: LegothequeService =
     inject(LegothequeService);
+  private readonly _messageService: MessageService = inject(MessageService);
 
   legoset = input.required<ILegoset>();
   myLego = input.required<ILegotheque>();
@@ -45,7 +55,24 @@ export class LegoCollection implements OnInit {
   ownedat!: Date | undefined;
   builtbeginat!: Date | null;
   builtat: Date | undefined;
-  minDateBuilt!: Date | undefined;
+  //min builtat : beginBuilt or ownedat
+  minDateBuilt: Signal<Date | undefined> = computed(() => {
+    const myLego = this.myLego();
+    return myLego.builtbeginat
+      ? new Date(myLego.builtbeginat)
+      : myLego.ownedat
+      ? new Date(myLego.ownedat)
+      : this.minDate;
+  });
+  //min beginbuiltat : ownedat
+  minBeginBuilt: Signal<Date | undefined> = computed(() => {
+    return new Date(this.myLego().ownedat!);
+  });
+  //max beginbuiltat : builtat or today
+  maxEndBuilt: Signal<Date | undefined> = computed(() => {
+    const myLego = this.myLego();
+    return myLego.builtat ? new Date(myLego.builtat) : new Date();
+  });
 
   keys: (keyof ILegotheque)[] = ['ownedat', 'builtbeginat', 'builtat'];
 
@@ -65,8 +92,6 @@ export class LegoCollection implements OnInit {
       ? legoset.retailprice
       : 0;
 
-    this.minDateBuilt = myLego.builtbeginat && new Date(myLego.builtbeginat);
-
     this.keys.forEach((key: string) => {
       const field = this.myLego()[key as keyof ILegotheque];
 
@@ -75,8 +100,31 @@ export class LegoCollection implements OnInit {
   }
 
   updateLego = () => {
-    this._legothequeService.updateLego(this.myLego(), this.keys).subscribe({
-      next: (res) => this.updateLegotheque.emit(res),
+    type LegoKey = keyof ILegotheque;
+
+    this.keys.forEach((key) => {
+      const k = key as LegoKey;
+      const value = (this as any)[k] as ILegotheque[LegoKey];
+      (this.myLego() as any)[k] = value;
+    });
+
+    console.log('myLego', this.myLego());
+
+    this._legothequeService.updateLego(this.myLego()).subscribe({
+      next: (res) => {
+        this.updateLegotheque.emit(res);
+
+        this._messageService.add({
+          severity: 'success',
+          summary: 'Modification enregistrée',
+        });
+      },
+      error: () => {
+        this._messageService.add({
+          severity: 'error',
+          summary: 'Un problème est survenu',
+        });
+      },
     });
   };
 
