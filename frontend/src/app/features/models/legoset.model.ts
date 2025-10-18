@@ -20,4 +20,5 @@ export interface ILegoset {
   minifigs?: number;
   reviewcount?: number;
   theme: ITheme;
+  retired: boolean;
 }

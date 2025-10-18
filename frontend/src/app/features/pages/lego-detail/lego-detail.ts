@@ -19,7 +19,7 @@ import { IWanted } from 'app/features/models/wanted.model';
 import { TagModule } from 'primeng/tag';
 import { LegoCollection } from 'app/features/components/lego-collection/lego-collection';
 import { LegoSummary } from 'app/features/components/lego-summary/lego-summary';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-lego-detail',
@@ -31,6 +31,7 @@ import { DatePipe } from '@angular/common';
     LegoCollection,
     LegoSummary,
     DatePipe,
+    CurrencyPipe,
   ],
   templateUrl: './lego-detail.html',
   styleUrl: './lego-detail.scss',

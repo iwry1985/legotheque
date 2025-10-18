@@ -10,6 +10,8 @@ import {
     ApiQuery,
     ApiResponse,
 } from '@nestjs/swagger';
+import { plainToInstance } from 'class-transformer';
+import { Legoset } from 'src/core/models/entities/legoset.entity';
 
 @Controller('legoset')
 export class LegosetController {
@@ -27,7 +29,10 @@ export class LegosetController {
     @Get('/:id')
     @ApiOperation({ summary: "Retourne le set correspondant à l'id" })
     @ApiResponse({ type: LegosetDto })
-    getOne(@Param('id') id: number): Promise<LegosetDto | null> {
-        return this._legosetService.getOne(id);
+    async getOne(@Param('id') id: number): Promise<LegosetDto | null> {
+        const legoset = await this._legosetService.getOne(id);
+        return plainToInstance(LegosetDto, legoset, {
+            excludeExtraneousValues: true,
+        });
     }
 }

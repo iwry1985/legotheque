@@ -1,31 +1,81 @@
 <div class="page">
   <div class="layout">
     <div class="details flex space-between">
+      <!-- IMAGE -->
       <div class="right img">
         <img class="lego" [src]="legoset.thumbnail" [alt]="legoset.thumbnail" />
       </div>
+
+      <!-- INFOS GAUCHE -->
       <div class="left">
         @if(themeLogo) {
         <div class="theme">
           @if(themeLogo.logo) {
           <img [src]="themeLogo.logo" [alt]="themeLogo.name" />
           } @else {
-          <h6>{{themeLogo.name}}</h6>
+          <h6>{{ themeLogo.name }}</h6>
           }
+        </div>
+        } @if(legoset.retired) {
+        <div class="tag-retired">
+          <p-tag
+            severity="danger"
+            value="Officiellement retiré de la vente"
+          ></p-tag>
         </div>
         }
 
-        <h2>{{legoset.name}}</h2>
+        <h2>{{ legoset.name }}</h2>
+
         <div class="infos flex">
-          <div class="item-flex">{{legoset.reference | ref}}</div>
-          <div class="item-flex">{{legoset.pieces | pieces}}</div>
-          <div class="item-flex">{{legoset.year}}</div>
+          <div class="item-flex">{{ legoset.reference | ref }}</div>
+          <div class="item-flex">{{ legoset.pieces | pieces }}</div>
+          <div class="item-flex">{{ legoset.year }}</div>
         </div>
 
+        <!-- 🔹 NOUVELLE SECTION EXTRA INFOS -->
+        <div class="extra-infos">
+          @if(legoset.retailprice) {
+          <p>
+            <span class="label">Prix LEGO :</span>
+            <span class="value"
+              >{{ legoset.retailprice | currency: 'EUR' }}</span
+            >
+          </p>
+          } @if(legoset.minage) {
+          <p>
+            <span class="label">Âge min :</span>
+            <span class="value">{{ legoset.minage }}+</span>
+          </p>
+          } @if(legoset.minifigs && legoset.minifigs > 0) {
+          <p>
+            <span class="label">Figurines :</span>
+            <span class="value">{{ legoset.minifigs }}</span>
+          </p>
+          } @if(legoset.launchdate) {
+          <p>
+            <span class="label">Sortie :</span>
+            <span class="value">
+              {{ legoset.launchdate | date: 'MMMM yyyy': 'Europe/Brussels':
+              'fr-FR' }}
+            </span>
+          </p>
+          } @if(legoset.exitdate && !legoset.retired) {
+          <p>
+            <span class="label">Fin prévue :</span>
+            <span class="value">
+              {{ legoset.exitdate | date: 'MMMM yyyy': 'Europe/Brussels':
+              'fr-FR' }}
+            </span>
+          </p>
+          }
+        </div>
+
+        <!-- ACTIONS UTILISATEUR -->
         @if(authService.connectedUser()) {
         <div class="user-actions">
           <div class="actions flex">
-            <!-- si le set n'est pas dans ma collection, afficher le bouton ajouter -->
+            <!-- Ajouter -->
             @if(!myLego()) {
             <p-button
               label="Ajouter"
@@ -34,24 +84,29 @@
               (onClick)="ownSet()"
             ></p-button>
             } @else {
+            <!-- Possédé -->
             <p-tag
               icon="pi pi-face-smile"
               value="Possédé"
               severity="info"
             ></p-tag>
 
-            <!-- si le set n'est pas encore construit -->
+            <!-- Construit / Non construit -->
             @if(!myLego()!.built) {
-            <p-tag icon="pi pi-circle-off" value="Non construit"></p-tag>
+            <p-tag
+              icon="pi pi-circle-off"
+              value="Non construit"
+              severity="warn"
+            ></p-tag>
             } @else {
             <p-tag
               icon="pi pi-check-circle"
-              value="construit"
+              value="Construit"
               severity="success"
             ></p-tag>
             } }
 
-            <!-- si le set n'est ni dans ma legotheque ni dans ma liste de wanted, afficher le bouton 'je le veux !' -->
+            <!-- Liste de souhaits -->
             @if(!myLego() && !wanted()) {
             <p-button
               label="Je le veux !"
@@ -61,9 +116,7 @@
               class="item-flex"
               (onClick)="addAsWanted()"
             ></p-button>
-            }
-            <!-- si le set est dans ma liste de wanted pas dans ma legotheque, afficher le bouton 'je ne le veux plus' -->
-            @if(wanted() && !myLego()) {
+            } @if(wanted() && !myLego()) {
             <p-button
               label="Je ne le veux plus !"
               icon="pi pi-heart"
@@ -74,6 +127,7 @@
             ></p-button>
             }
           </div>
+
           @if(wanted() && !myLego()) {
           <div class="wanted-since">
             Dans la liste de souhaits depuis {{ wanted()?.wantedat | date:
@@ -86,6 +140,7 @@
     </div>
   </div>
 
+  <!-- MA COLLECTION -->
   @if(myLego()) {
   <div class="collection flex">
     <div class="left">
@@ -93,8 +148,9 @@
         [legoset]="legoset"
         [myLego]="myLego()!"
         (updateLegotheque)="updateLegotheque($event)"
-      />
+      ></app-lego-collection>
     </div>
+
     <div class="right">
       <app-lego-summary [myLego]="myLego()!"></app-lego-summary>
     </div>
