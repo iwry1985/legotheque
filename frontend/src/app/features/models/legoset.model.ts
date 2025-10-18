@@ -21,4 +21,6 @@ export interface ILegoset {
   reviewcount?: number;
   theme: ITheme;
   retired: boolean;
+  newest: boolean;
+  retiredSoon: boolean;
 }

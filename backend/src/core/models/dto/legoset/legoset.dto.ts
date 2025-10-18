@@ -155,6 +155,17 @@ export class LegosetDto {
     theme: ThemeDto;
 
     @Expose()
+    @IsBoolean()
     @ApiProperty()
     retired?: boolean;
+
+    @Expose()
+    @ApiProperty()
+    @IsBoolean()
+    newest?: boolean;
+
+    @Expose()
+    @ApiProperty()
+    @IsBoolean()
+    retiredSoon?: boolean;
 }

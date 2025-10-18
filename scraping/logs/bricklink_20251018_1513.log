@@ -1,0 +1,56 @@
+2025-10-18 17:13:35,661 [INFO] Fichier de log actif : logs\bricklink_20251018_1513.log
+2025-10-18 17:13:36,034 [INFO] 100 sets à scrapper récupérés depuis la DB.
+2025-10-18 17:13:36,036 [INFO] Skip 5578-1 (fetch récent < 7 jours).
+2025-10-18 17:13:36,037 [INFO] Skip 5587-1 (fetch récent < 7 jours).
+2025-10-18 17:13:36,037 [INFO] Fetching 8961-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=8961-1#T=P
+2025-10-18 17:13:48,423 [INFO] Appended 4 rows — CSV now has 7240 rows.
+2025-10-18 17:13:48,432 [INFO] 1 fetched
+2025-10-18 17:13:48,432 [INFO] Sleeping 57s before next set.
+2025-10-18 17:14:45,592 [INFO] Fetching 8969-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=8969-1#T=P
+2025-10-18 17:14:55,530 [INFO] Appended 4 rows — CSV now has 7244 rows.
+2025-10-18 17:14:55,534 [INFO] 2 fetched
+2025-10-18 17:14:55,535 [INFO] Sleeping 82s before next set.
+2025-10-18 17:16:17,766 [INFO] Fetching 8970-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=8970-1#T=P
+2025-10-18 17:16:27,423 [INFO] Appended 4 rows — CSV now has 7248 rows.
+2025-10-18 17:16:27,427 [INFO] 3 fetched
+2025-10-18 17:16:27,428 [INFO] Sleeping 50s before next set.
+2025-10-18 17:17:18,320 [INFO] Fetching 8995-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=8995-1#T=P
+2025-10-18 17:17:27,867 [INFO] Appended 4 rows — CSV now has 7252 rows.
+2025-10-18 17:17:27,871 [INFO] 4 fetched
+2025-10-18 17:17:27,871 [INFO] Sleeping 33s before next set.
+2025-10-18 17:18:01,364 [INFO] Fetching 8051-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=8051-1#T=P
+2025-10-18 17:18:11,016 [INFO] Appended 4 rows — CSV now has 7256 rows.
+2025-10-18 17:18:11,022 [INFO] 5 fetched
+2025-10-18 17:18:11,022 [INFO] Sleeping 83s before next set.
+2025-10-18 17:19:34,201 [INFO] Fetching 3851-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=3851-1#T=P
+2025-10-18 17:19:43,760 [INFO] Appended 4 rows — CSV now has 7260 rows.
+2025-10-18 17:19:43,766 [INFO] 6 fetched
+2025-10-18 17:19:43,766 [INFO] Sleeping 59s before next set.
+2025-10-18 17:20:43,336 [INFO] Fetching 5867-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=5867-1#T=P
+2025-10-18 17:20:53,070 [INFO] Appended 4 rows — CSV now has 7264 rows.
+2025-10-18 17:20:53,083 [INFO] 7 fetched
+2025-10-18 17:20:53,085 [INFO] Sleeping 85s before next set.
+2025-10-18 17:22:18,766 [INFO] Fetching 5868-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=5868-1#T=P
+2025-10-18 17:22:28,392 [INFO] Appended 4 rows — CSV now has 7268 rows.
+2025-10-18 17:22:28,396 [INFO] 8 fetched
+2025-10-18 17:22:28,396 [INFO] Sleeping 38s before next set.
+2025-10-18 17:23:06,659 [INFO] Fetching 7160-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=7160-1#T=P
+2025-10-18 17:23:16,335 [INFO] Appended 4 rows — CSV now has 7272 rows.
+2025-10-18 17:23:16,339 [INFO] 9 fetched
+2025-10-18 17:23:16,339 [INFO] Sleeping 54s before next set.
+2025-10-18 17:24:10,584 [INFO] Fetching 7206-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=7206-1#T=P
+2025-10-18 17:24:20,290 [INFO] Appended 4 rows — CSV now has 7276 rows.
+2025-10-18 17:24:20,294 [INFO] 10 fetched
+2025-10-18 17:24:20,294 [INFO] Sleeping 83s before next set.
+2025-10-18 17:25:43,744 [INFO] Fetching 7207-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=7207-1#T=P
+2025-10-18 17:25:53,271 [INFO] Appended 4 rows — CSV now has 7280 rows.
+2025-10-18 17:25:53,276 [INFO] 11 fetched
+2025-10-18 17:25:53,276 [INFO] Sleeping 79s before next set.
+2025-10-18 17:27:12,616 [INFO] Fetching 8190-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=8190-1#T=P
+2025-10-18 17:27:22,366 [INFO] Appended 4 rows — CSV now has 7284 rows.
+2025-10-18 17:27:22,371 [INFO] 12 fetched
+2025-10-18 17:27:22,372 [INFO] Sleeping 89s before next set.
+2025-10-18 17:28:51,916 [INFO] Fetching 8898-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=8898-1#T=P
+2025-10-18 17:29:10,273 [INFO] Appended 4 rows — CSV now has 7288 rows.
+2025-10-18 17:29:10,282 [INFO] 13 fetched
+2025-10-18 17:29:10,282 [INFO] Sleeping 88s before next set.

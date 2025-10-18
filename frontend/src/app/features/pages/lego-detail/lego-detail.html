@@ -21,6 +21,23 @@
           <p-tag
             severity="danger"
             value="Officiellement retiré de la vente"
+            icon="pi pi-stop-circle"
+          ></p-tag>
+        </div>
+        } @if(legoset.newest) {
+        <div class="tag-retired">
+          <p-tag
+            icon="pi pi-sparkles"
+            severity="info"
+            value="Nouveauté"
+          ></p-tag>
+        </div>
+        } @if(legoset.retiredSoon) {
+        <div class="tag-retired">
+          <p-tag
+            icon="pi pi-info-circle"
+            severity="warn"
+            value="Bientôt retiré"
           ></p-tag>
         </div>
         }

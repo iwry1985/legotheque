@@ -1,0 +1,8 @@
+.listing {
+  display: flex;
+  flex-wrap: wrap;
+
+  .set {
+    max-width: 200px;
+  }
+}

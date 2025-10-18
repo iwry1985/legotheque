@@ -5,6 +5,8 @@ import { Paginator, PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { InputText } from 'primeng/inputtext';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lego-list',
@@ -15,13 +17,15 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     ReactiveFormsModule,
     ButtonModule,
+    CardModule,
   ],
   templateUrl: './lego-list.html',
-  styleUrl: './lego-list.css',
+  styleUrl: './lego-list.scss',
 })
 export class LegoList {
   private readonly _legosetService: LegosetService = inject(LegosetService);
   private readonly _fb = inject(FormBuilder);
+  private readonly _router = inject(Router);
 
   @ViewChild('paginator') //Correspond à l'id #paginator
   private _paginator!: Paginator;
@@ -48,5 +52,9 @@ export class LegoList {
     this.filters.set({ ...cleanFilters, page: 1 });
 
     this._paginator.changePage(0);
+  };
+
+  goToDetails = (legosetid: number) => {
+    this._router.navigateByUrl(`lego/${legosetid}`);
   };
 }

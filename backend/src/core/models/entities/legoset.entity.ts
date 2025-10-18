@@ -125,4 +125,35 @@ export class Legoset {
 
         return true; //si pas d'année => old = retired
     }
+
+    @Expose()
+    get newest(): boolean {
+        if (this.launchdate) {
+            const today = new Date();
+            const launch = new Date(this.launchdate);
+
+            return (
+                launch.getFullYear() === today.getFullYear() &&
+                launch.getMonth() === today.getMonth()
+            );
+        }
+        return false;
+    }
+
+    @Expose()
+    get retiredSoon(): boolean {
+        if (!this.retired && this.exitdate) {
+            const exit = new Date(this.exitdate);
+            const today = new Date();
+
+            //retired soon if retired within 3 months
+            const diffMonths =
+                (exit.getFullYear() - today.getFullYear()) * 12 +
+                (exit.getMonth() - today.getMonth());
+
+            return diffMonths >= 0 && diffMonths <= 3;
+        }
+
+        return false;
+    }
 }
