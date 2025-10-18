@@ -136,6 +136,9 @@ export class LegothequeService {
 
             lego = { ...lego, ...body };
 
+            if (lego.built && !lego.builtat) lego.builtat = new Date();
+            if (lego.builtat && !lego.built) lego.builtat = undefined;
+
             return this._legothequeRepository.save(lego);
         } catch (error) {
             throw new Error(error);

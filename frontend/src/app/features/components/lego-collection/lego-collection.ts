@@ -74,11 +74,8 @@ export class LegoCollection implements OnInit {
     });
   }
 
-  updateLego = (updated?: ILegotheque) => {
-    const lego = { ...this.myLego() };
-    const body: ILegotheque = { ...lego, ...updated };
-
-    this._legothequeService.updateLego(body, this.keys).subscribe({
+  updateLego = () => {
+    this._legothequeService.updateLego(this.myLego(), this.keys).subscribe({
       next: (res) => this.updateLegotheque.emit(res),
     });
   };
@@ -101,6 +98,7 @@ export class LegoCollection implements OnInit {
       section.classList.add('fade-out');
       setTimeout(() => {
         this.myLego().built = !this.myLego().built;
+
         this.updateLego();
         section.classList.remove('fade-out');
         section.classList.add('fade-in');

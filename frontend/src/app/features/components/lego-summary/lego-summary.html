@@ -6,22 +6,31 @@
 
   @if (myLego().ownedat) {
   <p class="ownedat">
-    Depuis {{ myLego().ownedat | date: "MMMM yyyy": "Europe/Brussels": "fr-FR"
-    }}
+    Depuis
+    <span class="yellow"
+      >{{ myLego().ownedat | date: "MMMM yyyy": "Europe/Brussels": "fr-FR"
+      }}</span
+    >
   </p>
   } @if (myLego().built) {
-  <p class="built">Construit</p>
+  <p class="built">
+    Construit en
+    <span class="yellow"
+      >{{ myLego().builtat | date: "MMMM yyyy": "Europe/Brussels": "fr-FR"
+      }}</span
+    >
+  </p>
   } @else {
   <p class="not-built">Pas encore construit</p>
   } @if (inProgress > 0 && !myLego().built) {
   <p class="in-progress">
-    En cours {{ inProgress }}
-    <span>@if (inProgress === 1) { jour } @else { jours }</span>
+    En cours <span class="yellow">{{ inProgress }}</span> @if (inProgress === 1)
+    { jour } @else {jours }
   </p>
   } @if(inProgress > 0 && myLego().built) {
   <p class="in-progress">
-    Construit en {{ inProgress }}
-    <span>@if (inProgress === 1) { jour } @else { jours }</span>
+    Construit en <span class="yellow">{{ inProgress }}</span> @if (inProgress
+    === 1) { jour } @else {jours }
   </p>
   }
 </div>

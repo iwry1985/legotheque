@@ -16,7 +16,9 @@ export class LegoSummary implements OnInit {
     const today = new Date();
     const beginBuiltAt = this.myLego().builtbeginat;
 
-    if (beginBuiltAt && !this.myLego().built) {
+    console.log(beginBuiltAt);
+
+    if (beginBuiltAt) {
       const diff = today.getTime() - new Date(beginBuiltAt).getTime();
       this.inProgress = Math.floor(diff / (1000 * 60 * 60 * 24));
     }
