@@ -6,5 +6,6 @@ export const isUserGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
 
   if (authService.connectedUser()) return true;
+
   return false;
 };

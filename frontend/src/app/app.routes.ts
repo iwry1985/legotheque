@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
 import { LegoDetailResolver } from './core/resolvers/legodetail.resolver';
+import { Home } from './features/pages/home/home';
+import { notConnectedGuard } from './core/guards/not-connected.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
       import('./features/pages/login/login').then((c) => c.Login),
+    canActivate: [notConnectedGuard],
   },
   {
     path: 'themes',
@@ -24,5 +27,13 @@ export const routes: Routes = [
         (c) => c.LegoDetail
       ),
     resolve: { data: LegoDetailResolver },
+  },
+  {
+    path: '',
+    component: Home,
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];

@@ -1,15 +1,18 @@
-<nav class="navbar">
+<nav class="navbar" [class.scrolled]="scrolled">
   <div class="nav-left">
-    <a routerLink="/home"
-      ><img src="logo.png" alt="Legothèque" class="logo"
+    <a routerLink="/"
+      ><img
+        [src]="!scrolled ? 'logo.png' : 'logo-light.png'"
+        alt="Legothèque"
+        class="logo"
     /></a>
   </div>
 
   <div class="nav-center">
-    <a routerLink="/home" routerLinkActive="active">Accueil</a>
-    <a routerLink="/collection" routerLinkActive="active">Ma collection</a>
-    <a routerLink="/wanted" routerLinkActive="active">Liste de souhaits</a>
-    <a routerLink="/sets" routerLinkActive="active">Tous les sets</a>
+    <a routerLink="/" routerLinkActive="active">Accueil</a>
+    <!-- <a routerLink="/collection" routerLinkActive="active">Ma collection</a>
+    <a routerLink="/wanted" routerLinkActive="active">Liste de souhaits</a> -->
+    <a routerLink="/lego" routerLinkActive="active">Parcourir</a>
   </div>
 
   <div class="nav-right">
@@ -18,7 +21,11 @@
       <i class="pi pi-user"></i>
       <span>{{ authService.connectedUser()?.username }}</span>
     </div>
-    <p-button label="Déconnexion" (click)="authService.logout()"></p-button>
+    <p-button
+      label="Déconnexion"
+      (click)="authService.logout()"
+      [severity]="scrolled ? 'secondary' : 'primary'"
+    ></p-button>
     } @else {
     <p-button label="Connexion" routerLink="/login"></p-button>
     }

@@ -7,7 +7,6 @@ body {
   background-color: $light;
   padding-top: 5rem;
   position: relative;
-  max-width: 70vw;
   margin: auto;
 
   h1,
@@ -19,6 +18,10 @@ body {
     font-family: $font-title;
   }
   color: #1a1a1a;
+}
+
+.container {
+  max-width: 70vw;
 }
 
 .yellow {

@@ -1,0 +1,19 @@
+<div class="item-list">
+  @if(banner()) {
+  <div class="cover">
+    <img [src]="banner()" [alt]="name()" />
+
+    <div class="theme">
+      @if(theme()) {
+      <img [src]="theme()" [alt]="themeName()" />
+      } @else{
+      <h4>{{name()}}</h4>
+      }
+    </div>
+  </div>
+  }
+
+  <div class="name">
+    <h4>{{name()}}</h4>
+  </div>
+</div>

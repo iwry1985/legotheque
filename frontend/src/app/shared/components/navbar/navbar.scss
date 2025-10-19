@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
+  //background: #fff;
   border-bottom: 2px solid #f1f1f1;
   padding: 0.8rem 2rem;
   position: fixed;
@@ -12,6 +12,30 @@
   left: 0;
   z-index: 1000;
   width: 100%;
+
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  &.scrolled {
+    background-color: $yellow;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    a,
+    .title,
+    .user-info,
+    i,
+    span {
+      color: #111 !important;
+    }
+
+    button {
+      background-color: #fff !important;
+      color: #111 !important;
+
+      &:hover {
+        background-color: #fef08a !important;
+      }
+    }
+  }
 
   .nav-left {
     display: flex;

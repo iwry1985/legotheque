@@ -1,7 +1,7 @@
 <div class="login-page">
   <div class="login-container">
     <div class="login-card">
-      <h2>Connexion</h2>
+      <h2>Se connecter</h2>
       <form [formGroup]="loginForm" (ngSubmit)="submit()">
         <p-floatLabel>
           <input pInputText id="email" formControlName="email" />
@@ -27,4 +27,9 @@
       </form>
     </div>
   </div>
+  <p-button
+    label="Créer un compte"
+    variant="text"
+    routerLink="/register"
+  ></p-button>
 </div>

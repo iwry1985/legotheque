@@ -1,0 +1,72 @@
+<div class="page">
+  <div class="head container">
+    <h1>Explore. Collectionne. Analyse.</h1>
+    <p-button
+      label="Découvrir"
+      icon="pi pi-eye"
+      routerLink="/lego"
+      size="large"
+    ></p-button>
+  </div>
+
+  @if(themes && themes.length > 0) {
+  <div class="section-themes">
+    <h2>Thèmes</h2>
+
+    <div class="listing-theme container">
+      @for(t of themes; track t.themeid) {
+      <app-item-list
+        [name]="`LEGO® ${t.name}`"
+        [themeName]="t.name"
+        [theme]="t.logo_url"
+        [banner]="t.img_url"
+      />
+      }
+    </div>
+  </div>
+  }
+
+  <div class="legothec container">
+    <h2>Gérez votre collection de sets LEGO®</h2>
+
+    <div class="cards">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <i class="pi pi-search"></i>
+            <span>Explorez les thèmes</span>
+          </div>
+        </ng-template>
+
+        <p>Parcourez les sets par thème et par année</p>
+      </p-card>
+
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <i class="pi pi-list-check"></i>
+            <span>Organisez vos sets</span>
+          </div>
+        </ng-template>
+
+        <p>Ajoutez et classez vos sets achetés et construits</p>
+      </p-card>
+
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <i class="pi pi-chart-bar"></i>
+            <span>Analysez vos préférences</span>
+          </div>
+        </ng-template>
+
+        <p>Analysez vos thèmes préférés et votre budget LEGO® 😱</p>
+      </p-card>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Commenez votre collection LEGO®</h2>
+    <p-button label="Rejoindre" size="large" severity="contrast" />
+  </div>
+</div>

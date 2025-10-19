@@ -9,6 +9,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { AuthModule } from './core/features/auth/auth.module';
 import { SharedModule } from './core/features/shared/shared.module';
 import { WantedModule } from './core/features/wanted/wanted.module';
+import { ThemeController } from './core/features/theme/theme.controller';
+import { ThemeModule } from './core/features/theme/theme.module';
 
 @Module({
     imports: [
@@ -44,6 +46,7 @@ import { WantedModule } from './core/features/wanted/wanted.module';
         AuthModule,
         SharedModule,
         WantedModule,
+        ThemeModule,
     ],
     controllers: [],
     providers: [],

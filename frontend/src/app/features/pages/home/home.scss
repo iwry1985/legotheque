@@ -1,0 +1,119 @@
+@use "theme" as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 9rem;
+  padding-bottom: 4rem;
+
+  // HERO
+  .head {
+    text-align: center;
+    padding: 6rem 2rem 4rem 2rem;
+
+    h1 {
+      font-size: 4rem;
+      max-width: 60%;
+      margin: 0 auto 2rem auto;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    p-button {
+      margin-top: 1rem;
+    }
+  }
+
+  // SECTION THEMES
+  .section-themes {
+    padding: 9rem 0;
+    background-color: $yellow;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      //font-weight: 600;
+      color: $light;
+    }
+
+    .listing-theme {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  // SECTION CARDS LEGO
+  .legothec {
+    text-align: center;
+
+    h2 {
+      margin-bottom: 2.5rem;
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+
+      p-card {
+        width: 280px;
+        border-radius: 14px;
+        overflow: hidden;
+
+        .p-card {
+          .p-card-header {
+            padding: 1rem 1.2rem !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          }
+
+          .p-card-body {
+            padding: 0.8rem 1.2rem 1.2rem 1.2rem !important;
+          }
+        }
+
+        .card-header {
+          padding: 1rem 1.2rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 1.05rem;
+          font-weight: 600;
+          justify-content: center;
+
+          i {
+            font-size: 1.4rem;
+            color: var(--p-primary-color, #facc15);
+          }
+        }
+
+        p {
+          margin-top: 0.4rem;
+          font-size: 0.95rem;
+          opacity: 0.85;
+          line-height: 1.35;
+        }
+      }
+    }
+  }
+
+  // CTA
+  .cta {
+    text-align: center;
+    padding: 4rem 1rem 2rem 1rem;
+    background-color: $yellow;
+    padding: 9rem;
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: $light;
+      padding: 2rem 0;
+    }
+  }
+}
