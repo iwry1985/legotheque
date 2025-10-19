@@ -75,7 +75,7 @@ export class LegoDetail implements OnInit {
       if (logo) this.themeLogo.logo = logo;
     }
 
-    console.log('theme', this.themeLogo);
+    console.log('wanted', this.wanted());
   };
 
   // add set to user wanted list

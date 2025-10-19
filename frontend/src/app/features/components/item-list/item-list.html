@@ -1,14 +1,14 @@
 <div class="item-list">
   @if(banner()) {
-  <div class="cover">
+  <div class="cover" [ngClass]="{'legoset': set()}">
     <img [src]="banner()" [alt]="name()" />
 
     <div class="theme">
       @if(theme()) {
       <img [src]="theme()" [alt]="themeName()" />
-      } @else{
+      } @else { @if(!hideThemeIfNoPic()) {
       <h4>{{name()}}</h4>
-      }
+      } }
     </div>
   </div>
   }

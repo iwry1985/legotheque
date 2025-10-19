@@ -1,11 +1,6 @@
 import { Expose } from 'class-transformer';
-import {
-    Column,
-    Entity,
-    PrimaryColumn,
-    PrimaryGeneratedColumn,
-    Unique,
-} from 'typeorm';
+import { getThemeLogo } from 'src/core/utils/theme.utils';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'theme' })
 export class Theme {
@@ -20,4 +15,9 @@ export class Theme {
     @Expose()
     @Column()
     img_num: number;
+
+    @Expose()
+    get img_url(): string | undefined {
+        if (this.img_num) return getThemeLogo(this.img_num);
+    }
 }

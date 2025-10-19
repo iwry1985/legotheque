@@ -10,7 +10,7 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 import { Theme } from './theme.entity';
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 
 @Entity({ name: 'legoset' })
 @Unique('UQ_bricksetid', ['bricksetid'])
@@ -113,6 +113,7 @@ export class Legoset {
     //theme
     @Expose()
     @ManyToOne(() => Theme)
+    @Type(() => Theme)
     @JoinColumn({ name: 'themeid' })
     theme: Theme;
 

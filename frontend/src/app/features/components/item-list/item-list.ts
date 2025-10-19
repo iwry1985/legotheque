@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-item-list',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './item-list.html',
   styleUrl: './item-list.scss',
 })
@@ -11,4 +12,6 @@ export class ItemList {
   themeName = input<string>();
   banner = input<string>();
   name = input.required<string>();
+  hideThemeIfNoPic = input<boolean>(false);
+  set = input<boolean>(false);
 }

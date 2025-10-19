@@ -88,3 +88,37 @@ img {
 .page {
   margin-top: 5em;
 }
+
+.listing {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.7rem;
+  padding: 0.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+
+  app-item-list {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* TABLETTE */
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* MOBILE LARGE */
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* SMALL MOBILE */
+  @media (max-width: 400px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

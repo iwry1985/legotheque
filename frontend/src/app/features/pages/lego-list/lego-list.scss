@@ -1,8 +1,60 @@
-.listing {
+.lego-search-page {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
 
-  .set {
-    max-width: 200px;
+  /* --- search bar --- */
+  form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--p-surface-0);
+    padding: 1.2rem 1.4rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+
+    input.p-inputtext {
+      flex: 1;
+      height: 42px;
+    }
+
+    p-button {
+      height: 42px;
+    }
+  }
+
+  .listing {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    padding: 0.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-items: center;
+
+    app-item-list {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+
+  /* --- paginator centré --- */
+  p-paginator {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  /* responsive mobile */
+  @media (max-width: 768px) {
+    form {
+      flex-direction: column;
+
+      input.p-inputtext,
+      p-button {
+        width: 100%;
+      }
+    }
   }
 }

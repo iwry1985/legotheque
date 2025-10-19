@@ -13,7 +13,7 @@ import {
     IsString,
 } from 'class-validator';
 import { ThemeDto } from '../theme/theme.dto';
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 
 export class LegosetDto {
     @Expose()
@@ -152,6 +152,7 @@ export class LegosetDto {
     @Expose()
     @IsNotEmpty()
     @ApiProperty()
+    @Type(() => ThemeDto)
     theme: ThemeDto;
 
     @Expose()

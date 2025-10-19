@@ -5,6 +5,11 @@ import { GetLegosetFilterDto } from 'src/core/models/dto/legoset/legoset-filters
 import { LegosetListDto } from 'src/core/models/dto/legoset/legoset-list.dto';
 import { Legoset } from 'src/core/models/entities/legoset.entity';
 import { Repository, SelectQueryBuilder } from 'typeorm';
+import {
+    instanceToInstance,
+    instanceToPlain,
+    plainToInstance,
+} from 'class-transformer';
 
 @Injectable()
 export class LegosetService {
@@ -89,7 +94,13 @@ export class LegosetService {
         const [data, total] = await query.getManyAndCount();
         const pageCount = Math.ceil(total / limit);
 
-        return { total, page, limit, pageCount, data };
+        return {
+            total,
+            page,
+            limit,
+            pageCount,
+            data: instanceToInstance(data),
+        };
     };
 
     getOne = (id: number): Promise<LegosetDto | null> => {

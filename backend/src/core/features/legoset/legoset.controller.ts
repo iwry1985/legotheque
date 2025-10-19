@@ -31,8 +31,6 @@ export class LegosetController {
     @ApiResponse({ type: LegosetDto })
     async getOne(@Param('id') id: number): Promise<LegosetDto | null> {
         const legoset = await this._legosetService.getOne(id);
-        return plainToInstance(LegosetDto, legoset, {
-            excludeExtraneousValues: true,
-        });
+        return plainToInstance(LegosetDto, legoset);
     }
 }

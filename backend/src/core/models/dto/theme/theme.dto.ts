@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { getThemeLogo } from 'src/core/utils/theme.utils';
 
 export class ThemeDto {
     @Expose()
@@ -20,4 +21,12 @@ export class ThemeDto {
     @IsInt()
     @ApiProperty()
     img_num: number;
+
+    @Expose()
+    @IsOptional()
+    @IsString()
+    @ApiProperty()
+    get img_url(): string | undefined {
+        if (this.img_num) return getThemeLogo(this.img_num);
+    }
 }

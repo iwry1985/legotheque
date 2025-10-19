@@ -15,12 +15,14 @@
 
     <div class="listing-theme container">
       @for(t of themes; track t.themeid) {
-      <app-item-list
-        [name]="`LEGO® ${t.name}`"
-        [themeName]="t.name"
-        [theme]="t.logo_url"
-        [banner]="t.img_url"
-      />
+      <a routerLink="/lego" [queryParams]="{themeid: t.themeid}">
+        <app-item-list
+          [name]="`LEGO® ${t.name}`"
+          [themeName]="t.name"
+          [theme]="t.logo_url"
+          [banner]="t.img_url"
+        />
+      </a>
       }
     </div>
   </div>
