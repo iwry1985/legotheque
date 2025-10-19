@@ -11,6 +11,11 @@ export const routes: Routes = [
     canActivate: [notConnectedGuard],
   },
   {
+    path: 'inscription',
+    loadComponent: () =>
+      import('./features/pages/register/register').then((c) => c.Register),
+  },
+  {
     path: 'themes',
     loadComponent: () =>
       import('./features/pages/theme-list/theme-list').then((c) => c.ThemeList),

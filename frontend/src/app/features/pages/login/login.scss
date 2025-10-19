@@ -9,7 +9,7 @@
 
   .login-container {
     width: 100%;
-    max-width: 420px;
+    max-width: 30vw;
     padding: 2rem;
   }
 
@@ -41,6 +41,18 @@
           width: 100%;
           padding: 0.8rem 0.9rem;
           font-size: 1rem;
+          box-sizing: border-box;
+        }
+
+        ::ng-deep .p-password,
+        ::ng-deep .p-password-input {
+          width: 100%;
+        }
+
+        ::ng-deep .p-password-input {
+          padding: 0.8rem 0.9rem;
+          font-size: 1rem;
+          box-sizing: border-box;
         }
 
         label {

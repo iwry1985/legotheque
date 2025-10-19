@@ -36,6 +36,7 @@ export class Login {
   });
 
   submit = () => {
+    console.log(this.loginForm.get('email'), this.loginForm.get('pwd'));
     if (this.loginForm.invalid) return;
 
     this._authService
