@@ -1,9 +1,11 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from 'environments/environment';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { tokenIntercept } from 'app/core/interceptors/token-interceptor';
+import { IRegister } from '../models/register.model';
+import { IUser } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -33,6 +35,10 @@ export class AuthService {
 
     this._connectedUser.set({ token, ...decoded });
   }
+
+  register = (body: IRegister): Observable<IUser> => {
+    return this._httpClient.post<IUser>(environment.apiUrl + 'users', body);
+  };
 
   login = (email: string, pwd: string) => {
     return this._httpClient

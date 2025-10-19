@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { LoginDto } from 'src/core/models/dto/user/login.dto';
 import { ApiBearerAuth, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { TokenDto } from 'src/core/models/dto/user/token.dto';
+import { CreateUserDto } from 'src/core/models/dto/user/user-create.dto';
 
 @Controller('auth')
 export class AuthController {

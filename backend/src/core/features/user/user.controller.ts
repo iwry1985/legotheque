@@ -4,6 +4,7 @@ import { UserDto } from 'src/core/models/dto/user/user.dto';
 import { CreateUserDto } from 'src/core/models/dto/user/user-create.dto';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { todo } from 'node:test';
+import { plainToInstance } from 'class-transformer';
 
 @Controller('users')
 export class UserController {
@@ -19,8 +20,12 @@ export class UserController {
     @Get('/:id')
     @ApiOperation({ summary: "Retourner le user correspondant à l'id" })
     @ApiResponse({ type: UserDto })
-    user(@Param('id') id: number): Promise<UserDto | null> {
-        return this._userService.getUser(id);
+    async user(@Param('id') id: number): Promise<UserDto | null> {
+        const user = await this._userService.getUser(id);
+
+        return plainToInstance(UserDto, user, {
+            excludeExtraneousValues: true,
+        });
     }
 
     @Post()

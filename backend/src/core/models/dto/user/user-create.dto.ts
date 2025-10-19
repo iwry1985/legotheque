@@ -3,10 +3,7 @@ import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { UserDto } from './user.dto';
 import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 
-export class CreateUserDto extends OmitType(UserDto, [
-    'userid',
-    'age',
-] as const) {
+export class CreateUserDto extends OmitType(UserDto, ['userid'] as const) {
     @IsNotEmpty()
     @IsString()
     @MinLength(5)

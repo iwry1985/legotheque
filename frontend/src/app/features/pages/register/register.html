@@ -1,1 +1,69 @@
-<p>register works!</p>
+<div class="register-page">
+  <div class="register-container">
+    <div class="register-card">
+      <h2>S'inscrire</h2>
+      <p class="subtitle">Crée un compte et rejoins la Legothèque</p>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <p-floatLabel variant="on">
+          <input pInputText formControlName="username" id="username" />
+          <label for="username">Nom d'utilisateur</label>
+        </p-floatLabel>
+        @if(registerForm.get('username')?.invalid &&
+        registerForm.get('username')?.touched) {
+        <p class="error">Nom d'utilisateur invalide</p>
+        }
+
+        <p-floatLabel variant="on">
+          <input pInputText id="email" formControlName="email" />
+          <label for="email">Email</label>
+        </p-floatLabel>
+        @if(registerForm.get('email')?.invalid &&
+        registerForm.get('email')?.touched) {
+        <p class="error">Email invalide</p>
+        }
+
+        <p-floatLabel variant="on">
+          <p-datePicker
+            dateFormat="dd/mm/yy"
+            showIcon="true"
+            [maxDate]="maxDate"
+            iconDisplay="input"
+            formControlName="birthdate"
+            id="birthdate"
+          ></p-datePicker>
+          <label for="birthdate">Date de naissance</label>
+        </p-floatLabel>
+        @if(registerForm.get('birthdate')?.invalid &&
+        registerForm.get('birthdate')?.touched) {
+        <p class="error">Date invalide</p>
+        }
+
+        <p-floatLabel variant="on">
+          <p-password id="pwd" formControlName="pwd"></p-password>
+          <label for="pwd">Mot de passe</label>
+        </p-floatLabel>
+
+        <p-floatLabel variant="on">
+          <p-password
+            id="confirmPwd"
+            formControlName="confirmPwd"
+            feedback="false"
+          ></p-password>
+          <label for="confirmPwd">Confirmation</label>
+        </p-floatLabel>
+
+        @if(registerForm.hasError('passwordMismatch') && registerForm.touched) {
+        <p class="error">Les mots de passe ne correspondent pas</p>
+        }
+
+        <p-button label="C'est parti !" icon="pi pi-user-plus" type="submit" />
+      </form>
+
+      <p class="small-link">
+        Déjà un compte ?
+        <a routerLink="/login">Se connecter</a>
+      </p>
+    </div>
+  </div>
+</div>

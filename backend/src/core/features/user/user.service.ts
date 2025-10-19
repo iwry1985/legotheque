@@ -17,15 +17,6 @@ export class UserService {
         private readonly _mailerService: MailerService
     ) {}
 
-    private getAge = (birthdate: Date): number => {
-        const age = DateTime.now().diff(
-            DateTime.fromJSDate(birthdate),
-            'years'
-        ).years;
-
-        return Math.floor(age);
-    };
-
     createUser = async (user: CreateUserDto): Promise<UserDto> => {
         /**
          * @param user: CreateUserDto obj user to save
@@ -57,7 +48,7 @@ export class UserService {
         //     html: 'Votre inscription sur Legothec a réussi !',
         // });
 
-        return { ...resp, age: this.getAge(user.birthdate) };
+        return resp;
     };
 
     getUsers = async (): Promise<UserDto[]> => {
@@ -74,11 +65,9 @@ export class UserService {
          * @returns user or null if doesn't exist
          */
         console.log('[USER Service] get user...', id);
-        const user = await this._userRepository.findOne({
+        return this._userRepository.findOne({
             where: [{ userid: id }],
         });
-
-        return user ? { ...user, age: this.getAge(user.birthdate) } : null;
     };
 
     deleteUser = async (id: number): Promise<boolean> => {

@@ -2,19 +2,20 @@
   <div class="login-container">
     <div class="login-card">
       <h2>Se connecter</h2>
+      <p class="subtitle">Ravi de te revoir dans la Legothèque</p>
+
       <form [formGroup]="loginForm" (ngSubmit)="submit()">
-        <p-floatLabel>
+        <p-floatLabel variant="on">
           <input pInputText id="email" formControlName="email" />
           <label for="email">Email</label>
         </p-floatLabel>
 
-        <p-floatLabel>
-          <p-password id="pwd" formControlName="pwd">
-            <div class="p-password p-component p-inputwrapper">
-              <input type="password" class="p-inputtext p-component" />
-              <button class="p-password-icon">...</button>
-            </div>
-          </p-password>
+        <p-floatLabel variant="on">
+          <p-password
+            id="pwd"
+            formControlName="pwd"
+            feedback="false"
+          ></p-password>
           <label for="pwd">Mot de passe</label>
         </p-floatLabel>
 
@@ -24,14 +25,11 @@
           type="submit"
         ></p-button>
       </form>
+
+      <p class="small-link">
+        Pas encore de compte ?
+        <a routerLink="/inscription">Créer un compte</a>
+      </p>
     </div>
   </div>
-  <p-button
-    label="Créer un compte"
-    variant="text"
-    routerLink="/inscription"
-    class="register-btn"
-    severity="secondary"
-    icon="pi pi-user-plus"
-  ></p-button>
 </div>

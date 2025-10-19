@@ -9,7 +9,7 @@ import { PasswordModule } from 'primeng/password';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +19,14 @@ import { Router } from '@angular/router';
     PasswordModule,
     ReactiveFormsModule,
     FloatLabelModule,
+    RouterLink,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
   //private readonly _dialogService: DialogService = inject(DialogService);
-  protected readonly _authService: AuthService = inject(AuthService);
+  private readonly _authService: AuthService = inject(AuthService);
   private readonly _fb: FormBuilder = inject(FormBuilder);
   private readonly _messageService = inject(MessageService);
   private readonly _router: Router = inject(Router);
@@ -36,7 +37,6 @@ export class Login {
   });
 
   submit = () => {
-    console.log(this.loginForm.get('email'), this.loginForm.get('pwd'));
     if (this.loginForm.invalid) return;
 
     this._authService
