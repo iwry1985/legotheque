@@ -1,0 +1,62 @@
+@use "theme" as *;
+
+.profile-page {
+  text-align: center;
+  padding-top: 2rem;
+
+  .profile-avatar {
+    position: relative;
+    z-index: 2;
+    margin-bottom: -8rem; // fait descendre l'image sur le bloc jaune
+
+    img {
+      width: 35vw;
+      height: auto;
+      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+    }
+
+    h1 {
+      font-family: "Lilita One", sans-serif;
+      font-size: 1.8rem;
+      margin-top: 0.5rem;
+      color: $dark;
+    }
+  }
+
+  .stats-section {
+    background-color: $yellow;
+    width: 100%;
+    padding: 8rem 2rem 4rem;
+
+    h2 {
+      font-family: "Lilita One", sans-serif;
+      color: $light;
+      margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+
+      div {
+        background: $light;
+        border-radius: 0.8rem;
+        padding: 1.2rem 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+        p:first-child {
+          font-size: 0.9rem;
+          color: #666;
+          margin-bottom: 0.3rem;
+        }
+
+        p:last-child {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: $dark;
+        }
+      }
+    }
+  }
+}

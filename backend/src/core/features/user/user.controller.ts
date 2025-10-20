@@ -1,27 +1,50 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Post,
+    Req,
+    UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from 'src/core/models/dto/user/user.dto';
 import { CreateUserDto } from 'src/core/models/dto/user/user-create.dto';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+    ApiBearerAuth,
+    ApiBody,
+    ApiOperation,
+    ApiResponse,
+    ApiTags,
+} from '@nestjs/swagger';
 import { todo } from 'node:test';
 import { plainToInstance } from 'class-transformer';
+import { UserGuard } from 'src/core/guards/user.guard';
 
+@ApiTags('users')
 @Controller('users')
 export class UserController {
     constructor(private readonly _userService: UserService) {}
 
-    @Get()
-    @ApiOperation({ summary: 'Retourne une liste de users' })
-    @ApiResponse({ type: UserDto })
-    users(): Promise<UserDto[]> {
-        return this._userService.getUsers();
-    }
+    // @Get()
+    // @UseGuards(UserGuard)
+    // @ApiBearerAuth()
+    // @ApiOperation({ summary: 'Retourne une liste de users' })
+    // @ApiResponse({ type: UserDto })
+    // users(): Promise<UserDto[]> {
+    //     return this._userService.getUsers();
+    // }
 
-    @Get('/:id')
-    @ApiOperation({ summary: "Retourner le user correspondant à l'id" })
+    @Get()
+    @UseGuards(UserGuard)
+    @ApiBearerAuth()
+    @ApiOperation({
+        summary: "Retourne le user correspondant à l'id du user connected",
+    })
     @ApiResponse({ type: UserDto })
-    async user(@Param('id') id: number): Promise<UserDto | null> {
-        const user = await this._userService.getUser(id);
+    async user(@Req() req: any): Promise<UserDto | null> {
+        const user = await this._userService.getUser(req.user.userid);
 
         return plainToInstance(UserDto, user, {
             excludeExtraneousValues: true,
@@ -36,11 +59,12 @@ export class UserController {
         return this._userService.createUser(body);
     }
 
-    TODO: 'only admin or concerned user can suppress account';
-    @Delete('/:id')
+    @Delete()
+    @UseGuards(UserGuard)
+    @ApiBearerAuth()
     @ApiOperation({ summary: 'Suppression de compte' })
     @ApiResponse({ type: Boolean })
-    delete(@Param('id') id: number): Promise<boolean> {
-        return this._userService.deleteUser(id);
+    delete(@Req() req: any): Promise<boolean> {
+        return this._userService.deleteUser(req.user.userid);
     }
 }

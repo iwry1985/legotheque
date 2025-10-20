@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { LegoDetailResolver } from './core/resolvers/legodetail.resolver';
 import { Home } from './features/pages/home/home';
 import { notConnectedGuard } from './core/guards/not-connected.guard';
+import { HomeSwitch } from './features/pages/home-switch/home-switch/home-switch';
+import { UserResolver } from './core/resolvers/user.resolver';
 
 export const routes: Routes = [
   {
@@ -35,7 +37,8 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: Home,
+    component: HomeSwitch,
+    resolve: { legoStats: UserResolver },
   },
   {
     path: '**',

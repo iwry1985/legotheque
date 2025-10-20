@@ -1,0 +1,83 @@
+<div class="profile-page">
+  <div class="profile-avatar">
+    <h1>{{ authService.connectedUser()?.username }}</h1>
+    <img
+      src="minifigs/profile.png"
+      [alt]="authService.connectedUser()?.username"
+    />
+  </div>
+
+  <div class="stats-section">
+    <h2>Statistiques en bref</h2>
+
+    <div class="stats-grid container">
+      <div>
+        <p>Total de sets</p>
+        <p>{{ legoStats.totalSets }}</p>
+      </div>
+
+      <div>
+        <p>Sets construits</p>
+        <p>{{ legoStats.totalDone }}</p>
+      </div>
+
+      <div>
+        <p>Total de pièces</p>
+        <p>{{ legoStats.totalBricks }}</p>
+      </div>
+
+      <div>
+        <p>Pièces montées</p>
+        <p>{{ legoStats.bricksDone }}</p>
+      </div>
+
+      <div>
+        <p>Pièces restantes</p>
+        <p>{{ legoStats.bricksLeft }}</p>
+      </div>
+
+      <div>
+        <p>Valeur estimée de ta collection</p>
+        <p>{{ legoStats.estimatedValue | currency: 'EUR'}}</p>
+      </div>
+
+      <div>
+        <p>Thèmes différents</p>
+        <p>{{ legoStats.totalThemes }}</p>
+      </div>
+
+      @if (legoStats.mostOwnedTheme) {
+      <div>
+        <p>Thème le plus possédé</p>
+        <p>{{ legoStats.mostOwnedTheme }}</p>
+      </div>
+      } @if (legoStats.oldestYear) {
+      <div>
+        <p>Set le plus vieux possédé</p>
+        <p>{{ legoStats.oldestYear }} — {{ legoStats.oldesName }}</p>
+      </div>
+      } @if (legoStats.mostBricks) {
+      <div>
+        <p>Plus gros set</p>
+        <p>
+          {{ legoStats.mostBricks }} pièces — {{ legoStats.mostBricksName }}
+        </p>
+      </div>
+      } @if (legoStats.lastBought) {
+      <div>
+        <p>Dernier achat</p>
+        <p>{{ legoStats.lastBought }}</p>
+      </div>
+      } @if (legoStats.oldestNotBuilt) {
+      <div>
+        <p>Le set le plus ancien possédé et non construit</p>
+        <p>{{ legoStats.oldestNotBuilt }}</p>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="listing-set">
+    <h2>Tes sets</h2>
+  </div>
+</div>

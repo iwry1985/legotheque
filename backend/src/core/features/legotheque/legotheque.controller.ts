@@ -15,6 +15,7 @@ import { LegothequeDto } from 'src/core/models/dto/legotheque/legotheque.dto';
 import { CreateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-create.dto';
 import { UpdateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-update.dto';
 import { UserGuard } from 'src/core/guards/user.guard';
+import { UserLegothequeDto } from 'src/core/models/dto/legotheque/user-legotheque.dto';
 
 @UseGuards(UserGuard)
 @ApiBearerAuth()
@@ -25,8 +26,14 @@ export class LegothequeController {
 
     @Get()
     @ApiOperation({ summary: 'Get all sets from collection' })
-    getCollection(): Promise<LegothequeDto[]> {
-        return this._legothequeService.getLegotheque(1);
+    getCollection(@Req() req: any): Promise<LegothequeDto[]> {
+        return this._legothequeService.getLegotheque(req.user.userid);
+    }
+
+    @Get('/stats')
+    @ApiOperation({ summary: 'Get user stat' })
+    getUserStats(@Req() req: any): Promise<UserLegothequeDto> {
+        return this._legothequeService.getUserStats(req.user.userid);
     }
 
     @Get('/:setid')

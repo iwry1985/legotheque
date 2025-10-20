@@ -8,7 +8,7 @@ import {
   UPDATE_LEGOTHEQUE_OMIT_KEYS,
 } from '../models/legotheque.model';
 import { omit } from 'app/core/utilitaires/obj-utils.utils';
-import { MessageService } from 'primeng/api';
+import { IUserLegotheque } from '../models/user-legotheque.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,5 +46,9 @@ export class LegothequeService {
     const body = omit(myLego, UPDATE_LEGOTHEQUE_OMIT_KEYS);
 
     return this.updateCollection(myLego.legothequeid, body);
+  };
+
+  getUserStats = (): Observable<IUserLegotheque> => {
+    return this._http.get<IUserLegotheque>(`${this._url}/stats`);
   };
 }

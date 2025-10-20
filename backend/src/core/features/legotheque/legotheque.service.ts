@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-create.dto';
 import { UpdateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-update.dto';
 import { LegothequeDto } from 'src/core/models/dto/legotheque/legotheque.dto';
+import { UserLegothequeDto } from 'src/core/models/dto/legotheque/user-legotheque.dto';
 import { Legotheque } from 'src/core/models/entities/legotheque.entity';
 import { Wanted } from 'src/core/models/entities/wanted.entity';
 import { FindOneOptions, Repository } from 'typeorm';
@@ -161,6 +162,124 @@ export class LegothequeService {
             await this._legothequeRepository.delete(legothequeid);
 
             return true;
+        } catch (error) {
+            throw new NotFoundException(error);
+        }
+    };
+
+    getUserStats = async (userid: number): Promise<UserLegothequeDto> => {
+        console.log('[LEGOTHEQUE Service], get user collection...', userid);
+
+        try {
+            const collection = await this._legothequeRepository.find({
+                where: { userid },
+                relations: ['set', 'set.theme'],
+            });
+
+            const legotheque = collection.reduce<
+                UserLegothequeDto & {
+                    _themes: Map<string, number>;
+                    lastBoughtDate?: Date;
+                    oldestNotBuiltDate?: Date;
+                }
+            >(
+                (acc, c) => {
+                    const pieces = c.set?.pieces || 0;
+                    acc.totalBricks += pieces;
+
+                    if (c.built) {
+                        acc.totalDone++;
+                        acc.bricksDone += pieces;
+                    } else {
+                        acc.bricksLeft += pieces;
+                    }
+
+                    const year = c.set?.year;
+                    if (year && (!acc.oldestYear || year < acc.oldestYear)) {
+                        acc.oldestYear = year;
+                        acc.oldestName = c.set.name;
+                    }
+
+                    if (
+                        pieces &&
+                        (!acc.mostBricks || pieces > acc.mostBricks)
+                    ) {
+                        acc.mostBricks = pieces;
+                        acc.mostBricksName = c.set.name;
+                    }
+
+                    const theme = c.set?.theme?.name;
+                    if (theme) {
+                        acc._themes.set(
+                            theme,
+                            (acc._themes.get(theme) || 0) + 1
+                        );
+                    }
+
+                    if (c.ownedat) {
+                        const ownedDate = new Date(c.ownedat);
+                        if (
+                            !acc.lastBoughtDate ||
+                            ownedDate > acc.lastBoughtDate
+                        ) {
+                            acc.lastBoughtDate = ownedDate;
+                            acc.lastBought = c.set?.name || '';
+                        }
+                    }
+
+                    if (!c.built && c.ownedat) {
+                        const ownedDate = new Date(c.ownedat);
+                        if (
+                            !acc.oldestNotBuiltDate ||
+                            ownedDate < acc.oldestNotBuiltDate
+                        ) {
+                            acc.oldestNotBuiltDate = ownedDate;
+                            acc.oldestNotBuilt = c.set?.name || '';
+                        }
+                    }
+
+                    if (c.purchaseprice || c.set.retailprice) {
+                        const value =
+                            Number(c.purchaseprice) ||
+                            Number(c.set.retailprice) ||
+                            0;
+                        acc.estimatedValue += value;
+                    }
+
+                    return acc;
+                },
+                {
+                    totalSets: collection.length,
+                    totalDone: 0,
+                    totalBricks: 0,
+                    bricksDone: 0,
+                    bricksLeft: 0,
+                    totalThemes: 0,
+                    mostBricks: 0,
+                    oldestYear: 0,
+                    mostOwnedTheme: '',
+                    oldestNotBuilt: '',
+                    lastBought: '',
+                    _themes: new Map<string, number>(),
+                    lastBoughtDate: undefined,
+                    oldestNotBuiltDate: undefined,
+                    estimatedValue: 0,
+                }
+            );
+
+            legotheque.totalThemes = legotheque._themes.size;
+
+            //thème le plus possédé
+            const sorted = [...legotheque._themes.entries()].sort(
+                (a, b) => b[1] - a[1]
+            );
+            legotheque.mostOwnedTheme = sorted[0]?.[0] || undefined;
+
+            delete (legotheque as any)._themes;
+            delete (legotheque as any).lastBoughtDate;
+            delete (legotheque as any).oldestNotBuiltDate;
+
+            return legotheque;
         } catch (error) {
             throw new NotFoundException(error);
         }

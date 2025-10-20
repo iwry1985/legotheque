@@ -51,7 +51,7 @@ export class Login {
         next: () => {
           this._messageService.add({
             severity: 'success',
-            summary: 'Bienvenue !',
+            summary: `Bienvenue ${this._authService.connectedUser().username}`,
           });
 
           this._router.navigateByUrl('lego');
