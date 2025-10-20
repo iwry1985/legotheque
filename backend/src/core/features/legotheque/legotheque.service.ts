@@ -4,6 +4,7 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DashboardDto } from 'src/core/models/dto/legotheque/dashboard.dto';
 import { CreateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-create.dto';
 import { UpdateLegothequeDto } from 'src/core/models/dto/legotheque/legotheque-update.dto';
 import { LegothequeDto } from 'src/core/models/dto/legotheque/legotheque.dto';
@@ -24,7 +25,10 @@ export class LegothequeService {
 
     //TODO: obj with pagination to return
     getLegotheque = async (userid: number): Promise<LegothequeDto[]> => {
-        return this._legothequeRepository.find({ where: { userid } });
+        return this._legothequeRepository.find({
+            where: { userid },
+            relations: ['set', 'set.theme'],
+        });
     };
 
     getOneSetFromLegotheque = async (
@@ -171,10 +175,7 @@ export class LegothequeService {
         console.log('[LEGOTHEQUE Service], get user collection...', userid);
 
         try {
-            const collection = await this._legothequeRepository.find({
-                where: { userid },
-                relations: ['set', 'set.theme'],
-            });
+            const collection = await this.getLegotheque(userid);
 
             const legotheque = collection.reduce<
                 UserLegothequeDto & {

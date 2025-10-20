@@ -6,10 +6,11 @@ import { Legotheque } from 'src/core/models/entities/legotheque.entity';
 import { Legoset } from 'src/core/models/entities/legoset.entity';
 import { Wanted } from 'src/core/models/entities/wanted.entity';
 import { WantedModule } from '../wanted/wanted.module';
+import { DashboardService } from './dashboard.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Legotheque, Legoset]), WantedModule],
-    providers: [LegothequeService],
+    providers: [LegothequeService, DashboardService],
     controllers: [LegothequeController],
 })
 export class LegothequeModule {}

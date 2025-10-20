@@ -16,7 +16,6 @@ export class LegosetService {
   };
 
   getList = (filters: Signal<any>) => {
-    console.log('filters', filters());
     return httpResource(() => ({
       url: environment.apiUrl + 'legoset',
       params: filters(),

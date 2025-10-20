@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -50,5 +50,11 @@ export class LegothequeService {
 
   getUserStats = (): Observable<IUserLegotheque> => {
     return this._http.get<IUserLegotheque>(`${this._url}/stats`);
+  };
+
+  getUserDashboard = () => {
+    return httpResource(() => ({
+      url: this._url + '/dashboard',
+    }));
   };
 }

@@ -5,7 +5,7 @@ export interface IUserLegotheque {
   bricksDone: number;
   bricksLeft: number;
   oldestYear?: number;
-  oldesName?: string;
+  oldestName?: string;
   totalThemes: number;
   mostBricks?: number;
   mostBricksName?: string;

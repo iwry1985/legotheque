@@ -37,7 +37,7 @@ export class AuthService {
             });
 
             const user = await this._userRepository.findOne({
-                where: { userid: decoded.id },
+                where: { userid: decoded.userid },
             });
 
             if (!user) throw new UnauthorizedException();
