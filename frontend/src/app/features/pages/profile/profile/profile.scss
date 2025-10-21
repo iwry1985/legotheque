@@ -7,12 +7,14 @@
   .profile-avatar {
     position: relative;
     z-index: 2;
-    margin-bottom: -8rem; // fait descendre l'image sur le bloc jaune
 
     img {
       width: 35vw;
       height: auto;
       filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+      position: absolute;
+      left: -95px;
+      top: 340px;
     }
 
     h1 {
@@ -26,7 +28,7 @@
   .stats-section {
     background-color: $yellow;
     width: 100%;
-    padding: 8rem 2rem 4rem;
+    padding: 4rem;
 
     h2 {
       font-family: "Lilita One", sans-serif;
@@ -41,7 +43,7 @@
 
       div {
         background: $light;
-        border-radius: 0.8rem;
+        //border-radius: 0.8rem;
         padding: 1.2rem 1rem;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 

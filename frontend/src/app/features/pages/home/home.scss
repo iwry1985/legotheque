@@ -61,7 +61,7 @@
 
       p-card {
         width: 280px;
-        border-radius: 14px;
+        border-radius: 0px;
         overflow: hidden;
 
         .p-card {
@@ -110,7 +110,7 @@
 
     .minifig-group {
       position: absolute;
-      top: -14 rem;
+      top: -14rem;
       left: 50%;
       transform: translateX(-50%);
       max-width: 35vw;

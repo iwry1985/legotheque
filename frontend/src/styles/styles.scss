@@ -60,7 +60,7 @@ img {
 
 .layout {
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 0px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
