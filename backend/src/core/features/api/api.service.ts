@@ -67,7 +67,7 @@ export class ApiService {
         const pageSize = 500;
         let pageNumber = 1;
         let hasMore = true;
-        const toYear = 1990;
+        const toYear = 1980;
 
         while (hasMore) {
             let params = {
