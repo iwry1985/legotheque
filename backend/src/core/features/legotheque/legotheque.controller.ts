@@ -6,6 +6,7 @@ import {
     Param,
     Patch,
     Post,
+    Query,
     Req,
     UseGuards,
 } from '@nestjs/common';
@@ -44,9 +45,10 @@ export class LegothequeController {
     @Get('/dashboard')
     @ApiOperation({ summary: 'user dashboard' })
     getUSerDashboard(
-        @Req() req: any
+        @Req() req: any,
+        @Query('range') range?: 'all' | 'year' | 'month'
     ): Promise<DashboardDto | { message: string }> {
-        return this._dashboardService.getDashboard(req.user.userid);
+        return this._dashboardService.getDashboard(req.user.userid, range);
     }
 
     @Get('/:setid')

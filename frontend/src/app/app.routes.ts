@@ -43,6 +43,7 @@ export const routes: Routes = [
       import('./features/pages/dashboard/dashboard').then((c) => c.Dashboard),
     canActivate: [isUserGuard],
     resolve: { data: DashboardResolver },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
   {
     path: '',

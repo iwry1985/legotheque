@@ -1,6 +1,6 @@
-<div class="page container">
-  <div class="layout">
-    <div class="details flex space-between">
+<div class="details-page">
+  <div class="details-layout">
+    <div class="details flex space-between container">
       <!-- IMAGE -->
       <div class="right img">
         <img class="lego" [src]="legoset.thumbnail" [alt]="legoset.thumbnail" />
@@ -50,7 +50,6 @@
           <div class="item-flex">{{ legoset.year }}</div>
         </div>
 
-        <!-- 🔹 NOUVELLE SECTION EXTRA INFOS -->
         <div class="extra-infos">
           @if(legoset.retailprice) {
           <p>
@@ -167,7 +166,7 @@
 
   <!-- MA COLLECTION -->
   @if(myLego()) {
-  <div class="collection flex">
+  <div class="collection flex container">
     <div class="left">
       <app-lego-collection
         [legoset]="legoset"

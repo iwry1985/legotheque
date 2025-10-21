@@ -1,7 +1,7 @@
 import { HttpClient, httpResource } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, range } from 'rxjs';
 import {
   ILegotheque,
   ILegothequeUpdate,
@@ -52,9 +52,13 @@ export class LegothequeService {
     return this._http.get<IUserLegotheque>(`${this._url}/stats`);
   };
 
-  getUserDashboard = () => {
+  getUserDashboard = (
+    rangeFilter: Signal<{ range: 'all' | 'year' | 'month' }>
+  ) => {
+    console.log('getUserDash', rangeFilter());
     return httpResource(() => ({
       url: this._url + '/dashboard',
+      params: rangeFilter(),
     }));
   };
 }

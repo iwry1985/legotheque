@@ -1,5 +1,10 @@
+.details-layout {
+  background-color: white;
+  padding: 5rem 0;
+}
+
 .details {
-  margin: 3rem 0;
+  margin: 3rem auto;
   display: flex;
   justify-content: space-between;
   gap: 3rem;
@@ -132,7 +137,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 2%;
-  margin: 2rem 0;
+  margin: 2rem auto;
 
   .left {
     flex: 0 0 65%;

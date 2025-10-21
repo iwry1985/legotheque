@@ -8,9 +8,27 @@
     </div>
 
     <div class="filters">
-      <button class="btn btn--ghost">Tous les temps</button>
-      <button class="btn btn--ghost">Cette année</button>
-      <button class="btn btn--ghost">Ce mois</button>
+      <button
+        class="btn btn--ghost"
+        [ngClass]="{'active': rangeFilter === 'all'}"
+        (click)="selectRange('all')"
+      >
+        Tous les temps
+      </button>
+      <button
+        class="btn btn--ghost"
+        [ngClass]="{'active': rangeFilter === 'year'}"
+        (click)="selectRange('year')"
+      >
+        Cette année
+      </button>
+      <button
+        class="btn btn--ghost"
+        [ngClass]="{'active': rangeFilter === 'month'}"
+        (click)="selectRange('month')"
+      >
+        Ce mois
+      </button>
     </div>
   </header>
 

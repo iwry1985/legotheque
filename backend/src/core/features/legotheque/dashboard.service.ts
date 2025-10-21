@@ -2,17 +2,39 @@ import { Injectable } from '@nestjs/common';
 import { LegothequeService } from './legotheque.service';
 import { first } from 'rxjs';
 import { DashboardDto } from 'src/core/models/dto/legotheque/dashboard.dto';
+import { MoreThanOrEqual } from 'typeorm';
 
 @Injectable()
 export class DashboardService {
     constructor(private readonly _legothequeService: LegothequeService) {}
 
     getDashboard = async (
-        userid: number
+        userid: number,
+        range: 'all' | 'year' | 'month' = 'all'
     ): Promise<DashboardDto | { message: string }> => {
-        const collection = await this._legothequeService.getLegotheque(userid);
+        const now = new Date();
+        let from: Date | undefined;
+
+        switch (range) {
+            case 'year':
+                from = new Date(now.getFullYear(), 0, 1);
+                break;
+            case 'month':
+                from = new Date(now.getFullYear(), now.getMonth(), 1);
+                break;
+            default:
+                from = undefined;
+        }
+
+        const collection = await this._legothequeService.getLegotheque(userid, {
+            ...(from && { ownedat: MoreThanOrEqual(from) }),
+        });
         if (!collection.length) return { message: 'Aucune donnée' };
 
+        return this.buildDashboard(collection);
+    };
+
+    private buildDashboard = (collection: any[]): DashboardDto => {
         //prepare data
         const purchasesByMonth = new Map<
             string,

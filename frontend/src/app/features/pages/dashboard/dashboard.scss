@@ -6,6 +6,11 @@
   gap: 3rem;
   padding-bottom: 4rem;
 
+  &.loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   // header
   &__header {
     display: flex;
@@ -38,6 +43,12 @@
         background-color: white;
         cursor: pointer;
         transition: all 0.2s;
+
+        &.active {
+          background-color: $yellow;
+          color: white;
+          border-color: $yellow;
+        }
 
         &:hover {
           background-color: $yellow;

@@ -24,9 +24,12 @@ export class LegothequeService {
     ) {}
 
     //TODO: obj with pagination to return
-    getLegotheque = async (userid: number): Promise<LegothequeDto[]> => {
+    getLegotheque = async (
+        userid: number,
+        extraOptions: any = {}
+    ): Promise<LegothequeDto[]> => {
         return this._legothequeRepository.find({
-            where: { userid },
+            where: { userid, ...extraOptions },
             relations: ['set', 'set.theme'],
         });
     };
