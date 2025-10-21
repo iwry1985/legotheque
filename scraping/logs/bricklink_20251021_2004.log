@@ -1,0 +1,28 @@
+2025-10-21 22:04:09,369 [INFO] Fichier de log actif : logs\bricklink_20251021_2004.log
+2025-10-21 22:04:09,717 [INFO] 100 sets à scrapper récupérés depuis la DB.
+2025-10-21 22:04:09,733 [INFO] Skip 5578-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,733 [INFO] Skip 5587-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,734 [INFO] Skip 7639-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,734 [INFO] Skip 7682-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,735 [INFO] Skip 7746-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,736 [INFO] Skip 7748-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,738 [INFO] Skip 7749-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,738 [INFO] Skip 8123-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,739 [INFO] Skip 8168-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,739 [INFO] Skip 8256-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,739 [INFO] Skip 8960-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,740 [INFO] Skip 8962-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,740 [INFO] Skip 8968-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,741 [INFO] Skip 21004-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,741 [INFO] Skip 3848-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,741 [INFO] Skip 3850-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,742 [INFO] Skip 8058-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,742 [INFO] Skip 8059-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,743 [INFO] Skip 8060-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,743 [INFO] Skip 7158-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,743 [INFO] Skip 7162-1 (fetch récent < 7 jours).
+2025-10-21 22:04:09,745 [INFO] Fetching 3849-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=3849-1#T=P
+2025-10-21 22:04:19,435 [INFO] Appended 4 rows — CSV now has 12352 rows.
+2025-10-21 22:04:19,442 [INFO] 1 fetched
+2025-10-21 22:04:19,443 [INFO] Sleeping 45s before next set.
+2025-10-21 22:05:05,371 [INFO] Fetching 5866-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=5866-1#T=P

@@ -1,0 +1,16 @@
+2025-10-21 18:58:57,147 [INFO] Fichier de log actif : logs\bricklink_20251021_1658.log
+2025-10-21 18:58:58,936 [INFO] 10 sets à scrapper récupérés depuis la DB.
+2025-10-21 18:58:58,950 [INFO] Skip 5578-1 (fetch récent < 7 jours).
+2025-10-21 18:58:58,951 [INFO] Skip 5587-1 (fetch récent < 7 jours).
+2025-10-21 18:58:58,952 [INFO] Skip 40173-1 (fetch récent < 7 jours).
+2025-10-21 18:58:58,952 [INFO] Skip 21159-1 (fetch récent < 7 jours).
+2025-10-21 18:58:58,953 [INFO] Skip 10282-2 (fetch récent < 7 jours).
+2025-10-21 18:58:58,953 [INFO] Skip 40724-1 (fetch récent < 7 jours).
+2025-10-21 18:58:58,960 [INFO] Skip 910052-1 (fetch récent < 7 jours).
+2025-10-21 18:58:58,960 [INFO] Skip 910056-1 (fetch récent < 7 jours).
+2025-10-21 18:58:58,961 [INFO] Fetching 31172-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=31172-1#T=P
+2025-10-21 18:59:20,822 [INFO] Appended 4 rows — CSV now has 11880 rows.
+2025-10-21 18:59:20,828 [INFO] 1 fetched
+2025-10-21 18:59:20,829 [INFO] Sleeping 81s before next set.
+2025-10-21 19:00:41,981 [INFO] Skip 31175-1 (fetch récent < 7 jours).
+2025-10-21 19:00:41,982 [INFO] Finished run.

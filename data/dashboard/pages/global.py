@@ -5,8 +5,11 @@ import plotly.express as px
 from data import df, df_sales, df_sets
 import pandas as pd
 from app import lego_colors
+lego_yellow = "#EAB308"
 
 dash.register_page(__name__, path="/", name="Vue globale")
+
+
 
 # ========== 1. Nombre de sets lancés par année ==========
 sets_per_year = (
@@ -111,7 +114,30 @@ fig_theme_grouped = px.bar(
     labels={"period": "Décennie", "nb_sets": "Nombre de sets", "theme_group": "Groupe de thème"},
 )
 
-# ========== 7. KPI ==========
+# ========== 7. Corrélation prix vs pièces ==========
+df_scatter = df_sets[
+    df_sets["pieces"].notna() &
+    (df_sets["pieces"] > 0) &
+    df_sets["retail_price"].notna() &
+    (df_sets["retail_price"] > 0)
+]
+
+fig_price_pieces = px.scatter(
+    df_scatter,
+    x="pieces",
+    y="retail_price",
+    color="theme_group",
+    size="retail_price", 
+    hover_data=["name", "theme"],
+    title="Corrélation entre le prix et le nombre de pièces",
+    labels={"pieces": "Nombre de pièces", "retail_price": "Prix (€)", "theme_group": "Groupe de thème"},
+)
+
+fig_price_pieces.update_traces(marker=dict(opacity=0.7, line=dict(width=0)))
+fig_price_pieces.update_layout(colorway=[lego_yellow, "#575757"])
+
+
+# ========== 8. KPI ==========
 kpi_theme = df["theme"].value_counts().idxmax()
 kpi_theme_count = df["theme"].value_counts().max()
 kpi_price = df.loc[df["retail_price"].idxmax(), ["name", "retail_price"]]
@@ -136,6 +162,33 @@ kpis = dbc.Row([
 
 
 
+
+for fig in [
+    fig_sets,
+    fig_avg_price,
+    fig_avg_pieces,
+    fig_avg_age,
+    fig_18plus,
+    fig_price_pieces,
+]:
+    for trace in fig.data:
+        # pour les barres
+        if trace.type == "bar":
+            trace.marker.color = lego_yellow
+        # pour les courbes (line)
+        elif trace.type == "scatter":
+            trace.line.color = lego_yellow
+            trace.marker.color = lego_yellow
+
+    fig.update_layout(
+        template="plotly_white",
+        font=dict(family="Inter, sans-serif", size=13),
+        title_font=dict(family="Lilita One", size=16, color="#333"),
+        margin=dict(l=40, r=20, t=60, b=40),
+        colorway=[lego_yellow],
+    )
+
+
 # ================ LAYOUT ==================
 for fig in [fig_sets, fig_avg_price, fig_avg_pieces, fig_avg_age, fig_18plus, fig_theme_grouped]:
     fig.update_layout(
@@ -147,26 +200,43 @@ for fig in [fig_sets, fig_avg_price, fig_avg_pieces, fig_avg_age, fig_18plus, fi
     )
     
     
-layout = dbc.Container([
-    html.H2("Vue globale LEGO", className="text-center mb-5", style={"color": "#EAB308"}),
+layout = html.Div([
+    dbc.Container([
+        html.H2("Vue globale LEGO", className="text-center mb-5",
+                style={"color": "#EAB308"}),
 
-    kpis,
+        kpis,
 
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_sets), md=6),
-        dbc.Col(dcc.Graph(figure=fig_avg_price), md=6)
-    ], className="mb-4"),
+        # tes graphes
+        dbc.Row([
+            dbc.Col(dcc.Graph(figure=fig_sets), md=6),
+            dbc.Col(dcc.Graph(figure=fig_avg_price), md=6)
+        ], className="mb-4"),
 
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_avg_pieces), md=6),
-        dbc.Col(dcc.Graph(figure=fig_theme_grouped), md=6)
-        
-    ], className="mb-4"),
+        dbc.Row([
+            dbc.Col(dcc.Graph(figure=fig_avg_pieces), md=6),
+            dbc.Col(dcc.Graph(figure=fig_theme_grouped), md=6)
+        ], className="mb-4"),
 
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_18plus), md=6),
-        dbc.Col(dcc.Graph(figure=fig_avg_age), md=6)
-    ], className="mb-4"),
+        dbc.Row([
+            dbc.Col(dcc.Graph(figure=fig_18plus), md=6),
+            dbc.Col(dcc.Graph(figure=fig_avg_age), md=6)
+        ], className="mb-4"),
 
-], fluid=True, className="p-5", style={"backgroundColor": "#fafafa"})
+        dbc.Col(dcc.Graph(figure=fig_price_pieces), md=12),
+    ], fluid=True, className="p-5", style={"backgroundColor": "#fafafa"}),
+
+    html.Img(
+        src="/assets/detective.png",
+        style={
+            "position": "absolute",   # reste visible au scroll
+            "top": "40px",
+            "left": "40px",
+            "width": "250px",
+            "opacity": "0.9",
+            "zIndex": "2000",
+        }
+    )
+])
+
 

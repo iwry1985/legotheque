@@ -1,23 +1,32 @@
-from dash import Dash, html, dcc, page_container, page_registry
+from dash import Dash, html, page_container
 import dash_bootstrap_components as dbc
+from callbacks import market_callbacks
 
 
 lego_colors = [
-    "#EAB308",  # jaune LEGO
-    "#DB1A21",  # rouge LEGO
-    "#006CB7",  # bleu LEGO
-    "#008F4C",  # vert LEGO
-    "#FF6F00",  # orange accent
-    "#575757"   # gris neutre
+    "#EAB308",  
+    "#DB1A21",  
+    "#006CB7",  
+    "#008F4C",  
+    "#FF6F00",  
+    "#575757"   
 ]
 
 # ================ INIT APP ==================
-app = Dash(__name__, use_pages=True, suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.LUX])
+app = Dash(
+    __name__, 
+    use_pages=True, 
+    suppress_callback_exceptions=True, 
+    external_stylesheets=[dbc.themes.LUX],
+    prevent_initial_callbacks="initial_duplicate"
+)
 
-
+market_callbacks.register_callbacks(app)
 # =========================================================
 #  Navbar
 # =========================================================
+
+     
 navbar = dbc.Navbar(
     dbc.Container([
         # titre
@@ -32,14 +41,14 @@ navbar = dbc.Navbar(
 
         # Liens de navigation
         dbc.Nav([
-            dbc.NavItem(dbc.NavLink("Vue globale", href="/", active="exact")),
+            dbc.NavItem(dbc.NavLink("Vue globale", href="/", active="exact" )),
             dbc.NavItem(dbc.NavLink("Marché secondaire", href="/market", active="exact")),
         ], className="ms-auto", navbar=True),
     ]),
     color="light",
     dark=False,
     sticky="top",
-    style={"borderBottom": "4px solid #EAB308"}  # ligne jaune LEGO
+    style={"borderBottom": "4px solid #EAB308", "zIndex":5}  # ligne jaune LEGO
 )
 
 # =========================================================
@@ -55,5 +64,6 @@ app.layout = html.Div([
 # =========================================================
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
