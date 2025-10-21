@@ -6,9 +6,11 @@ import {
   ViewChildren,
   effect,
   inject,
+  signal,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
+import { LegothequeService } from 'app/features/services/legotheque.service';
 
 Chart.register(...registerables);
 
@@ -19,69 +21,67 @@ Chart.register(...registerables);
   imports: [CommonModule],
 })
 export class Dashboard {
-  private readonly _route: ActivatedRoute = inject(ActivatedRoute);
-  private readonly _router: Router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
+  private readonly _router = inject(Router);
+  private readonly _legoService = inject(LegothequeService);
 
-  dashboard = this._route.snapshot.data['data'];
+  @ViewChildren('chart') charts!: QueryList<ElementRef<HTMLCanvasElement>>;
+  private chartRefs: Chart[] = [];
+
+  dashboard = signal<any | null>(null);
   rangeFilter =
     (this._route.snapshot.queryParamMap.get('range') as
       | 'all'
       | 'year'
       | 'month') ?? 'all';
 
-  private chartRefs: Chart[] = [];
+  constructor() {
+    const resource = this._legoService.getUserDashboard();
 
-  @ViewChildren('chart') charts!: QueryList<ElementRef<HTMLCanvasElement>>;
+    if (resource?.value) this.dashboard.set(resource.value());
 
+    effect(() => {
+      const val = resource?.value ? resource.value() : null;
+      if (val) this.dashboard.set(val);
+    });
+
+    //recréée les charts quand dashboard change
+    effect(() => {
+      const data = this.dashboard();
+      const canvases = this.charts?.toArray() ?? [];
+      if (!data || canvases.length < 8) return;
+      this.renderCharts(data, canvases);
+    });
+  }
+
+  // ============================
+  // Range selector
+  // ============================
   selectRange(range: 'all' | 'year' | 'month') {
     if (this.rangeFilter === range) return;
-
     this.rangeFilter = range;
 
+    //update URL
     this._router.navigate([], {
       relativeTo: this._route,
       queryParams: { range },
       queryParamsHandling: 'merge',
     });
+
+    // recharge les données
+    this._legoService.setDashboardRange(range);
   }
 
-  constructor() {
-    console.log('dashboard from route:', this.dashboard);
-
-    effect(() => {
-      const data = this.dashboard?.value();
-      const canvases = this.charts?.toArray() ?? [];
-
-      // 🟡 Données pas prêtes ou DOM pas encore rendu
-      if (!data || canvases.length < 8) {
-        console.log('⏳ Dashboard pas encore prêt', { data, canvases });
-
-        // on attend la fin du rendu DOM avant de relancer
-        queueMicrotask(() => {
-          const canvasesLater = this.charts?.toArray() ?? [];
-          if (data && canvasesLater.length >= 8) {
-            this.renderCharts(data, canvasesLater);
-          }
-        });
-        return;
-      }
-
-      // ✅ Données + canvases prêts
-      this.renderCharts(data, canvases);
-    });
-  }
-
+  // ============================
+  // Charts rendering
+  // ============================
   private renderCharts(
     data: any,
     canvases: ElementRef<HTMLCanvasElement>[]
   ): void {
-    console.log('✅ Dashboard ready:', data);
-
-    // Reset des anciens graphiques
     this.chartRefs.forEach((c) => c.destroy());
     this.chartRefs = [];
 
-    // === 1) Achats & dépenses ===
     this.chartRefs.push(
       new Chart(canvases[0].nativeElement, {
         type: 'bar',
@@ -90,7 +90,6 @@ export class Dashboard {
       })
     );
 
-    // === 2) Répartition par thème ===
     this.chartRefs.push(
       new Chart(canvases[1].nativeElement, {
         type: 'doughnut',
@@ -99,7 +98,6 @@ export class Dashboard {
       })
     );
 
-    // === 3) Sets avec minifigs ===
     this.chartRefs.push(
       new Chart(canvases[2].nativeElement, {
         type: 'pie',
@@ -107,7 +105,6 @@ export class Dashboard {
       })
     );
 
-    // === 4) Histogramme valeur estimée ===
     this.chartRefs.push(
       new Chart(canvases[3].nativeElement, {
         type: 'bar',
@@ -115,7 +112,6 @@ export class Dashboard {
       })
     );
 
-    // === 5) Histogramme par tranches de pièces ===
     this.chartRefs.push(
       new Chart(canvases[4].nativeElement, {
         type: 'bar',
@@ -123,12 +119,11 @@ export class Dashboard {
       })
     );
 
-    // === 6) Progression des sets construits ===
     this.chartRefs.push(
       new Chart(canvases[5].nativeElement, {
         type: 'line',
         data: {
-          labels: data.progression?.labels,
+          labels: data.progression.labels,
           datasets: data.progression.datasets.map((d: any) => ({
             ...d,
             borderColor: '#facc15',
@@ -143,7 +138,6 @@ export class Dashboard {
       })
     );
 
-    // === 7) Top 5 thèmes construits ===
     this.chartRefs.push(
       new Chart(canvases[6].nativeElement, {
         type: 'bar',
@@ -159,7 +153,6 @@ export class Dashboard {
       })
     );
 
-    // === 8) Top 5 sets les plus chers ===
     this.chartRefs.push(
       new Chart(canvases[7].nativeElement, {
         type: 'bar',

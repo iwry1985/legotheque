@@ -1,7 +1,7 @@
 import { HttpClient, httpResource } from '@angular/common/http';
-import { inject, Injectable, Signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from 'environments/environment';
-import { Observable, range } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   ILegotheque,
   ILegothequeUpdate,
@@ -17,48 +17,48 @@ export class LegothequeService {
   private readonly _http = inject(HttpClient);
   private readonly _url = environment.apiUrl + 'legotheque';
 
-  getSet = (setid: number): Observable<ILegotheque> => {
-    return this._http.get<ILegotheque>(`${this._url}/${setid}`);
-  };
+  private _range = signal<'all' | 'year' | 'month'>('all');
 
-  addSet = (setid: number) => {
-    return this._http.post<ILegotheque>(`${this._url}`, {
-      setid,
-    });
-  };
+  private _dashboardResource = httpResource(() => ({
+    url: this._url + '/dashboard',
+    params: { range: this._range() },
+  }));
 
-  removeSet = (legothequeid: number): Observable<boolean> => {
-    return this._http.delete<boolean>(`${this._url}/${legothequeid}`);
-  };
+  // ============================
+  // Méthodes standard
+  // ============================
+  getSet = (setid: number): Observable<ILegotheque> =>
+    this._http.get<ILegotheque>(`${this._url}/${setid}`);
+
+  addSet = (setid: number) =>
+    this._http.post<ILegotheque>(`${this._url}`, { setid });
+
+  removeSet = (legothequeid: number): Observable<boolean> =>
+    this._http.delete<boolean>(`${this._url}/${legothequeid}`);
 
   updateCollection = (
     legothequeid: number,
     body: ILegothequeUpdate
-  ): Observable<ILegotheque> => {
-    return this._http
-      .patch<ILegotheque>(`${this._url}/${legothequeid}`, {
-        body,
-      })
-      .pipe();
-  };
+  ): Observable<ILegotheque> =>
+    this._http.patch<ILegotheque>(`${this._url}/${legothequeid}`, { body });
 
   updateLego = (myLego: ILegotheque): Observable<ILegotheque> => {
     const body = omit(myLego, UPDATE_LEGOTHEQUE_OMIT_KEYS);
-
     return this.updateCollection(myLego.legothequeid, body);
   };
 
-  getUserStats = (): Observable<IUserLegotheque> => {
-    return this._http.get<IUserLegotheque>(`${this._url}/stats`);
-  };
+  getUserStats = (): Observable<IUserLegotheque> =>
+    this._http.get<IUserLegotheque>(`${this._url}/stats`);
 
-  getUserDashboard = (
-    rangeFilter: Signal<{ range: 'all' | 'year' | 'month' }>
-  ) => {
-    console.log('getUserDash', rangeFilter());
-    return httpResource(() => ({
-      url: this._url + '/dashboard',
-      params: rangeFilter(),
-    }));
-  };
+  // ============================
+  // Dashboard
+  // ============================
+  getUserDashboard() {
+    return this._dashboardResource;
+  }
+
+  setDashboardRange(range: 'all' | 'year' | 'month') {
+    this._range.set(range);
+    this._dashboardResource.reload(); // 🔁 recharge les données
+  }
 }

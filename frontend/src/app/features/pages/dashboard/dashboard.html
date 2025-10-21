@@ -50,20 +50,20 @@
         <li>
           <span class="kpis__label">Achats totaux</span>
           <span class="kpis__value">
-            {{ dashboard?.summary?.totalSets || '—' }}
+            {{ dashboard()?.summary?.totalSets || '—' }}
           </span>
         </li>
         <li>
           <span class="kpis__label">Moyenne/mois</span>
           <span class="kpis__value">
-            {{ ((dashboard?.summary?.totalSets && dashboard?.summary?.totalSets
-            / 12) | number : '1.0-1') || '—' }}
+            {{ ((dashboard()?.summary?.totalSets &&
+            dashboard()?.summary?.totalSets / 12) | number : '1.0-1') || '—' }}
           </span>
         </li>
         <li>
           <span class="kpis__label">Budget total (€)</span>
           <span class="kpis__value">
-            {{ (dashboard?.summary?.totalValue | number : '1.2-2') || '—' }}
+            {{ (dashboard()?.summary?.totalValue | number : '1.2-2') || '—' }}
           </span>
         </li>
       </ul>
@@ -119,14 +119,14 @@
         <li>
           <span class="kpis__label">Taux de construction</span>
           <span class="kpis__value">
-            {{ dashboard?.summary?.builtRatio }} %
+            {{ dashboard()?.summary?.builtRatio }} %
           </span>
         </li>
         <li>
           <span class="kpis__label">Sets reçus en cadeau</span>
           <span class="kpis__value">
-            {{ dashboard?.summary?.totalGifts }} ({{
-            dashboard?.summary?.giftsRatio }} %)
+            {{ dashboard()?.summary?.totalGifts }} ({{
+            dashboard()?.summary?.giftsRatio }} %)
           </span>
         </li>
         <!-- <li>

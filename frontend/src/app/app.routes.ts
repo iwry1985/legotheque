@@ -1,11 +1,9 @@
 import { Routes } from '@angular/router';
 import { LegoDetailResolver } from './core/resolvers/legodetail.resolver';
-import { Home } from './features/pages/home/home';
 import { notConnectedGuard } from './core/guards/not-connected.guard';
 import { HomeSwitch } from './features/pages/home-switch/home-switch/home-switch';
 import { UserResolver } from './core/resolvers/user.resolver';
 import { isUserGuard } from './core/guards/is-user.guard';
-import { DashboardResolver } from './core/resolvers/dashboard.resolver';
 
 export const routes: Routes = [
   {
@@ -42,8 +40,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/pages/dashboard/dashboard').then((c) => c.Dashboard),
     canActivate: [isUserGuard],
-    resolve: { data: DashboardResolver },
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
   {
     path: '',
