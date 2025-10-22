@@ -23,6 +23,7 @@ export class LegosetController {
     })
     @ApiResponse({ type: LegosetListDto })
     getList(@Query() filters: GetLegosetFilterDto): Promise<LegosetListDto> {
+        console.log(['LEGOSET CONTROLLER getList', filters]);
         return this._legosetService.getlist(filters);
     }
 

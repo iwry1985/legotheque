@@ -20,19 +20,7 @@ export class Home implements OnInit {
   ngOnInit(): void {
     this._themeService.getThemes([1, 20, 17, 15]).subscribe({
       next: (res) => {
-        this.themes = res.map((theme) => ({
-          ...theme,
-          logo_url:
-            theme.img_num &&
-            `/themes_assets/logo_${theme.img_num
-              .toString()
-              .padStart(2, '0')}.png`,
-          img_url:
-            theme.img_num &&
-            `/themes_assets/banner_${theme.img_num
-              .toString()
-              .padStart(2, '0')}.png`,
-        }));
+        this.themes = this._themeService.getLogoAndBanner(res);
       },
     });
   }

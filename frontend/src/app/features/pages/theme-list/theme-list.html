@@ -1,1 +1,16 @@
-<p>theme-list works!</p>
+<div class="themes-page">
+  <div class="container">
+    <div class="listing">
+      @for(t of themes; track t.themeid) {
+      <a routerLink="/lego/list" [queryParams]="{themeid: t.themeid, page: 1}">
+        <app-item-list
+          [name]="`LEGO® ${t.name}`"
+          [themeName]="t.name"
+          [theme]="t.logo_url"
+          [banner]="t.img_url"
+        />
+      </a>
+      }
+    </div>
+  </div>
+</div>

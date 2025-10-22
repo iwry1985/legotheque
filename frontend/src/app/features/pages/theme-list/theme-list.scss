@@ -1,0 +1,25 @@
+.themes-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+
+  .container {
+    padding: 0 1rem;
+
+    .listing {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+
+      app-item-list {
+        flex: 1 1 250px; // largeur de base de 250px, s'adapte si besoin
+        max-width: 300px; // évite qu’un item prenne tout l’espace
+      }
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { notConnectedGuard } from './core/guards/not-connected.guard';
 import { HomeSwitch } from './features/pages/home-switch/home-switch/home-switch';
 import { UserResolver } from './core/resolvers/user.resolver';
 import { isUserGuard } from './core/guards/is-user.guard';
+import { ThemeResolver } from './core/resolvers/theme.resolver';
 
 export const routes: Routes = [
   {
@@ -18,14 +19,15 @@ export const routes: Routes = [
       import('./features/pages/register/register').then((c) => c.Register),
   },
   {
-    path: 'themes',
-    loadComponent: () =>
-      import('./features/pages/theme-list/theme-list').then((c) => c.ThemeList),
-  },
-  {
-    path: 'lego',
+    path: 'lego/list',
     loadComponent: () =>
       import('./features/pages/lego-list/lego-list').then((c) => c.LegoList),
+  },
+  {
+    path: 'lego/themes',
+    loadComponent: () =>
+      import('./features/pages/theme-list/theme-list').then((c) => c.ThemeList),
+    resolve: { themes: ThemeResolver },
   },
   {
     path: 'lego/:id',

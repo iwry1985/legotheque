@@ -8,8 +8,13 @@
       <img [src]="theme()" [alt]="themeName()" />
       } @else { @if(!hideThemeIfNoPic()) {
       <h4>{{name()}}</h4>
+
       } }
     </div>
+  </div>
+  } @else {
+  <div class="no-banner">
+    <h4>{{name()}}</h4>
   </div>
   }
 

@@ -1,3 +1,5 @@
+@use "theme" as *;
+
 .item-list {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,7 @@
   background: #f8f8f8;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+  max-width: 214px;
 
   .cover {
     position: relative;
@@ -62,6 +65,23 @@
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+    }
+  }
+
+  .no-banner {
+    height: 160px;
+    background-color: $yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 214px;
+
+    h4 {
+      margin: auto;
+      font-size: 1rem;
+      color: $light;
+      font-weight: 300;
+      text-align: center;
     }
   }
 }
