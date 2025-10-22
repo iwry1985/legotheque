@@ -23,10 +23,21 @@
 
   <div class="nav-right">
     @if(authService.connectedUser()) {
-    <div class="user-info flex">
-      <i class="pi pi-user"></i>
-      <span>{{ authService.connectedUser()?.username }}</span>
+    <div class="user-menu" (click)="toggleMenu()" tabindex="0">
+      <div class="user-info flex">
+        <i class="pi pi-user"></i>
+        <span>{{ authService.connectedUser()?.username }}</span>
+        <i class="pi pi-chevron-down"></i>
+      </div>
+
+      @if(showMenu) {
+      <div class="dropdown">
+        <a routerLink="/profil">Profil</a>
+        <a routerLink="/dashboard" [queryParams]="{range: 'all'}">Dashboard</a>
+      </div>
+      }
     </div>
+
     <p-button
       label="Déconnexion"
       (click)="authService.logout()"

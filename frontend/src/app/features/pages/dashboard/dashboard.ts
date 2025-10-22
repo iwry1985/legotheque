@@ -4,9 +4,11 @@ import {
   ElementRef,
   QueryList,
   ViewChildren,
-  effect,
   inject,
   signal,
+  effect,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
@@ -20,7 +22,7 @@ Chart.register(...registerables);
   styleUrls: ['./dashboard.scss'],
   imports: [CommonModule],
 })
-export class Dashboard {
+export class Dashboard implements OnInit, OnDestroy {
   private readonly _route = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _legoService = inject(LegothequeService);
@@ -29,11 +31,7 @@ export class Dashboard {
   private chartRefs: Chart[] = [];
 
   dashboard = signal<any | null>(null);
-  rangeFilter =
-    (this._route.snapshot.queryParamMap.get('range') as
-      | 'all'
-      | 'year'
-      | 'month') ?? 'all';
+  rangeFilter: 'all' | 'year' | 'month' = 'all';
 
   constructor() {
     const resource = this._legoService.getUserDashboard();
@@ -45,36 +43,54 @@ export class Dashboard {
       if (val) this.dashboard.set(val);
     });
 
-    //recréée les charts quand dashboard change
     effect(() => {
       const data = this.dashboard();
-      const canvases = this.charts?.toArray() ?? [];
-      if (!data || canvases.length < 8) return;
-      this.renderCharts(data, canvases);
+      if (!data) return;
+
+      setTimeout(() => {
+        const canvases = this.charts?.toArray() ?? [];
+        if (canvases.length < 8) return;
+        this.renderCharts(data, canvases);
+      });
     });
   }
 
-  // ============================
-  // Range selector
-  // ============================
+  ngOnInit(): void {
+    this.dashboard.set(null);
+    this.rangeFilter = 'all';
+    this._legoService.setDashboardRange('all');
+
+    const rangeParam = this._route.snapshot.queryParamMap.get('range');
+    if (!rangeParam) {
+      this.rangeFilter = 'all';
+      this._router.navigate([], {
+        relativeTo: this._route,
+        queryParams: { range: 'all' },
+        queryParamsHandling: 'merge',
+      });
+    } else {
+      this.rangeFilter = rangeParam as 'all' | 'year' | 'month';
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.chartRefs.forEach((c) => c.destroy());
+    this.chartRefs = [];
+  }
+
   selectRange(range: 'all' | 'year' | 'month') {
     if (this.rangeFilter === range) return;
     this.rangeFilter = range;
 
-    //update URL
     this._router.navigate([], {
       relativeTo: this._route,
       queryParams: { range },
       queryParamsHandling: 'merge',
     });
 
-    // recharge les données
     this._legoService.setDashboardRange(range);
   }
 
-  // ============================
-  // Charts rendering
-  // ============================
   private renderCharts(
     data: any,
     canvases: ElementRef<HTMLCanvasElement>[]

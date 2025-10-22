@@ -6,10 +6,12 @@ import { jwtDecode } from 'jwt-decode';
 import { tokenIntercept } from 'app/core/interceptors/token-interceptor';
 import { IRegister } from '../models/register.model';
 import { IUser } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly _httpClient = inject(HttpClient);
+  private readonly _router: Router = inject(Router);
 
   private _connectedUser = signal<any>(null);
 
@@ -72,5 +74,8 @@ export class AuthService {
 
     //remove _connectedUser value
     this._connectedUser.set(null);
+
+    //renvoie à la home
+    this._router.navigate(['/home']);
   };
 }

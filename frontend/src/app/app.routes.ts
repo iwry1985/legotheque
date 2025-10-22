@@ -44,9 +44,11 @@ export const routes: Routes = [
     canActivate: [isUserGuard],
   },
   {
-    path: 'profile',
+    path: 'profil',
     loadComponent: () =>
       import('./features/pages/profile/profile').then((c) => c.Profile),
+    canActivate: [isUserGuard],
+    resolve: { legoStats: UserResolver },
   },
   {
     path: 'home',

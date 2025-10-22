@@ -17,6 +17,7 @@ export class Navbar {
 
   scrolled: boolean = false;
   search: string = '';
+  showMenu: boolean = false;
 
   @HostListener('window:scroll')
   onScroll() {
@@ -31,5 +32,9 @@ export class Navbar {
     });
 
     this.search = '';
+  };
+
+  toggleMenu = () => {
+    this.showMenu = !this.showMenu;
   };
 }
