@@ -5,64 +5,144 @@
   flex-direction: column;
   gap: 9rem;
   padding-bottom: 4rem;
+  width: 100%;
 
-  // HERO
+  // ===== HERO =====
   .head {
     text-align: center;
-    padding: 6rem 2rem 4rem 2rem;
+    padding: 8rem 2rem; // on enlève le padding bas pour coller à l’image
+    position: relative;
+    overflow: visible;
 
     h1 {
-      font-size: 4rem;
-      max-width: 60%;
-      margin: 0 auto 2rem auto;
-      line-height: 1.1;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      line-height: 1.15;
+      z-index: 2;
+      position: relative;
     }
 
     p-button {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    // === MINIFIG HERO géante ===
+    .minifig {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -22rem;
+      width: 80vw;
+
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+
+    // @media (max-width: 1200px) {
+    //   .minifig {
+    //     height: 80vh;
+    //   }
+    // }
+
+    @media (max-width: 992px) {
+      .minifig {
+        height: 70vh;
+        margin-top: 4rem;
+
+        img {
+          transform: translateY(5%);
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      .minifig {
+        height: 60vh;
+
+        img {
+          transform: none;
+          height: auto;
+          max-width: 90vw;
+        }
+      }
     }
   }
 
-  // SECTION THEMES
+  // ===== SECTION THEMES =====
   .section-themes {
-    padding: 9rem 0;
+    padding: 8rem 2rem;
     background-color: $yellow;
     text-align: center;
 
     h2 {
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      //font-weight: 600;
+      margin-bottom: 3rem;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
       color: $light;
     }
 
     .listing-theme {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem; // un peu plus d’air entre les cartes
+      justify-content: center;
+      align-items: stretch;
+      max-width: 1400px;
+      margin: 0 auto;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    @media (min-width: 1600px) {
+      .listing-theme {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .listing-theme {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.2rem;
+      }
     }
   }
 
-  // SECTION CARDS LEGO
+  // ===== SECTION LEGO CARDS =====
   .legothec {
     text-align: center;
+    padding: 4rem 2rem;
 
     h2 {
       margin-bottom: 2.5rem;
-      font-size: 2.2rem;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
     }
 
     .cards {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 2rem;
-      flex-wrap: wrap;
-      padding: 0 1rem;
+      justify-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
 
       p-card {
-        width: 280px;
-        border-radius: 0px;
+        width: 100%;
+        max-width: 320px;
+        border-radius: 0;
         overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 
         .p-card {
           .p-card-header {
@@ -71,7 +151,7 @@
           }
 
           .p-card-body {
-            padding: 0.8rem 1.2rem 1.2rem 1.2rem !important;
+            padding: 0.8rem 1.2rem 1.2rem !important;
           }
         }
 
@@ -100,27 +180,78 @@
     }
   }
 
-  // CTA
+  // ===== CTA =====
   .cta {
     text-align: center;
-    padding: 4rem 1rem 2rem 1rem;
     background-color: $yellow;
-    padding: 20rem 9rem 9rem 9rem;
+    padding: 14rem 2rem 9rem;
     position: relative;
 
     .minifig-group {
       position: absolute;
-      top: -14rem;
+      top: -18rem;
       left: 50%;
       transform: translateX(-50%);
-      max-width: 35vw;
+      //width: clamp(200px, 35vw, 400px);
+      width: 27vw;
     }
 
     h2 {
-      font-size: 2.2rem;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
       margin-bottom: 1.5rem;
       color: $light;
       padding: 2rem 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  // ===== RESPONSIVE ADJUSTMENTS =====
+  @media (max-width: 992px) {
+    gap: 6rem;
+
+    .head {
+      padding: 5rem 1.5rem 3rem;
+      h1 {
+        max-width: 90%;
+      }
+      .minifig {
+        display: none;
+      }
+    }
+
+    .section-themes {
+      padding: 6rem 1.5rem;
+    }
+
+    .legothec {
+      padding: 3rem 1.5rem;
+    }
+
+    .cta {
+      padding: 10rem 1.5rem 6rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .head {
+      padding: 4rem 1rem 2rem;
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    .section-themes,
+    .legothec {
+      padding: 4rem 1rem;
+    }
+
+    .cta {
+      padding: 8rem 1rem 5rem;
+      h2 {
+        font-size: 1.6rem;
+      }
     }
   }
 }

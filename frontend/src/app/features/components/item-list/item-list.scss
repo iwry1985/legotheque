@@ -3,60 +3,72 @@
 .item-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  //border-radius: 0.25rem;
-  overflow: hidden;
   background: #f8f8f8;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
   cursor: pointer;
-  max-width: 214px;
+  width: 100%;
+  max-width: 360px; // plus grande largeur
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
 
   .cover {
     position: relative;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2; // format plus large et immersif
     background: #ddd;
-    height: 10rem;
+    width: 100%;
+    overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05); // léger zoom au survol
     }
 
     .theme {
       position: absolute;
-      top: 0.5rem;
-      left: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      background: rgba(255, 255, 255, 0.8);
+      top: 0.6rem;
+      left: 0.6rem;
+      padding: 0.3rem 0.6rem;
+      background: rgba(255, 255, 255, 0.85);
       border-radius: 0.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      max-width: 50%;
+      max-width: 55%;
 
       img {
-        max-height: 1.5rem;
+        max-height: 1.8rem;
         width: auto;
         object-fit: contain;
       }
 
       h4 {
         margin: 0;
-        font-size: 0.9rem;
+        font-size: 1rem;
         color: #333;
+        text-align: center;
       }
     }
   }
 
   .name {
     text-align: center;
-    padding: 0.5rem 0.75rem;
+    padding: 0.8rem 1rem;
 
     h4 {
       margin: 0;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #222;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -65,19 +77,30 @@
   }
 
   .no-banner {
-    height: 160px;
+    aspect-ratio: 3 / 2;
     background-color: $yellow;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 214px;
+    width: 100%;
 
     h4 {
       margin: auto;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: $light;
-      font-weight: 300;
+      font-weight: 400;
       text-align: center;
     }
+  }
+
+  @media (max-width: 768px) {
+    max-width: 300px;
+    .cover {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (max-width: 480px) {
+    max-width: 260px;
   }
 }

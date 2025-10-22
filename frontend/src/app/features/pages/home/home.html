@@ -7,6 +7,10 @@
       routerLink="/lego/list"
       size="large"
     ></p-button>
+
+    <div class="minifig">
+      <img src="minifigs/run.png" alt="minfigs-run" />
+    </div>
   </div>
 
   @if(themes && themes.length > 0) {
@@ -21,6 +25,7 @@
           [themeName]="t.name"
           [theme]="t.logo_url"
           [banner]="t.img_url"
+          class="item-list"
         />
       </a>
       }
