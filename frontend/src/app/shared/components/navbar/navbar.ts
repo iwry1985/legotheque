@@ -24,9 +24,12 @@ export class Navbar {
   }
 
   submit = () => {
-    console.log('search', this.search);
+    if (!this.search?.trim()) return; // ignore vide
+
     this._router.navigate(['/lego/list'], {
       queryParams: { search: this.search },
     });
+
+    this.search = '';
   };
 }

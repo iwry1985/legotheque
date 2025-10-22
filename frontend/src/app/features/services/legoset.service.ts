@@ -3,6 +3,7 @@ import { inject, Injectable, Signal } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { ILegoset } from '../models/legoset.model';
+import { ISecondaryMarket } from '../models/secondary-market.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,16 @@ export class LegosetService {
 
   getList = (filters: Signal<any>) => {
     return httpResource(() => ({
-      url: environment.apiUrl + 'legoset',
+      url: this._url,
       params: filters(),
     }));
+  };
+
+  getSetSecondaryMarket = (
+    bricksetid: string
+  ): Observable<ISecondaryMarket | null> => {
+    return this._http.get<ISecondaryMarket>(
+      `${this._url}/market/${bricksetid}`
+    );
   };
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from 'app/features/services/auth.service';
 import { Home } from '../../home/home';
-import { Profile } from '../../profile/profile/profile';
+import { Profile } from '../../profile/profile';
 
 @Component({
   selector: 'app-home-switch',

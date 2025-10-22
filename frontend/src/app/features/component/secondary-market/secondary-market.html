@@ -1,0 +1,31 @@
+<div class="market-table">
+  <div class="head">
+    @if(section() === 'current') {
+    <p>Actuellement</p>
+    } @else {
+    <p>Les 6 derniers mois</p>
+    }
+    <p>Sous scellé</p>
+    <p>Ouvert</p>
+  </div>
+
+  <div class="body">
+    <div>
+      <p>Min</p>
+      <p>{{ prices().new.min }}</p>
+      <p>{{prices().used.min}}</p>
+    </div>
+
+    <div>
+      <p>Max</p>
+      <p>{{ prices().new.max }}</p>
+      <p>{{prices().used.max}}</p>
+    </div>
+
+    <div>
+      <p>Moyenne</p>
+      <p>{{ prices().new.avg }}</p>
+      <p>{{prices().used.avg}}</p>
+    </div>
+  </div>
+</div>

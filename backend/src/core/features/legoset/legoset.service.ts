@@ -10,12 +10,17 @@ import {
     instanceToPlain,
     plainToInstance,
 } from 'class-transformer';
+import { SecondaryMarket } from 'src/core/models/entities/secondary-market.entity';
+import { SecondaryMarketDto } from 'src/core/models/dto/legoset/secondary-market.dto';
 
 @Injectable()
 export class LegosetService {
     constructor(
         @InjectRepository(Legoset)
-        private readonly _legosetRepository: Repository<Legoset>
+        private readonly _legosetRepository: Repository<Legoset>,
+
+        @InjectRepository(SecondaryMarket)
+        private readonly _secMarketRepository: Repository<SecondaryMarket>
     ) {}
 
     private addRangeFilter = (
@@ -116,5 +121,49 @@ export class LegosetService {
             where: { setid: id },
             relations: ['theme'],
         });
+    };
+
+    mappingSecondaryMarket = (rows: SecondaryMarket[]): SecondaryMarketDto => {
+        const dto = new SecondaryMarketDto();
+
+        dto.current = { new: {}, used: {} };
+        dto.last6Months = { new: {}, used: {} };
+
+        for (const row of rows) {
+            const section =
+                row.section === 'Last 6 Months Sales'
+                    ? 'last6Months'
+                    : 'current';
+            const condition = row.condition === 'Used' ? 'used' : 'new';
+
+            dto[section][condition] = {
+                min:
+                    row.min_price != null
+                        ? Number(row.min_price).toFixed(2)
+                        : undefined,
+                max:
+                    row.max_price != null
+                        ? Number(row.max_price).toFixed(2)
+                        : undefined,
+                avg:
+                    row.avg_price != null
+                        ? Number(row.avg_price).toFixed(2)
+                        : undefined,
+            };
+        }
+
+        return dto;
+    };
+
+    getSetSecondarMarket = async (
+        bricksetid: string
+    ): Promise<SecondaryMarketDto | null> => {
+        const market = await this._secMarketRepository.find({
+            where: { bricksetid },
+        });
+
+        if (!market) return null;
+
+        return this.mappingSecondaryMarket(market);
     };
 }

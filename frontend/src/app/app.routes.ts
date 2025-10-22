@@ -44,6 +44,16 @@ export const routes: Routes = [
     canActivate: [isUserGuard],
   },
   {
+    path: 'profile',
+    loadComponent: () =>
+      import('./features/pages/profile/profile').then((c) => c.Profile),
+  },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./features/pages/home/home').then((c) => c.Home),
+  },
+  {
     path: '',
     component: HomeSwitch,
     resolve: { legoStats: UserResolver },

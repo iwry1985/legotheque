@@ -12,6 +12,7 @@ import {
 } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
 import { Legoset } from 'src/core/models/entities/legoset.entity';
+import { SecondaryMarketDto } from 'src/core/models/dto/legoset/secondary-market.dto';
 
 @Controller('legoset')
 export class LegosetController {
@@ -33,5 +34,13 @@ export class LegosetController {
     async getOne(@Param('id') id: number): Promise<LegosetDto | null> {
         const legoset = await this._legosetService.getOne(id);
         return plainToInstance(LegosetDto, legoset);
+    }
+
+    @Get('/market/:id')
+    @ApiOperation({ summary: 'Retourne les prix du marché secondaire du set' })
+    getSecondaryMarket(
+        @Param('id') id: string
+    ): Promise<SecondaryMarketDto | null> {
+        return this._legosetService.getSetSecondarMarket(id);
     }
 }

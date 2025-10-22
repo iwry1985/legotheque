@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ItemList } from 'app/features/components/item-list/item-list';
 import { ITheme } from 'app/features/models/theme.model';
+import { AuthService } from 'app/features/services/auth.service';
 import { ThemeService } from 'app/features/services/theme.service';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -14,6 +15,7 @@ import { CardModule } from 'primeng/card';
 })
 export class Home implements OnInit {
   private readonly _themeService = inject(ThemeService);
+  protected authService: AuthService = inject(AuthService);
 
   themes!: ITheme[];
 

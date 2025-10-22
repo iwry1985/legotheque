@@ -20,6 +20,9 @@ import { TagModule } from 'primeng/tag';
 import { LegoCollection } from 'app/features/components/lego-collection/lego-collection';
 import { LegoSummary } from 'app/features/components/lego-summary/lego-summary';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { ISecondaryMarket } from 'app/features/models/secondary-market.model';
+import { LegosetService } from 'app/features/services/legoset.service';
+import { SecondaryMarket } from 'app/features/component/secondary-market/secondary-market';
 
 @Component({
   selector: 'app-lego-detail',
@@ -32,6 +35,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
     LegoSummary,
     DatePipe,
     CurrencyPipe,
+    SecondaryMarket,
   ],
   templateUrl: './lego-detail.html',
   styleUrl: './lego-detail.scss',
@@ -42,11 +46,13 @@ export class LegoDetail implements OnInit {
     inject(LegothequeService);
   private readonly _wantedService: WantedService = inject(WantedService);
   protected authService: AuthService = inject(AuthService);
+  private readonly _legosetService: LegosetService = inject(LegosetService);
 
   legoset!: ILegoset;
   myLego: WritableSignal<ILegotheque | null> = signal<ILegotheque | null>(null);
   wanted: WritableSignal<IWanted | null> = signal<IWanted | null>(null);
   themeLogo?: { logo?: string; banner?: string; name: string };
+  marketPrices: ISecondaryMarket | undefined;
 
   ngOnInit(): void {
     //get set
@@ -59,6 +65,17 @@ export class LegoDetail implements OnInit {
     this.wanted.set(this._activatedRoute.snapshot.data['data']['wanted']);
 
     this.getThemeAsset();
+
+    //get set secondary market prices
+    if (this.legoset.bricksetid) {
+      this._legosetService
+        .getSetSecondaryMarket(this.legoset.bricksetid)
+        .subscribe({
+          next: (res) => {
+            if (res) this.marketPrices = res;
+          },
+        });
+    }
   }
 
   //get theme logo

@@ -1,0 +1,76 @@
+@use "theme" as *;
+
+.market-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $light;
+  padding: 1.5rem 2rem;
+  min-width: 320px;
+  color: #1c1917;
+
+  .head {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #292524;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.2rem;
+    align-items: end;
+
+    p {
+      margin: 0;
+    }
+
+    p:first-child {
+      color: $yellow;
+      text-align: left;
+    }
+
+    p:nth-child(2),
+    p:nth-child(3) {
+      text-align: center;
+    }
+  }
+
+  .body {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+
+    div {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: rgba(250, 250, 250, 0.9);
+      border-radius: 0.6rem;
+      padding: 0.5rem 0.8rem;
+
+      p {
+        margin: 0;
+        font-size: 0.95rem;
+        text-align: center;
+
+        &:first-child {
+          font-weight: 600;
+          text-align: left;
+          color: #444;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    .head,
+    .body div {
+      grid-template-columns: 1fr 1fr 1fr;
+      font-size: 0.9rem;
+    }
+  }
+}

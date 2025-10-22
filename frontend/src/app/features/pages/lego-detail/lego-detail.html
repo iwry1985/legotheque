@@ -164,6 +164,21 @@
     </div>
   </div>
 
+  <!-- SECONDARY MARKET -->
+  @if(marketPrices) {
+  <div class="market">
+    <h2>Marché secondaire</h2>
+    <div class="tables container">
+      <app-secondary-market section="current" [prices]="marketPrices.current" />
+      <app-secondary-market
+        section="last6Months"
+        [prices]="marketPrices.last6Months"
+      />
+    </div>
+  </div>
+
+  }
+
   <!-- MA COLLECTION -->
   @if(myLego()) {
   <div class="collection flex container">

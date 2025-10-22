@@ -2,6 +2,7 @@ import { ITheme } from './theme.model';
 
 export interface ILegoset {
   setid: number;
+  bricksetid: string;
   reference: number;
   variant: number;
   name: string;

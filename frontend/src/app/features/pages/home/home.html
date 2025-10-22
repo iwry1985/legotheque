@@ -4,7 +4,7 @@
     <p-button
       label="Découvrir"
       icon="pi pi-eye"
-      routerLink="/lego"
+      routerLink="/lego/list"
       size="large"
     ></p-button>
   </div>
@@ -72,11 +72,20 @@
       <img src="minifigs/group.png" alt="minfigs-group" />
     </div>
     <h2>Commenez votre collection LEGO®</h2>
+    @if(authService.connectedUser()) {
+    <p-button
+      label="Voir vore collection"
+      size="large"
+      severity="contrast"
+      routerLink="profile"
+    />
+    } @else {
     <p-button
       label="Rejoindre"
       size="large"
       severity="contrast"
       routerLink="inscription"
     />
+    }
   </div>
 </div>
