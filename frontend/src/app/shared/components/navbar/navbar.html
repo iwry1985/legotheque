@@ -10,6 +10,17 @@
     <a routerLink="/lego" routerLinkActive="active">Parcourir</a>
   </div>
 
+  <div class="search">
+    <form (ngSubmit)="submit()">
+      <input
+        pInputText
+        [(ngModel)]="search"
+        placeholder="Rechercher un set..."
+        name="search"
+      />
+    </form>
+  </div>
+
   <div class="nav-right">
     @if(authService.connectedUser()) {
     <div class="user-info flex">

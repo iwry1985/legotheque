@@ -54,6 +54,7 @@ export class LegosetService {
             sortBy,
             sort,
             search,
+            adultOnly,
         } = filters;
         let { page, limit } = filters;
 
@@ -77,6 +78,8 @@ export class LegosetService {
                 '(LOWER(legoset.name) LIKE LOWER(:search) OR legoset.reference::text LIKE :search OR LOWER(legoset.tags) LIKE LOWER(:search))',
                 { search: `%${search}%` }
             );
+
+        if (adultOnly) query.andWhere('legoset.minage = 18');
 
         //pagination
         if (sortBy) {

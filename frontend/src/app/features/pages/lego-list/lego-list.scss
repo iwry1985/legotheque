@@ -1,28 +1,96 @@
+@use "theme" as *;
+
 .lego-search-page {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  /* --- search bar --- */
-  form {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--p-surface-0);
-    padding: 1.2rem 1.4rem;
-    border-radius: 0px;
+  /* --- section filtres : bande jaune sur toute la largeur --- */
+  .filters {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    background: $yellow;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    padding: 2rem 0;
 
-    input.p-inputtext {
-      flex: 1;
-      height: 42px;
-    }
+    form {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
 
-    p-button {
-      height: 42px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem 1.8rem;
+      align-items: center;
+
+      input.p-inputtext,
+      p-select {
+        width: 100%;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+      }
+
+      /* --- sliders --- */
+      .slider-group {
+        grid-column: span 2;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        span {
+          font-size: 0.9rem;
+          color: #4b5563;
+        }
+
+        p-slider {
+          width: 100%;
+        }
+      }
+
+      /* --- toggle adult only --- */
+      .toggle-group {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 500;
+        color: #1f2937;
+
+        p-toggleSwitch {
+          transform: scale(1.1);
+        }
+      }
+
+      /* --- bouton rechercher --- */
+      .search-btn {
+        grid-column: 1 / -1; // prend toute la largeur de la grille
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      p-button {
+        background-color: #1f2937 !important;
+        border: none;
+        border-radius: 8px;
+        color: #fff !important;
+        font-weight: 600;
+        height: 42px;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background-color: darken(#1f2937, 6%) !important;
+        }
+      }
     }
   }
 
+  /* --- listing des sets --- */
   .listing {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -39,22 +107,29 @@
     }
   }
 
-  /* --- paginator centré --- */
+  /* --- pagination --- */
   p-paginator {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+    background-color: $yellow;
+    color: $light;
   }
 
-  /* responsive mobile */
+  /* --- responsive --- */
   @media (max-width: 768px) {
-    form {
-      flex-direction: column;
-
-      input.p-inputtext,
-      p-button {
-        width: 100%;
-      }
+    .filters form {
+      grid-template-columns: 1fr;
     }
   }
+}
+
+/* --- sliders contrastés --- */
+::ng-deep .p-slider .p-slider-range {
+  background-color: #1f2937 !important;
+}
+
+::ng-deep .p-slider .p-slider-handle {
+  border-color: #1f2937 !important;
+  background-color: #fff !important;
 }

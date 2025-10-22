@@ -1,15 +1,62 @@
 <div class="lego-search-page">
-  <div class="container">
-    <form [formGroup]="form" class="mb-5" (ngSubmit)="search()">
+  <div class="filters">
+    <form class="container" [formGroup]="filterForm" (ngSubmit)="search()">
       <input
         pInputText
         formControlName="search"
         placeholder="Rechercher un set..."
       />
-      <input pInputText formControlName="themeid" placeholder="Thème ID" />
-      <p-button label="Search" icon="pi pi-send" type="submit"></p-button>
-    </form>
+      <p-select
+        formControlName="themeid"
+        placeholder="Sélectionnez un thème"
+        [options]="themes"
+        optionLabel="name"
+        optionValue="themeid"
+      />
 
+      <div class="toggle-group">
+        <p-toggleSwitch formControlName="adultOnly" inputId="adultOnlySwitch" />
+        <label for="adultOnlySwitch">Seulement les sets 18+</label>
+      </div>
+
+      <div class="slider-group">
+        <div class="flex justify-content-between align-items-center">
+          <span>{{ filterForm.value.rangePieces?.[0] || 0 }} pièces</span>
+          <span>{{ filterForm.value.rangePieces?.[1] || 12000 }} pièces</span>
+        </div>
+        <p-slider
+          formControlName="rangePieces"
+          [range]="true"
+          min="0"
+          max="12000"
+          step="50"
+        />
+      </div>
+
+      @if(!filterForm.value.adultOnly) {
+      <div class="slider-group">
+        <div class="flex justify-content-between align-items-center">
+          <span>{{ filterForm.value.rangeAge?.[0] || 4 }} ans</span>
+          <span>{{ filterForm.value.rangeAge?.[1] || 18 }} ans</span>
+        </div>
+        <p-slider
+          formControlName="rangeAge"
+          [range]="true"
+          min="4"
+          max="18"
+          step="1"
+          (onSlideEnd)="filterForm.get('rangeAge')?.markAsTouched()"
+        />
+      </div>
+      }
+
+      <div class="search-btn">
+        <p-button label="Rechercher" icon="pi pi-send" type="submit"></p-button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
     <div class="listing">
       @for(set of legosets.value()?.data; track set.setid) {
       <app-item-list

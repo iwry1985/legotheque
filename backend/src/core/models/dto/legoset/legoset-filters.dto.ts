@@ -1,6 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsIn, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import {
+    IsBoolean,
+    IsIn,
+    IsInt,
+    IsOptional,
+    IsString,
+    Max,
+    Min,
+} from 'class-validator';
 
 export class GetLegosetFilterDto {
     @IsOptional()
@@ -54,6 +62,12 @@ export class GetLegosetFilterDto {
     @Min(4)
     @ApiProperty({ name: 'maxAge', required: false })
     maxAge?: number;
+
+    @IsOptional()
+    @IsBoolean()
+    @Transform(({ value }) => value === true || value === 'true')
+    @ApiProperty({ name: 'adultOnly', required: false })
+    adultOnly?: boolean;
 
     @IsOptional()
     @IsString()
