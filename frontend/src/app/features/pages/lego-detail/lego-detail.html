@@ -1,5 +1,14 @@
 <div class="details-page">
   <div class="details-layout">
+    <div class="back">
+      <p-button
+        label="Retour"
+        icon="pi pi-chevron-left"
+        size="large"
+        (onClick)="previous()"
+      />
+    </div>
+
     <div class="minifig" [ngClass]="getThemeClass(legoset.theme.name)">
       @if(isSpecialTheme(legoset.theme.name)) {
       <img [src]="`minifigs/${legoset.theme.name}.png`" alt="minifig" />

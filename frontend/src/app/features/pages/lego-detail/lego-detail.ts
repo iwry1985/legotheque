@@ -3,10 +3,9 @@ import {
   inject,
   OnInit,
   signal,
-  Signal,
   WritableSignal,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ILegoset } from '../../models/legoset.model';
 import { ButtonModule } from 'primeng/button';
 import { RefPipe } from 'app/core/pipes/ref-pipe';
@@ -19,7 +18,12 @@ import { IWanted } from 'app/features/models/wanted.model';
 import { TagModule } from 'primeng/tag';
 import { LegoCollection } from 'app/features/components/lego-collection/lego-collection';
 import { LegoSummary } from 'app/features/components/lego-summary/lego-summary';
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import {
+  CommonModule,
+  CurrencyPipe,
+  DatePipe,
+  Location,
+} from '@angular/common';
 import { ISecondaryMarket } from 'app/features/models/secondary-market.model';
 import { LegosetService } from 'app/features/services/legoset.service';
 import { SecondaryMarket } from 'app/features/component/secondary-market/secondary-market';
@@ -48,12 +52,17 @@ export class LegoDetail implements OnInit {
   private readonly _wantedService: WantedService = inject(WantedService);
   protected authService: AuthService = inject(AuthService);
   private readonly _legosetService: LegosetService = inject(LegosetService);
+  private readonly _location: Location = inject(Location);
 
   legoset!: ILegoset;
   myLego: WritableSignal<ILegotheque | null> = signal<ILegotheque | null>(null);
   wanted: WritableSignal<IWanted | null> = signal<IWanted | null>(null);
   themeLogo?: { logo?: string; banner?: string; name: string };
   marketPrices: ISecondaryMarket | undefined;
+
+  previous = () => {
+    this._location.back();
+  };
 
   ngOnInit(): void {
     //get set

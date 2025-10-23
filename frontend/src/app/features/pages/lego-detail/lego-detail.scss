@@ -5,6 +5,12 @@
   padding: 5rem 0;
   position: relative;
 
+  .back {
+    position: absolute;
+    left: 5rem;
+    top: 2rem;
+  }
+
   .minifig {
     position: absolute;
     right: 0;

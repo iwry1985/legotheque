@@ -13,6 +13,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { LegothequeService } from 'app/features/services/legotheque.service';
+import { AuthService } from 'app/features/services/auth.service';
 
 Chart.register(...registerables);
 
@@ -26,6 +27,7 @@ export class Dashboard implements OnInit, OnDestroy {
   private readonly _route = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _legoService = inject(LegothequeService);
+  private readonly _authService = inject(AuthService);
 
   @ViewChildren('chart') charts!: QueryList<ElementRef<HTMLCanvasElement>>;
   private chartRefs: Chart[] = [];

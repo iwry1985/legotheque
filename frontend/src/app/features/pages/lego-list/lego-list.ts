@@ -45,7 +45,7 @@ export class LegoList implements OnInit {
   filters: any = signal({ page: 1 });
   legosets: any = this._legosetService.getList(this.filters);
   filterForm = this._fb.group({
-    themeid: [''],
+    themeid: [null],
     search: [''],
     rangePieces: [[0, 12000] as number[]],
     rangeAge: [[4, 18] as number[]],
@@ -54,8 +54,11 @@ export class LegoList implements OnInit {
   themes: ITheme[] = [];
 
   ngOnInit(): void {
+    let currentParams: any;
+
     this._activatedRoute.queryParams.subscribe({
       next: (p) => {
+        currentParams = p;
         this.filters.update((f: any) => ({
           ...f,
           page: p['page'] ? Number(p['page']) : f.page ?? 1,
@@ -68,7 +71,27 @@ export class LegoList implements OnInit {
 
     this._themeService.getThemes().subscribe({
       next: (res) => {
-        this.themes = res;
+        this.themes = res.map((t) => ({
+          ...t,
+          themeid: t.themeid,
+        }));
+
+        if (currentParams) {
+          this.filterForm.patchValue({
+            themeid:
+              currentParams['themeid'] && Number(currentParams['themeid']),
+            search: currentParams['search'] ?? '',
+            rangePieces: [
+              Number(currentParams['minPieces'] ?? 0),
+              Number(currentParams['maxPieces'] ?? 12000),
+            ],
+            rangeAge: [
+              Number(currentParams['minAge'] ?? 4),
+              Number(currentParams['maxAge'] ?? 18),
+            ],
+            adultOnly: currentParams['adultOnly'] === 'true',
+          });
+        }
       },
     });
   }
@@ -77,11 +100,8 @@ export class LegoList implements OnInit {
   private _paginator!: Paginator;
 
   changePage = (state: PaginatorState) => {
-    console.log('state', state);
     const page = (state.page ?? 0) + 1;
     const current = this.filters();
-
-    console.log('current', current);
 
     this.updateQueryParams({
       ...current,
@@ -142,7 +162,7 @@ export class LegoList implements OnInit {
 
     //this.updateQueryParams(this.filters());
 
-    this._paginator.changePage(0);
+    this._paginator?.changePage(0);
   };
 
   goToDetails = (legosetid: number) => {
@@ -150,10 +170,9 @@ export class LegoList implements OnInit {
   };
 
   private updateQueryParams = (filters: any): void => {
-    console.log('update query filters', filters);
     this._router.navigate([], {
       queryParams: filters,
-      queryParamsHandling: 'merge',
+      //queryParamsHandling: 'merge',
     });
   };
 }

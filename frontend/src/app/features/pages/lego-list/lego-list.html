@@ -34,6 +34,7 @@
           min="0"
           max="12000"
           step="50"
+          (onSlideEnd)="filterForm.get('rangePieces')?.markAsTouched()"
         />
       </div>
 
