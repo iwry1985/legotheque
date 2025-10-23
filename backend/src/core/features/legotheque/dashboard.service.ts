@@ -129,7 +129,7 @@ export class DashboardService {
         const gifts = purchaseSorted.map(([_, v]) => v.gifts);
 
         const progressionLabels = [...builtOverTime.keys()].sort();
-        const progressionValues = this.accumulate([...builtOverTime.values()]);
+        const progressionValues = [...builtOverTime.values()];
 
         const themesSorted = [...themeCount.entries()].sort(
             (a, b) => b[1] - a[1]
@@ -139,11 +139,24 @@ export class DashboardService {
             (a, b) => b[1] - a[1]
         );
 
-        const priceHistLabels = [...priceRange.keys()];
-        const priceHistData = [...priceRange.values()];
+        // On convertit en tableau [label, count], on trie, puis on reconstruit
+        const priceHistSorted = [...priceRange.entries()].sort((a, b) => {
+            const aStart = parseInt(a[0].split('-')[0], 10);
+            const bStart = parseInt(b[0].split('-')[0], 10);
+            return aStart - bStart; // tri croissant
+        });
 
-        const pieceHistLabels = [...pieceRange.keys()];
-        const pieceHistData = [...pieceRange.values()];
+        const priceHistLabels = priceHistSorted.map(([label]) => label);
+        const priceHistData = priceHistSorted.map(([_, value]) => value);
+
+        const pieceHistSorted = [...pieceRange.entries()].sort((a, b) => {
+            const aStart = parseInt(a[0].split('-')[0], 10);
+            const bStart = parseInt(b[0].split('-')[0], 10);
+            return aStart - bStart;
+        });
+
+        const pieceHistLabels = pieceHistSorted.map(([label]) => label);
+        const pieceHistData = pieceHistSorted.map(([_, value]) => value);
 
         //create & return DashboardDTO
         return {
@@ -198,7 +211,7 @@ export class DashboardService {
                 labels: progressionLabels,
                 datasets: [
                     {
-                        label: 'Sets construits cumulés',
+                        label: 'Sets construits',
                         data: progressionValues,
                         type: 'line',
                     },

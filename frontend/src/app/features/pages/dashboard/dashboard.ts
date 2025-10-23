@@ -104,8 +104,20 @@ export class Dashboard implements OnInit, OnDestroy {
     this.chartRefs.push(
       new Chart(canvases[0].nativeElement, {
         type: 'bar',
-        data: data.purchases,
-        options: { responsive: true, scales: { y: { beginAtZero: true } } },
+        data: {
+          labels: data.purchases.labels,
+          datasets: data.purchases.datasets.map((d: any) => ({
+            ...d,
+            borderWidth: 2,
+            tension: 0.3,
+            pointRadius: d.type === 'line' ? 4 : 0,
+            fill: false,
+          })),
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: true } },
+        },
       })
     );
 
@@ -168,6 +180,7 @@ export class Dashboard implements OnInit, OnDestroy {
           datasets: data.progression.datasets.map((d: any) => ({
             ...d,
             borderColor: '#facc15',
+            borderWidth: 2,
             tension: 0.3,
             fill: false,
             pointRadius: 4,

@@ -25,6 +25,9 @@ export class ThemeService {
 
         return this._themeRepository.find({
             where,
+            order: {
+                name: 'ASC',
+            },
         });
     };
 }
