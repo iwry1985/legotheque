@@ -1,10 +1,15 @@
 <div class="profile-page">
   <div class="profile-avatar">
     <h1>{{ authService.connectedUser()?.username }}</h1>
-    <img
-      src="minifigs/tbbt.png"
-      [alt]="authService.connectedUser()?.username"
-    />
+    <p-button
+      class="btn-dashboard"
+      routerLink="dashboard"
+      label="Dashboard"
+      size="large"
+      severity="contrast"
+      icon="pi pi-chart-bar"
+    ></p-button>
+    <img src="minifigs/tbbt.png" alt="avatar" />
   </div>
 
   <div class="stats-section">
@@ -77,7 +82,45 @@
     </div>
   </div>
 
+  @if(userSets().length) {
   <div class="listing-set">
     <h2>Tes sets</h2>
+
+    <div class="sets-grid container">
+      @for (v of visibleSets; track v.legothequeid) {
+      <div
+        class="set-item"
+        (click)="goToDetails(v.legothequeid)"
+        [ngClass]="{ built: v.builtat }"
+      >
+        <img [src]="v.set?.thumbnail" [alt]="v.set?.name" />
+        <div class="set-info">
+          <h3>{{ v.set?.name }}</h3>
+          <p>{{ v.set?.theme?.name }}</p>
+
+          @if (v.ownedat) {
+          <p class="owned">Acheté le {{ v.ownedat | date }}</p>
+          } @if (v.builtat) {
+          <p class="built">Construit le {{ v.builtat | date }}</p>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    @if (visibleCount() < userSets().length) {
+    <p-button
+      size="large"
+      class="btn-show-more"
+      (click)="showMore()"
+      label="Voir plus"
+    ></p-button>
+    }
   </div>
+  } @else {
+  <div class="listing-set no-set">
+    <p>Encore aucun set d'enregistré !</p>
+    <p-button label="Parcourir les sets" size="large" routerLink="/lego/list" />
+  </div>
+  }
 </div>

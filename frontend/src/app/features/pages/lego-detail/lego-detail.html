@@ -166,6 +166,14 @@
               class="item-flex"
               (onClick)="removeFromWanted()"
             ></p-button>
+            } @if(myLego()) {
+            <p-button
+              label="Supprimer le set de ma collection"
+              icon="pi pi-times"
+              size="large"
+              severity="danger"
+              (onClick)="removeSet()"
+            />
             }
           </div>
 

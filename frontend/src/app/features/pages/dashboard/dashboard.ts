@@ -27,7 +27,6 @@ export class Dashboard implements OnInit, OnDestroy {
   private readonly _route = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _legoService = inject(LegothequeService);
-  private readonly _authService = inject(AuthService);
 
   @ViewChildren('chart') charts!: QueryList<ElementRef<HTMLCanvasElement>>;
   private chartRefs: Chart[] = [];

@@ -1,63 +1,171 @@
 @use "theme" as *;
 
 .profile-page {
-  text-align: center;
-  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem 1rem;
 
+  // === AVATAR / HEADER ===
   .profile-avatar {
-    position: relative;
-    z-index: 2;
-
-    img {
-      //width: 35vw;
-      height: auto;
-      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
-      position: absolute;
-      left: -4rem;
-      top: 17rem;
-    }
+    text-align: center;
 
     h1 {
       font-family: "Lilita One", sans-serif;
-      font-size: 1.8rem;
-      margin-top: 0.5rem;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
       color: $dark;
+    }
+
+    img {
+      width: 20%;
+      height: auto;
+      margin: 0 auto;
+      filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.1));
+      position: fixed;
+      bottom: 0;
+      right: 1rem;
+      z-index: 100;
     }
   }
 
+  // === STATISTIQUES ===
   .stats-section {
-    background-color: $yellow;
-    width: 100%;
-    padding: 4rem;
+    width: min(90%, 1000px);
+    background: white;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    padding: 3rem;
+    text-align: center;
+    border: 1px solid $light;
 
     h2 {
       font-family: "Lilita One", sans-serif;
-      color: $light;
+      color: $yellow;
       margin-bottom: 2rem;
+      font-size: 1.6rem;
     }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
 
       div {
         background: $light;
-        //border-radius: 0.8rem;
-        padding: 1.2rem 1rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        padding: 1.4rem 1rem;
+        border: 1px solid #dcdcdc;
 
         p:first-child {
-          font-size: 0.9rem;
-          color: #666;
-          margin-bottom: 0.3rem;
+          font-size: 0.85rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: #777;
+          margin-bottom: 0.4rem;
         }
 
         p:last-child {
-          font-size: 1.2rem;
+          font-size: 1.3rem;
           font-weight: 600;
           color: $dark;
         }
+      }
+    }
+  }
+
+  // === LISTE DES SETS ===
+  .listing-set {
+    width: min(90%, 1000px);
+    margin-top: 2rem;
+    text-align: left;
+
+    &.no-set {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h2 {
+      font-family: "Lilita One", sans-serif;
+      font-size: 1.5rem;
+      color: $dark;
+      border-bottom: 3px solid $yellow;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1rem;
+    }
+
+    .set-item {
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 0.8rem 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: 1px solid $light;
+
+      &:hover {
+        border: 1px solid $dark !important;
+      }
+
+      &.built {
+        border: 1px solid #90ee90;
+      }
+
+      img {
+        width: 90px;
+        object-fit: contain;
+        margin-right: 1rem;
+      }
+
+      .set-info {
+        h3 {
+          font-size: 1.1rem;
+          color: $dark;
+          margin: 0 0 0.3rem 0;
+        }
+
+        p {
+          margin: 0;
+          font-size: 0.9rem;
+          color: #555;
+        }
+
+        .owned {
+          color: darken($yellow, 10%);
+          font-weight: 600;
+        }
+
+        .built {
+          color: $yellow;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .btn-show-more {
+      margin: 1.5rem auto 0;
+      display: block;
+      padding: 0.6rem 1.5rem;
+      font-weight: 600;
+      background: $yellow;
+      color: $light;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.9;
       }
     }
   }

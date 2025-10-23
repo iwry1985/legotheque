@@ -127,6 +127,15 @@ export class LegoDetail implements OnInit {
     });
   };
 
+  //remove set from collection
+  removeSet = () => {
+    const lego = this.myLego();
+    if (lego)
+      this._legothequeService.removeSet(lego.legothequeid).subscribe({
+        next: (res) => this.myLego.set(null),
+      });
+  };
+
   updateLegotheque = (legotheque: ILegotheque) => {
     this.myLego.set(legotheque);
   };

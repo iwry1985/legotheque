@@ -47,6 +47,10 @@ export class LegothequeService {
   getUserStats = (): Observable<IUserLegotheque> =>
     this._http.get<IUserLegotheque>(`${this._url}/stats`);
 
+  getUserCollection = (): Observable<ILegotheque[]> => {
+    return this._http.get<ILegotheque[]>(`${this._url}`);
+  };
+
   // ============================
   // Dashboard
   // ============================
