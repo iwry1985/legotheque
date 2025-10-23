@@ -1,5 +1,13 @@
 <div class="details-page">
   <div class="details-layout">
+    <div class="minifig" [ngClass]="getThemeClass(legoset.theme.name)">
+      @if(isSpecialTheme(legoset.theme.name)) {
+      <img [src]="`minifigs/${legoset.theme.name}.png`" alt="minifig" />
+      } @else {
+      <img src="minifigs/construction.png" alt="construction" />
+      }
+    </div>
+
     <div class="details flex space-between container">
       <!-- IMAGE -->
       <div class="right img">

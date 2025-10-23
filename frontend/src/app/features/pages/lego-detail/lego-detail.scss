@@ -3,6 +3,50 @@
 .details-layout {
   background-color: white;
   padding: 5rem 0;
+  position: relative;
+
+  .minifig {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 25%;
+
+    &.indiana,
+    &.art,
+    &.sonic,
+    &.lotr,
+    &.simpsons,
+    &.minecraft {
+      bottom: -9rem;
+    }
+
+    &.disney {
+      bottom: -9rem;
+      width: 17%;
+    }
+
+    &.starwars {
+      bottom: -8rem;
+      width: 30%;
+    }
+
+    &.ninjago {
+      bottom: -18rem;
+      width: 30%;
+    }
+
+    &.jurassic {
+      right: -8rem;
+      bottom: -28rem;
+    }
+
+    &.dc,
+    &.hp {
+      width: 20%;
+      right: 3rem;
+      bottom: -11rem;
+    }
+  }
 }
 
 .details {

@@ -19,7 +19,7 @@
 
     <div class="listing-theme container">
       @for(t of themes; track t.themeid) {
-      <a routerLink="/lego" [queryParams]="{themeid: t.themeid}">
+      <a routerLink="/lego/list" [queryParams]="{themeid: t.themeid}">
         <app-item-list
           [name]="`LEGO® ${t.name}`"
           [themeName]="t.name"
@@ -29,6 +29,14 @@
         />
       </a>
       }
+    </div>
+    <div class="theme-link">
+      <p-button
+        label="Tous les thèmes"
+        size="large"
+        severity="secondary"
+        routerLink="/lego/themes"
+      />
     </div>
   </div>
   }

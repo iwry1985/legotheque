@@ -102,6 +102,11 @@
       }
     }
 
+    .theme-link {
+      margin: auto;
+      margin-top: 2rem;
+    }
+
     @media (min-width: 1600px) {
       .listing-theme {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

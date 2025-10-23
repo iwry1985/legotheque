@@ -1,4 +1,8 @@
 <div class="lego-search-page">
+  <div class="minifig">
+    <img src="minifigs/director.png" alt="minifig-director" />
+  </div>
+
   <div class="filters">
     <form class="container" [formGroup]="filterForm" (ngSubmit)="search()">
       <input
@@ -51,7 +55,12 @@
       }
 
       <div class="search-btn">
-        <p-button label="Rechercher" icon="pi pi-send" type="submit"></p-button>
+        <p-button
+          label="Rechercher"
+          icon="pi pi-send"
+          type="submit"
+          severity="secondary"
+        ></p-button>
       </div>
     </form>
   </div>

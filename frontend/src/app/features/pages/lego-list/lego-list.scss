@@ -4,6 +4,15 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
+
+  .minifig {
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    right: -10px;
+    width: 15%;
+  }
 
   /* --- section filtres : bande jaune sur toute la largeur --- */
   .filters {
@@ -99,6 +108,7 @@
     max-width: 1400px;
     margin: 0 auto;
     justify-items: center;
+    min-height: calc(100vh - 478px);
 
     app-item-list {
       display: flex;

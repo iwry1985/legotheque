@@ -19,7 +19,7 @@ import { IWanted } from 'app/features/models/wanted.model';
 import { TagModule } from 'primeng/tag';
 import { LegoCollection } from 'app/features/components/lego-collection/lego-collection';
 import { LegoSummary } from 'app/features/components/lego-summary/lego-summary';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { ISecondaryMarket } from 'app/features/models/secondary-market.model';
 import { LegosetService } from 'app/features/services/legoset.service';
 import { SecondaryMarket } from 'app/features/component/secondary-market/secondary-market';
@@ -36,6 +36,7 @@ import { SecondaryMarket } from 'app/features/component/secondary-market/seconda
     DatePipe,
     CurrencyPipe,
     SecondaryMarket,
+    CommonModule,
   ],
   templateUrl: './lego-detail.html',
   styleUrl: './lego-detail.scss',
@@ -76,6 +77,8 @@ export class LegoDetail implements OnInit {
           },
         });
     }
+
+    console.log('theme', this.legoset.theme.name);
   }
 
   //get theme logo
@@ -120,4 +123,48 @@ export class LegoDetail implements OnInit {
   updateLegotheque = (legotheque: ILegotheque) => {
     this.myLego.set(legotheque);
   };
+
+  //for minifig img
+  isSpecialTheme(themeName: string): boolean {
+    const themes = [
+      'Indiana Jones',
+      'Disney',
+      'Star Wars',
+      'Jurassic World',
+      'Ninjago',
+      'City',
+      'DC Comics Super Heroes',
+      'Marvel Super Heroes',
+      'Art',
+      'Sonic the Hedgehog',
+      'The Lord of the Rings',
+      'Harry Potter',
+      'The Simpsons',
+      'Minecraft',
+    ];
+    return themes.some((t) => themeName.includes(t));
+  }
+
+  themeStyles: Record<string, string> = {
+    Disney: 'disney',
+    'Indiana Jones': 'indiana',
+    'Star Wars': 'starwars',
+    'Jurassic World': 'jurassic',
+    Ninjago: 'ninjago',
+    City: 'city',
+    'DC Comics Super Heroes': 'dc',
+    Art: 'art',
+    'Sonic the Hedgehog': 'sonic',
+    'The Lord of the Rings': 'lotr',
+    'Harry Potter': 'hp',
+    'The Simpsons': 'simpsons',
+    Minecraft: 'minecraft',
+  };
+
+  getThemeClass(themeName: string): string {
+    const key = Object.keys(this.themeStyles).find((k) =>
+      themeName.includes(k)
+    );
+    return key ? this.themeStyles[key] : 'theme-default';
+  }
 }
