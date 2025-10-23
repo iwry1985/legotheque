@@ -31,6 +31,12 @@ export class LegothequeService {
         return this._legothequeRepository.find({
             where: { userid, ...extraOptions },
             relations: ['set', 'set.theme'],
+            order: {
+                lastupdatedat: 'DESC',
+                set: {
+                    name: 'ASC',
+                },
+            },
         });
     };
 

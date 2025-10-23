@@ -92,7 +92,7 @@
       @for (v of visibleSets; track v.legothequeid) {
       <div
         class="set-item"
-        (click)="goToDetails(v.legothequeid)"
+        (click)="goToDetails(v.set?.setid)"
         [ngClass]="{ built: v.builtat }"
       >
         <img [src]="v.set?.thumbnail" [alt]="v.set?.name" />

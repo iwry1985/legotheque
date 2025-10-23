@@ -29,7 +29,7 @@
 
     &.disney {
       bottom: -9rem;
-      width: 17%;
+      width: 15%;
     }
 
     &.starwars {
@@ -167,6 +167,10 @@
             line-height: 2.5rem;
           }
         }
+      }
+
+      .delete-action {
+        margin-top: 1rem;
       }
 
       .wanted-since {

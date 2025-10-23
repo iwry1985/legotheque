@@ -25,10 +25,10 @@ fig_sets = px.bar(
     labels={"launch_year": "Année", "set_id": "Nombre de sets"},
 )
 
-# ========== 2. Prix moyen des sets par année ==========
+# ========== 2. Prix moyen des sets par année (à partir de 2005) ==========
 df_clean = df_sets[df_sets["retail_price"].notna() & (df_sets["retail_price"] > 0)]
 avg_price = (
-    df_clean.groupby("launch_year", as_index=False)["retail_price"]
+    df_clean[df_clean["launch_year"] >= 2005].groupby("launch_year", as_index=False)["retail_price"]
     .mean()
     .sort_values("launch_year")
 )

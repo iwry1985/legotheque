@@ -65,6 +65,9 @@ export class LegoDetail implements OnInit {
   };
 
   ngOnInit(): void {
+    //scroll vers le haut
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     //get set
     this.legoset = this._activatedRoute.snapshot.data['data']['legoset'];
 

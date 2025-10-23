@@ -166,7 +166,11 @@
               class="item-flex"
               (onClick)="removeFromWanted()"
             ></p-button>
-            } @if(myLego()) {
+            }
+          </div>
+
+          @if(myLego()) {
+          <div class="delete-action">
             <p-button
               label="Supprimer le set de ma collection"
               icon="pi pi-times"
@@ -174,10 +178,8 @@
               severity="danger"
               (onClick)="removeSet()"
             />
-            }
           </div>
-
-          @if(wanted() && !myLego()) {
+          } @if(wanted() && !myLego()) {
           <div class="wanted-since">
             Dans la liste de souhaits depuis {{ wanted()?.wantedat | date:
             'dd/MM/yyyy' }}
@@ -201,7 +203,6 @@
       />
     </div>
   </div>
-
   }
 
   <!-- MA COLLECTION -->
