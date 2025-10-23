@@ -10,7 +10,7 @@ import {
 import { Legoset } from './legoset.entity';
 import { User } from './user.entity';
 
-@Entity({ name: 'legotheque_dev' })
+@Entity({ name: 'legotheque' })
 export class Legotheque {
     @PrimaryGeneratedColumn()
     legothequeid: number;

@@ -32,6 +32,7 @@ export class LegothequeService {
             where: { userid, ...extraOptions },
             relations: ['set', 'set.theme'],
             order: {
+                ownedat: 'DESC',
                 lastupdatedat: 'DESC',
                 set: {
                     name: 'ASC',

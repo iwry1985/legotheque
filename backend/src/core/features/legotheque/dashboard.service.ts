@@ -191,7 +191,7 @@ export class DashboardService {
                 datasets: [{ label: 'Sets', data: priceHistData }],
             },
             piecesHistogram: {
-                labels: priceHistLabels,
+                labels: pieceHistLabels,
                 datasets: [{ label: 'Sets', data: pieceHistData }],
             },
             progression: {

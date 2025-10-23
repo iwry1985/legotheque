@@ -11,7 +11,7 @@ import {
 import { Legotheque } from './legotheque.entity';
 import { Expose } from 'class-transformer';
 
-@Entity({ name: 'users_dev' })
+@Entity({ name: 'users' })
 @Unique('UQ_email', ['email'])
 export class User {
     @Expose()

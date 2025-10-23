@@ -127,14 +127,36 @@ export class Dashboard implements OnInit, OnDestroy {
     this.chartRefs.push(
       new Chart(canvases[3].nativeElement, {
         type: 'bar',
-        data: data.priceHistogram,
+        data: {
+          labels: data.priceHistogram.labels,
+          datasets: data.priceHistogram.datasets.map((d: any) => ({
+            ...d,
+            backgroundColor: '#eab308',
+            borderColor: '#d4a106',
+            borderWidth: 1,
+          })),
+        },
+        options: {
+          scales: { y: { beginAtZero: true } },
+        },
       })
     );
 
     this.chartRefs.push(
       new Chart(canvases[4].nativeElement, {
         type: 'bar',
-        data: data.piecesHistogram,
+        data: {
+          labels: data.piecesHistogram.labels,
+          datasets: data.piecesHistogram.datasets.map((d: any) => ({
+            ...d,
+            backgroundColor: '#eab308',
+            borderColor: '#d4a106',
+            borderWidth: 1,
+          })),
+        },
+        options: {
+          scales: { y: { beginAtZero: true } },
+        },
       })
     );
 
@@ -166,8 +188,14 @@ export class Dashboard implements OnInit, OnDestroy {
             {
               label: 'Sets construits',
               data: data.tops.themesBuilt.map((t: any) => t.value),
+              backgroundColor: '#eab308',
+              borderColor: '#d4a106',
+              borderWidth: 1,
             },
           ],
+        },
+        options: {
+          scales: { y: { beginAtZero: true } },
         },
       })
     );
@@ -181,8 +209,14 @@ export class Dashboard implements OnInit, OnDestroy {
             {
               label: 'Prix (€)',
               data: data.tops.expensiveSets.map((s: any) => s.price),
+              backgroundColor: '#eab308',
+              borderColor: '#d4a106',
+              borderWidth: 1,
             },
           ],
+        },
+        options: {
+          scales: { y: { beginAtZero: true } },
         },
       })
     );

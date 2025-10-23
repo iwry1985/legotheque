@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Legoset } from './legoset.entity';
 
-@Entity({ name: 'wanted_dev' })
+@Entity({ name: 'wanted' })
 export class Wanted {
     @PrimaryGeneratedColumn()
     wantedid: number;

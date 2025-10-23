@@ -101,9 +101,15 @@
           <p>{{ v.set?.theme?.name }}</p>
 
           @if (v.ownedat) {
-          <p class="owned">Acheté le {{ v.ownedat | date }}</p>
+          <p class="owned">
+            Acheté en {{ v.ownedat | date: "MMMM yyyy": "Europe/Brussels":
+            "fr-FR" }}
+          </p>
           } @if (v.builtat) {
-          <p class="built">Construit le {{ v.builtat | date }}</p>
+          <p class="built">
+            Construit en {{ v.builtat | date: "MMMM yyyy": "Europe/Brussels":
+            "fr-FR" }}
+          </p>
           }
         </div>
       </div>
