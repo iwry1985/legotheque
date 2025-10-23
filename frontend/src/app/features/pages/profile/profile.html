@@ -1,14 +1,16 @@
 <div class="profile-page">
+  <p-button
+    class="btn-dashboard"
+    routerLink="/dashboard"
+    label="Dashboard"
+    size="large"
+    severity="secondary"
+    icon="pi pi-chart-bar"
+    class="dash"
+  ></p-button>
   <div class="profile-avatar">
     <h1>{{ authService.connectedUser()?.username }}</h1>
-    <p-button
-      class="btn-dashboard"
-      routerLink="dashboard"
-      label="Dashboard"
-      size="large"
-      severity="contrast"
-      icon="pi pi-chart-bar"
-    ></p-button>
+
     <img src="minifigs/tbbt.png" alt="avatar" />
   </div>
 

@@ -19,8 +19,10 @@ export class LegothequeService {
 
   private _range = signal<'all' | 'year' | 'month'>('all');
 
-  private _dashboardResource?: ReturnType<typeof httpResource>;
-
+  _dashboardResource = httpResource(() => ({
+    url: `${this._url}/dashboard`,
+    params: { range: this._range() },
+  }));
   // ============================
   // Méthodes standard
   // ============================
@@ -55,12 +57,6 @@ export class LegothequeService {
   // Dashboard
   // ============================
   getUserDashboard() {
-    if (!this._dashboardResource) {
-      this._dashboardResource = httpResource(() => ({
-        url: this._url + '/dashboard',
-        params: { range: this._range() },
-      }));
-    }
     return this._dashboardResource;
   }
 

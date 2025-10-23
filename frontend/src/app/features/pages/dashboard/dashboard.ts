@@ -10,10 +10,11 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { LegothequeService } from 'app/features/services/legotheque.service';
-import { AuthService } from 'app/features/services/auth.service';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 Chart.register(...registerables);
 
@@ -21,7 +22,7 @@ Chart.register(...registerables);
   selector: 'app-dashboard',
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonModule, RouterLink, ProgressSpinnerModule],
 })
 export class Dashboard implements OnInit, OnDestroy {
   private readonly _route = inject(ActivatedRoute);
@@ -33,20 +34,18 @@ export class Dashboard implements OnInit, OnDestroy {
 
   dashboard = signal<any | null>(null);
   rangeFilter: 'all' | 'year' | 'month' = 'all';
+  resource: any;
 
   constructor() {
-    const resource = this._legoService.getUserDashboard();
-
-    if (resource?.value) this.dashboard.set(resource.value());
-
     effect(() => {
-      const val = resource?.value ? resource.value() : null;
+      const val = this.resource?.value ? this.resource.value() : null;
       if (val) this.dashboard.set(val);
     });
 
     effect(() => {
       const data = this.dashboard();
-      if (!data) return;
+      console.log('data', data);
+      if (!data || data.message) return;
 
       setTimeout(() => {
         const canvases = this.charts?.toArray() ?? [];
@@ -57,6 +56,9 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.resource = this._legoService.getUserDashboard();
+
+    if (this.resource?.value) this.dashboard.set(this.resource.value());
     this.dashboard.set(null);
     this.rangeFilter = 'all';
     this._legoService.setDashboardRange('all');
