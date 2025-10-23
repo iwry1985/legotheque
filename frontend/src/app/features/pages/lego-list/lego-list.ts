@@ -53,8 +53,15 @@ export class LegoList implements OnInit {
 
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe({
-      next: (p) =>
-        this.filters.set({ ...p, page: 1, sortBy: 'year', sort: 'DESC' }),
+      next: (p) => {
+        this.filters.update((f: any) => ({
+          ...f,
+          page: p['page'] ? Number(p['page']) : f.page ?? 1,
+          sortBy: p['sortBy'] ?? 'year',
+          sort: p['sort'] ?? 'DESC',
+          ...p,
+        }));
+      },
     });
 
     this._themeService.getThemes().subscribe({
@@ -68,14 +75,15 @@ export class LegoList implements OnInit {
   private _paginator!: Paginator;
 
   changePage = (state: PaginatorState) => {
-    this.filters.update((f: any) => ({
-      ...f,
-      page: (state.page ?? 0) + 1,
-      sortBy: 'year',
-      sort: 'DESC',
-    })); //page start at 0
+    const page = (state.page ?? 0) + 1;
+    const current = this.filters();
 
-    this.updateQueryParams(this.filters());
+    this.updateQueryParams({
+      ...current,
+      page,
+      sortBy: current.sortBy ?? 'year',
+      sort: current.sort ?? 'DESC',
+    });
   };
 
   handleRangle = (
@@ -88,13 +96,9 @@ export class LegoList implements OnInit {
         ? this.filterForm.get('rangePieces')?.value
         : this.filterForm.get('rangeAge')?.value;
 
-    console.log('rangeField', rangeField);
-
     const [minValue, maxValue] = rangeField
       ? rangeField
       : [type === 'pieces' ? 0 : 4, type === 'pieces' ? 12000 : 18];
-
-    console.log(minValue, maxValue);
 
     return {
       [min]: minValue ? minValue : type === 'pieces' ? 0 : 4,
@@ -118,8 +122,6 @@ export class LegoList implements OnInit {
       cleanFilters = { ...cleanFilters, ...range };
     }
 
-    console.log('touched', this.filterForm.get('rangeAge')?.touched);
-
     if (
       this.filterForm.get('rangeAge')?.touched &&
       !this.filterForm.value.adultOnly
@@ -131,13 +133,9 @@ export class LegoList implements OnInit {
 
     const { rangePieces, rangeAge, ...filtered } = cleanFilters;
 
-    console.log('filtered', filtered);
-
-    this.filters.set({ ...filtered, page: 1 });
+    this.updateQueryParams({ ...this.filters(), ...filtered, page: 1 });
 
     this._paginator.changePage(0);
-
-    this.updateQueryParams(filtered);
   };
 
   goToDetails = (legosetid: number) => {

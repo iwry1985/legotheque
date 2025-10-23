@@ -12,20 +12,20 @@
   <div class="body">
     <div>
       <p>Min</p>
-      <p>{{ prices().new.min }}</p>
-      <p>{{prices().used.min}}</p>
+      <p>{{ isValidNumber(prices().new.min) }}</p>
+      <p>{{ isValidNumber(prices().used.min)}}</p>
     </div>
 
     <div>
       <p>Max</p>
-      <p>{{ prices().new.max }}</p>
-      <p>{{prices().used.max}}</p>
+      <p>{{ isValidNumber(prices().new.max) }}</p>
+      <p>{{ isValidNumber(prices().used.max) }}</p>
     </div>
 
     <div>
       <p>Moyenne</p>
-      <p>{{ prices().new.avg }}</p>
-      <p>{{prices().used.avg}}</p>
+      <p>{{ isValidNumber(prices().new.avg) }}</p>
+      <p>{{ isValidNumber(prices().used.avg) }}</p>
     </div>
   </div>
 </div>

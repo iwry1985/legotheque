@@ -1,0 +1,7 @@
+2025-10-23 11:53:21,660 [INFO] Fichier de log actif : logs\bricklink_20251023_0953.log
+2025-10-23 11:53:22,046 [INFO] 100 sets à scrapper récupérés depuis la DB.
+2025-10-23 11:53:22,052 [INFO] Skip 5578-1 (fetch récent < 7 jours).
+2025-10-23 11:53:22,052 [INFO] Skip 5587-1 (fetch récent < 7 jours).
+2025-10-23 11:53:22,053 [INFO] Skip 7959-1 (fetch récent < 7 jours).
+2025-10-23 11:53:22,053 [INFO] Skip 40173-1 (fetch récent < 7 jours).
+2025-10-23 11:53:22,053 [INFO] Fetching 75200-1 — https://www.bricklink.com/v2/catalog/catalogitem.page?S=75200-1#T=P

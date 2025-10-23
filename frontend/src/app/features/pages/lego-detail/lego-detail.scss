@@ -16,7 +16,8 @@
     &.sonic,
     &.lotr,
     &.simpsons,
-    &.minecraft {
+    &.minecraft,
+    &.jurassic {
       bottom: -9rem;
     }
 
@@ -33,11 +34,6 @@
     &.ninjago {
       bottom: -18rem;
       width: 30%;
-    }
-
-    &.jurassic {
-      right: -8rem;
-      bottom: -28rem;
     }
 
     &.dc,
@@ -181,7 +177,7 @@
 .market {
   background-color: $yellow;
   text-align: center;
-  padding: 1rem 0 2rem 0;
+  padding: 2rem 0;
 
   h2 {
     font-size: 2rem;

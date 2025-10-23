@@ -17,6 +17,7 @@ export class LegosetService {
   };
 
   getList = (filters: Signal<any>) => {
+    console.log('before api', filters());
     return httpResource(() => ({
       url: this._url,
       params: filters(),

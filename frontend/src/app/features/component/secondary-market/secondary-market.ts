@@ -10,4 +10,11 @@ import { ICondition } from 'app/features/models/secondary-market.model';
 export class SecondaryMarket {
   section = input.required<string>();
   prices = input.required<ICondition>();
+
+  isValidNumber = (value?: any): any => {
+    const num = Number(value);
+
+    if (num && !Number.isNaN(num)) return value;
+    else return '—';
+  };
 }

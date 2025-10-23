@@ -77,8 +77,6 @@ export class LegoDetail implements OnInit {
           },
         });
     }
-
-    console.log('theme', this.legoset.theme.name);
   }
 
   //get theme logo
