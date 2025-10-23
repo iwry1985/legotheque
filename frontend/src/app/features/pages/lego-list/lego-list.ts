@@ -13,6 +13,7 @@ import { ThemeService } from 'app/features/services/theme.service';
 import { ITheme } from 'app/features/models/theme.model';
 import { SliderModule } from 'primeng/slider';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-lego-list',
@@ -29,6 +30,7 @@ import { ToggleSwitchModule } from 'primeng/toggleswitch';
     SelectModule,
     SliderModule,
     ToggleSwitchModule,
+    ProgressSpinnerModule,
   ],
   templateUrl: './lego-list.html',
   styleUrl: './lego-list.scss',
@@ -75,8 +77,11 @@ export class LegoList implements OnInit {
   private _paginator!: Paginator;
 
   changePage = (state: PaginatorState) => {
+    console.log('state', state);
     const page = (state.page ?? 0) + 1;
     const current = this.filters();
+
+    console.log('current', current);
 
     this.updateQueryParams({
       ...current,
@@ -133,7 +138,9 @@ export class LegoList implements OnInit {
 
     const { rangePieces, rangeAge, ...filtered } = cleanFilters;
 
-    this.updateQueryParams({ ...this.filters(), ...filtered, page: 1 });
+    this.filters.set(filtered);
+
+    //this.updateQueryParams(this.filters());
 
     this._paginator.changePage(0);
   };
@@ -143,6 +150,7 @@ export class LegoList implements OnInit {
   };
 
   private updateQueryParams = (filters: any): void => {
+    console.log('update query filters', filters);
     this._router.navigate([], {
       queryParams: filters,
       queryParamsHandling: 'merge',

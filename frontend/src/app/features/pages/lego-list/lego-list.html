@@ -66,6 +66,16 @@
   </div>
 
   <div class="container">
+    @if (legosets.isLoading()) {
+    <div class="loader">
+      <p-progress-spinner
+        strokeWidth="40"
+        animationDuration="1s"
+        [style]="{ width: '80px', height: '80px' }"
+      />
+      <p>Chargement des sets...</p>
+    </div>
+    } @else if(legosets.value()?.data?.length) {
     <div class="listing">
       @for(set of legosets.value()?.data; track set.setid) {
       <app-item-list
@@ -79,12 +89,22 @@
       />
       }
     </div>
+    } @else {
+    <div class="not_found">
+      <img src="minifigs/sick.png" alt="not_found" />
+      <h2>Aucun set trouvé</h2>
+    </div>
+
+    }
   </div>
 
+  @if(legosets.value()?.total > legosets.value()?.limit) {
   <p-paginator
     #paginator
     [totalRecords]="legosets.value()?.total"
     [rows]="legosets.value()?.limit"
     (onPageChange)="changePage($event)"
+    [first]="(filters().page - 1) * legosets.value()?.limit"
   ></p-paginator>
+  }
 </div>
